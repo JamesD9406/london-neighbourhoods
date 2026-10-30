@@ -1,0 +1,878 @@
+{
+ "checked": "2026-10-30",
+ "source": "OpenStreetMap contributors (ODbL)",
+ "cafes": [
+  {
+   "id": "cafe-asmara-coffee-house",
+   "name": "Asmara Coffee House",
+   "address": "700 York Street",
+   "url": "https://asmaracoffeehouse.com",
+   "lat": 42.98742,
+   "lon": -81.22713
+  },
+  {
+   "id": "cafe-big-orange",
+   "name": "Big Orange",
+   "brand": "Big Orange",
+   "lat": 43.02506,
+   "lon": -81.27927
+  },
+  {
+   "id": "cafe-black-walnut-bakery-cafe",
+   "name": "Black Walnut Bakery Cafe",
+   "address": "134 Wortley Rd",
+   "url": "https://www.blackwalnutbakerycafe.com/",
+   "lat": 42.97358,
+   "lon": -81.25409
+  },
+  {
+   "id": "cafe-black-walnut-bakery-cafe-2",
+   "name": "Black Walnut Bakery Cafe",
+   "url": "https://blackwalnutbakerycafe.com/",
+   "lat": 43.01526,
+   "lon": -81.28011
+  },
+  {
+   "id": "cafe-browned",
+   "name": "BROWNED",
+   "address": "275 Wharncliffe Road North",
+   "url": "https://www.browned.ca",
+   "lat": 42.99251,
+   "lon": -81.26447
+  },
+  {
+   "id": "cafe-browned-2",
+   "name": "BROWNED",
+   "url": "https://www.browned.ca",
+   "lat": 42.93182,
+   "lon": -81.22333
+  },
+  {
+   "id": "cafe-cafe-resturant",
+   "name": "Cafe Resturant",
+   "lat": 43.05494,
+   "lon": -81.18039
+  },
+  {
+   "id": "cafe-cafe-sentral",
+   "name": "Cafe Sentral",
+   "lat": 42.98311,
+   "lon": -81.25131
+  },
+  {
+   "id": "cafe-casa-latina",
+   "name": "Casa Latina",
+   "address": "150 Dundas Street",
+   "url": "https://casalatinalondon.square.site/",
+   "lat": 42.9837,
+   "lon": -81.25019
+  },
+  {
+   "id": "cafe-chatime",
+   "name": "Chatime",
+   "brand": "Chatime",
+   "address": "541 Oxford Street West",
+   "lat": 42.98451,
+   "lon": -81.29166
+  },
+  {
+   "id": "cafe-chatime-2",
+   "name": "Chatime",
+   "brand": "Chatime",
+   "lat": 43.02604,
+   "lon": -81.27772
+  },
+  {
+   "id": "cafe-coco",
+   "name": "Coco",
+   "brand": "CoCo",
+   "url": "https://cocofreshtea.ca/",
+   "lat": 42.98265,
+   "lon": -81.29256
+  },
+  {
+   "id": "cafe-coco-fresh-tea-juice",
+   "name": "CoCo Fresh Tea & Juice",
+   "brand": "CoCo",
+   "address": "1350 Fanshawe Park Road East",
+   "lat": 43.04306,
+   "lon": -81.2284
+  },
+  {
+   "id": "cafe-coffee-culture",
+   "name": "Coffee Culture",
+   "brand": "Coffee Culture",
+   "lat": 42.98485,
+   "lon": -81.24601
+  },
+  {
+   "id": "cafe-commonwealth-coffee-co",
+   "name": "Commonwealth Coffee Co.",
+   "lat": 42.98615,
+   "lon": -81.25046
+  },
+  {
+   "id": "cafe-dishington-s-tea-room",
+   "name": "Dishington's Tea Room",
+   "lat": 42.9104,
+   "lon": -81.29773
+  },
+  {
+   "id": "cafe-dough-ev",
+   "name": "Dough EV",
+   "address": "621 Dundas Street",
+   "url": "https://www.doughev.com/",
+   "lat": 42.9889,
+   "lon": -81.23096
+  },
+  {
+   "id": "cafe-einstein-s",
+   "name": "Einstein's",
+   "lat": 43.01083,
+   "lon": -81.2732
+  },
+  {
+   "id": "cafe-filter-cafe",
+   "name": "Filter Café",
+   "address": "206 Piccadilly Street",
+   "lat": 42.99439,
+   "lon": -81.25368
+  },
+  {
+   "id": "cafe-hasbeans",
+   "name": "Hasbeans",
+   "lat": 42.9824,
+   "lon": -81.25066
+  },
+  {
+   "id": "cafe-java-time",
+   "name": "Java Time",
+   "lat": 42.98483,
+   "lon": -81.25005
+  },
+  {
+   "id": "cafe-lin-s-bubble-tea",
+   "name": "Lin’s Bubble Tea",
+   "lat": 43.00254,
+   "lon": -81.18626
+  },
+  {
+   "id": "cafe-little-red-roaster",
+   "name": "Little Red Roaster",
+   "lat": 42.9826,
+   "lon": -81.25078
+  },
+  {
+   "id": "cafe-locomotive-espresso",
+   "name": "Locomotive Espresso",
+   "lat": 42.99486,
+   "lon": -81.24365
+  },
+  {
+   "id": "cafe-london-bicycle-cafe",
+   "name": "London Bicycle Cafe",
+   "address": "320 Thames Street",
+   "url": "https://cafe.londonbicyclecafe.com",
+   "lat": 42.98013,
+   "lon": -81.25471
+  },
+  {
+   "id": "cafe-mado-cafe-patio",
+   "name": "Mado Cafe Patio",
+   "lat": 43.02477,
+   "lon": -81.28
+  },
+  {
+   "id": "cafe-marky-s-crepe-cafe",
+   "name": "Marky's Crepe Cafe",
+   "lat": 42.98626,
+   "lon": -81.25048
+  },
+  {
+   "id": "cafe-nooners",
+   "name": "Nooners",
+   "lat": 42.98521,
+   "lon": -81.24755
+  },
+  {
+   "id": "cafe-plant-matter-cafe",
+   "name": "Plant Matter Cafe",
+   "lat": 42.99417,
+   "lon": -81.25274
+  },
+  {
+   "id": "cafe-presotea",
+   "name": "Presotea",
+   "address": "717 Richmond Street",
+   "url": "http://presotea.ca/",
+   "lat": 42.99432,
+   "lon": -81.25278
+  },
+  {
+   "id": "cafe-real-fruit-bubble-tea",
+   "name": "Real Fruit Bubble Tea",
+   "brand": "Real Fruit Bubble Tea",
+   "lat": 43.02647,
+   "lon": -81.2779
+  },
+  {
+   "id": "cafe-real-fruit-bubble-tea-2",
+   "name": "Real Fruit Bubble Tea",
+   "brand": "Real Fruit Bubble Tea",
+   "address": "1105 Wellington Road",
+   "lat": 42.93144,
+   "lon": -81.22471
+  },
+  {
+   "id": "cafe-reset-social-cafe",
+   "name": "Reset Social Cafe",
+   "address": "503 Talbot Street",
+   "url": "https://www.resetsocial.cafe/",
+   "lat": 42.98617,
+   "lon": -81.25366
+  },
+  {
+   "id": "cafe-riverside-cafe",
+   "name": "Riverside Cafe",
+   "lat": 43.01041,
+   "lon": -81.26907
+  },
+  {
+   "id": "cafe-scotian-isle-baked-goods",
+   "name": "Scotian Isle Baked Goods",
+   "address": "972 Hamilton Road",
+   "url": "https://scotianisle.ca/",
+   "lat": 42.97783,
+   "lon": -81.19184
+  },
+  {
+   "id": "cafe-sharetea",
+   "name": "Sharetea",
+   "brand": "Sharetea",
+   "lat": 42.99294,
+   "lon": -81.25161
+  },
+  {
+   "id": "cafe-sidetrack-a-wortley-cafe",
+   "name": "Sidetrack: A Wortley Café",
+   "address": "136 Wortley Road",
+   "url": "https://www.sidetrack.cafe",
+   "lat": 42.97328,
+   "lon": -81.25372
+  },
+  {
+   "id": "cafe-society-cafe",
+   "name": "Society Café",
+   "address": "44 Blackfriars Street",
+   "lat": 42.98918,
+   "lon": -81.26052
+  },
+  {
+   "id": "cafe-starbucks",
+   "name": "Starbucks",
+   "brand": "Starbucks",
+   "lat": 43.01885,
+   "lon": -81.31014
+  },
+  {
+   "id": "cafe-starbucks-2",
+   "name": "Starbucks",
+   "brand": "Starbucks",
+   "lat": 43.01163,
+   "lon": -81.25656
+  },
+  {
+   "id": "cafe-starbucks-3",
+   "name": "Starbucks",
+   "brand": "Starbucks",
+   "lat": 43.02608,
+   "lon": -81.27745
+  },
+  {
+   "id": "cafe-starbucks-4",
+   "name": "Starbucks",
+   "brand": "Starbucks",
+   "lat": 43.00438,
+   "lon": -81.17623
+  },
+  {
+   "id": "cafe-starbucks-5",
+   "name": "Starbucks",
+   "brand": "Starbucks",
+   "lat": 43.02872,
+   "lon": -81.27999
+  },
+  {
+   "id": "cafe-starbucks-6",
+   "name": "Starbucks",
+   "brand": "Starbucks",
+   "lat": 43.03449,
+   "lon": -81.25712
+  },
+  {
+   "id": "cafe-starbucks-7",
+   "name": "Starbucks",
+   "brand": "Starbucks",
+   "lat": 42.97472,
+   "lon": -81.3204
+  },
+  {
+   "id": "cafe-starbucks-8",
+   "name": "Starbucks",
+   "brand": "Starbucks",
+   "lat": 43.01038,
+   "lon": -81.33675
+  },
+  {
+   "id": "cafe-starbucks-9",
+   "name": "Starbucks",
+   "brand": "Starbucks",
+   "lat": 42.93715,
+   "lon": -81.28156
+  },
+  {
+   "id": "cafe-starbucks-10",
+   "name": "Starbucks",
+   "brand": "Starbucks",
+   "lat": 42.95772,
+   "lon": -81.23294
+  },
+  {
+   "id": "cafe-starbucks-11",
+   "name": "Starbucks",
+   "brand": "Starbucks",
+   "lat": 42.94237,
+   "lon": -81.22495
+  },
+  {
+   "id": "cafe-starbucks-12",
+   "name": "Starbucks",
+   "brand": "Starbucks",
+   "lat": 42.93793,
+   "lon": -81.22565
+  },
+  {
+   "id": "cafe-starbucks-13",
+   "name": "Starbucks",
+   "brand": "Starbucks",
+   "lat": 43.01399,
+   "lon": -81.19916
+  },
+  {
+   "id": "cafe-starbucks-14",
+   "name": "Starbucks",
+   "brand": "Starbucks",
+   "address": "524 Oxford Street West",
+   "lat": 42.98404,
+   "lon": -81.29043
+  },
+  {
+   "id": "cafe-starbucks-15",
+   "name": "Starbucks",
+   "brand": "Starbucks",
+   "address": "1725 Richmond Street",
+   "url": "https://www.starbucks.ca/",
+   "lat": 43.02763,
+   "lon": -81.28387
+  },
+  {
+   "id": "cafe-starbucks-16",
+   "name": "Starbucks",
+   "brand": "Starbucks",
+   "lat": 42.95461,
+   "lon": -81.29
+  },
+  {
+   "id": "cafe-starbucks-17",
+   "name": "Starbucks",
+   "brand": "Starbucks",
+   "address": "1164 Highbury Avenue North",
+   "lat": 43.0147,
+   "lon": -81.21205
+  },
+  {
+   "id": "cafe-studio-coffee",
+   "name": "Studio Coffee",
+   "address": "211 Dundas Street",
+   "url": "http://studio-coffee.ca/",
+   "lat": 42.98409,
+   "lon": -81.24779
+  },
+  {
+   "id": "cafe-tea-house",
+   "name": "Tea House",
+   "lat": 43.00327,
+   "lon": -81.22556
+  },
+  {
+   "id": "cafe-thai-cafe",
+   "name": "Thai cafe",
+   "lat": 42.9991,
+   "lon": -81.33165
+  },
+  {
+   "id": "cafe-the-cardboard-cafe",
+   "name": "The Cardboard Cafe",
+   "url": "https://www.thecardboardcafe.com/",
+   "lat": 42.98331,
+   "lon": -81.25159
+  },
+  {
+   "id": "cafe-the-tea-lounge",
+   "name": "The Tea Lounge",
+   "lat": 42.99514,
+   "lon": -81.25098
+  },
+  {
+   "id": "cafe-the-whale-tea",
+   "name": "The Whale Tea",
+   "address": "209 Dundas Street",
+   "lat": 42.98398,
+   "lon": -81.24829
+  },
+  {
+   "id": "cafe-tim-hortons",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "url": "https://www.timhortons.com/",
+   "lat": 42.92931,
+   "lon": -81.17368
+  },
+  {
+   "id": "cafe-tim-hortons-2",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "url": "https://www.timhortons.com/",
+   "lat": 42.92663,
+   "lon": -81.21645
+  },
+  {
+   "id": "cafe-tim-hortons-3",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "lat": 42.91788,
+   "lon": -81.20999
+  },
+  {
+   "id": "cafe-tim-hortons-4",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "lat": 43.01106,
+   "lon": -81.25618
+  },
+  {
+   "id": "cafe-tim-hortons-5",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "lat": 42.99306,
+   "lon": -81.25217
+  },
+  {
+   "id": "cafe-tim-hortons-6",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "lat": 43.01043,
+   "lon": -81.26906
+  },
+  {
+   "id": "cafe-tim-hortons-7",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "lat": 43.01193,
+   "lon": -81.24367
+  },
+  {
+   "id": "cafe-tim-hortons-8",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "lat": 43.02626,
+   "lon": -81.27881
+  },
+  {
+   "id": "cafe-tim-hortons-9",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "lat": 42.94781,
+   "lon": -81.29239
+  },
+  {
+   "id": "cafe-tim-hortons-10",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "lat": 43.02845,
+   "lon": -81.27419
+  },
+  {
+   "id": "cafe-tim-hortons-11",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "lat": 42.98471,
+   "lon": -81.24425
+  },
+  {
+   "id": "cafe-tim-hortons-12",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "lat": 42.92647,
+   "lon": -81.21809
+  },
+  {
+   "id": "cafe-tim-hortons-13",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "lat": 42.98394,
+   "lon": -81.2493
+  },
+  {
+   "id": "cafe-tim-hortons-14",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "lat": 43.01217,
+   "lon": -81.2753
+  },
+  {
+   "id": "cafe-tim-hortons-15",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "lat": 42.93922,
+   "lon": -81.28233
+  },
+  {
+   "id": "cafe-tim-hortons-16",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "lat": 42.97811,
+   "lon": -81.19523
+  },
+  {
+   "id": "cafe-tim-hortons-17",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "lat": 43.01172,
+   "lon": -81.20065
+  },
+  {
+   "id": "cafe-tim-hortons-18",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "lat": 43.0122,
+   "lon": -81.20006
+  },
+  {
+   "id": "cafe-tim-hortons-19",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "lat": 43.01276,
+   "lon": -81.19954
+  },
+  {
+   "id": "cafe-tim-hortons-20",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "lat": 43.01494,
+   "lon": -81.18991
+  },
+  {
+   "id": "cafe-tim-hortons-21",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "lat": 42.98851,
+   "lon": -81.3266
+  },
+  {
+   "id": "cafe-tim-hortons-22",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "lat": 43.0087,
+   "lon": -81.27612
+  },
+  {
+   "id": "cafe-tim-hortons-23",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "url": "https://www.timhortons.com/",
+   "lat": 42.98521,
+   "lon": -81.29445
+  },
+  {
+   "id": "cafe-tim-hortons-24",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "url": "https://www.timhortons.com/",
+   "lat": 42.94417,
+   "lon": -81.21367
+  },
+  {
+   "id": "cafe-tim-hortons-25",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "url": "https://www.timhortons.com/",
+   "lat": 42.98058,
+   "lon": -81.25015
+  },
+  {
+   "id": "cafe-tim-hortons-26",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "lat": 43.00521,
+   "lon": -81.304
+  },
+  {
+   "id": "cafe-tim-hortons-27",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "lat": 42.95475,
+   "lon": -81.28948
+  },
+  {
+   "id": "cafe-tim-hortons-28",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "url": "https://www.timhortons.com/",
+   "lat": 42.99386,
+   "lon": -81.25768
+  },
+  {
+   "id": "cafe-tim-hortons-29",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "url": "https://www.timhortons.com/",
+   "lat": 42.95888,
+   "lon": -81.21452
+  },
+  {
+   "id": "cafe-tim-hortons-30",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "lat": 42.94807,
+   "lon": -81.22825
+  },
+  {
+   "id": "cafe-tim-hortons-31",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "lat": 42.9412,
+   "lon": -81.2587
+  },
+  {
+   "id": "cafe-tim-hortons-32",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "lat": 42.96035,
+   "lon": -81.33557
+  },
+  {
+   "id": "cafe-tim-hortons-33",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "url": "https://www.timhortons.com/",
+   "lat": 42.96205,
+   "lon": -81.23077
+  },
+  {
+   "id": "cafe-tim-hortons-34",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "url": "https://www.timhortons.com/",
+   "lat": 42.96299,
+   "lon": -81.19482
+  },
+  {
+   "id": "cafe-tim-hortons-35",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "address": "296 Horton Street East",
+   "url": "https://www.timhortons.ca/store-locator/store/restaurant_67155",
+   "lat": 42.98081,
+   "lon": -81.24196
+  },
+  {
+   "id": "cafe-tim-hortons-36",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "url": "https://www.timhortons.com/",
+   "lat": 42.99222,
+   "lon": -81.16903
+  },
+  {
+   "id": "cafe-tim-hortons-37",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "url": "https://www.timhortons.com/",
+   "lat": 43.00379,
+   "lon": -81.15289
+  },
+  {
+   "id": "cafe-tim-hortons-38",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "lat": 43.00212,
+   "lon": -81.18352
+  },
+  {
+   "id": "cafe-tim-hortons-39",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "address": "1019 Dundas Street",
+   "lat": 42.99276,
+   "lon": -81.21673
+  },
+  {
+   "id": "cafe-tim-hortons-40",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "url": "https://www.timhortons.com/",
+   "lat": 42.9994,
+   "lon": -81.2373
+  },
+  {
+   "id": "cafe-tim-hortons-41",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "address": "1145 Oxford Street East",
+   "url": "https://www.timhortons.com/",
+   "lat": 43.00601,
+   "lon": -81.2157
+  },
+  {
+   "id": "cafe-tim-hortons-42",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "lat": 43.01357,
+   "lon": -81.18939
+  },
+  {
+   "id": "cafe-tim-hortons-43",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "url": "https://www.timhortons.com/",
+   "lat": 43.0096,
+   "lon": -81.16016
+  },
+  {
+   "id": "cafe-tim-hortons-44",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "url": "https://www.timhortons.com/",
+   "lat": 43.01604,
+   "lon": -81.21377
+  },
+  {
+   "id": "cafe-tim-hortons-45",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "address": "939 Southdale Road West",
+   "url": "https://www.timhortons.com/",
+   "lat": 42.93619,
+   "lon": -81.31582
+  },
+  {
+   "id": "cafe-tim-hortons-46",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "url": "https://www.timhortons.com/",
+   "lat": 42.97399,
+   "lon": -81.26252
+  },
+  {
+   "id": "cafe-tim-hortons-47",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "lat": 43.04565,
+   "lon": -81.26105
+  },
+  {
+   "id": "cafe-tim-hortons-48",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "lat": 43.0126,
+   "lon": -81.33177
+  },
+  {
+   "id": "cafe-tim-hortons-49",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "address": "9919 Glendon Drive",
+   "lat": 42.94416,
+   "lon": -81.4316
+  },
+  {
+   "id": "cafe-tim-hortons-50",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "lat": 42.96885,
+   "lon": -81.28143
+  },
+  {
+   "id": "cafe-tim-hortons-51",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "lat": 43.03441,
+   "lon": -81.25758
+  },
+  {
+   "id": "cafe-tim-hortons-52",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "lat": 42.92677,
+   "lon": -81.27911
+  },
+  {
+   "id": "cafe-tim-hortons-53",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "lat": 42.9409,
+   "lon": -81.25241
+  },
+  {
+   "id": "cafe-tim-hortons-54",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "address": "616 Wharncliffe Road South",
+   "url": "https://locations.timhortons.ca",
+   "lat": 42.95257,
+   "lon": -81.25917
+  },
+  {
+   "id": "cafe-tim-hortons-55",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "lat": 42.98743,
+   "lon": -81.22351
+  },
+  {
+   "id": "cafe-tim-hortons-56",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "lat": 42.90358,
+   "lon": -81.29683
+  },
+  {
+   "id": "cafe-tim-hortons-57",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "lat": 42.96434,
+   "lon": -81.36322
+  },
+  {
+   "id": "cafe-tim-hortons-58",
+   "name": "Tim Hortons",
+   "brand": "Tim Hortons",
+   "lat": 42.93122,
+   "lon": -81.22427
+  },
+  {
+   "id": "cafe-ungers-farmers-market",
+   "name": "Ungers Farmers Market",
+   "lat": 42.99843,
+   "lon": -81.3297
+  },
+  {
+   "id": "cafe-you-made-it-cafe",
+   "name": "YOU Made It Café",
+   "address": "332 Richmond Street",
+   "lat": 42.98151,
+   "lon": -81.24838
+  }
+ ]
+}

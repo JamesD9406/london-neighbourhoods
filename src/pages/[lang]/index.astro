@@ -2,7 +2,8 @@
 import Base from '../../layouts/Base.astro';
 import MapSvg from '../../components/MapSvg.astro';
 import { LANGS, LANG_META, STRINGS, type Lang } from '../../i18n/strings';
-import { ITEMS, CHECKED, SOURCES, type Item } from '../../lib/data';
+import { ITEMS, CHECKED, CAFES_CHECKED, SOURCES, type Item, type Kind } from '../../lib/data';
+import { KIND_ICON, UI_ICON } from '../../lib/icons';
 
 export function getStaticPaths() {
   return LANGS.map((lang) => ({ params: { lang } }));
@@ -20,14 +21,18 @@ function searchText(i: Item) {
   const all = LANGS.map((l) => STRINGS[l]);
   const tagWords = i.tags.flatMap((tag) => all.map((s) => s.tags[tag as keyof typeof t.tags]));
   const kindWords = all.flatMap((s) => [s.type[i.kind], s.layers[i.kind]]);
-  const about = i.kind === 'neighbourhood' ? [] : [t.about[i.kind], STRINGS.en.about[i.kind]];
+  const about = i.kind in t.about ? [t.about[i.kind as keyof typeof t.about], STRINGS.en.about[i.kind as keyof typeof t.about]] : [];
   return fold([
     i.name[lang], i.name.en, i.text?.[lang], i.text?.en, i.address, i.note?.[lang],
     ...about, ...kindWords, ...tagWords,
   ].filter(Boolean).join(' '));
 }
 const directions = (i: Item) => `https://www.google.com/maps/dir/?api=1&destination=${i.lat},${i.lon}`;
-const kinds = ['neighbourhood', 'library', 'serviceontario'] as const;
+// Chip order: what newcomers need most first.
+const kinds: Kind[] = ['neighbourhood', 'library', 'serviceontario', 'park', 'cafe'];
+const kindIcon = (k: Kind, cls: string) => k === 'neighbourhood'
+  ? `<span class="${cls} ${cls}--neighbourhood"></span>`
+  : `<svg class="${cls} ${cls}--${k}" viewBox="0 0 24 24" aria-hidden="true">${KIND_ICON[k]}</svg>`;
 ---
 <Base lang={lang} title={`${t.title} — ${t.layers.neighbourhood}, ${t.layers.library}, ServiceOntario`}>
   <header class="top">
@@ -51,7 +56,7 @@ const kinds = ['neighbourhood', 'library', 'serviceontario'] as const;
     <div class="chips" role="group" aria-label={t.show}>
       {kinds.map((k) => (
         <button type="button" class="chip" data-layer={k} aria-pressed="true">
-          <span class={`swatch swatch--${k}`} aria-hidden="true"></span>{t.layers[k]}
+          <Fragment set:html={kindIcon(k, 'chip-icon')} />{t.layers[k]}
         </button>
       ))}
     </div>
@@ -65,23 +70,24 @@ const kinds = ['neighbourhood', 'library', 'serviceontario'] as const;
     <div class="map-wrap">
       <MapSvg lang={lang} />
       <div class="zoom">
-        <button type="button" id="zoom-in" aria-label={t.zoomIn}>+</button>
-        <button type="button" id="zoom-out" aria-label={t.zoomOut}>−</button>
-        <button type="button" id="zoom-reset" aria-label={t.resetMap}>⤢</button>
+        <button type="button" id="zoom-in" aria-label={t.zoomIn} set:html={UI_ICON.plus} />
+        <button type="button" id="zoom-out" aria-label={t.zoomOut} set:html={UI_ICON.minus} />
+        <button type="button" id="zoom-reset" aria-label={t.resetMap} set:html={UI_ICON.reset} />
       </div>
       <span class="attr">{t.mapData}</span>
     </div>
 
     <div class="side">
       <aside class="detail" id="detail" aria-live="polite" hidden>
-        <button type="button" class="detail__close" id="detail-close" aria-label={t.close}>×</button>
+        <button type="button" class="detail__close" id="detail-close" aria-label={t.close} set:html={UI_ICON.close} />
         {ITEMS.map((i) => (
           <article data-id={i.id} hidden>
             <span class="kind">{t.type[i.kind]}</span>
             <h2>{i.n ? `${i.n}. ` : ''}{i.name[lang]}</h2>
             {i.text && <p>{i.text[lang]}</p>}
-            {i.kind !== 'neighbourhood' && <p>{t.about[i.kind]}</p>}
-            {i.address && <p><strong>{t.address}:</strong> <span dir="ltr">{i.address}</span>{i.note && <> · {i.note[lang]}</>}</p>}
+            {i.kind in t.about && <p>{t.about[i.kind as keyof typeof t.about]}</p>}
+            {i.address && <p><strong>{t.address}:</strong> <span dir="ltr">{i.address}</span>{i.note && i.kind !== 'cafe' && <> · {i.note[lang]}</>}</p>}
+            {i.note && (i.kind === 'cafe' || !i.address) && <p class="note">{i.note[lang]}</p>}
             {i.approximate && <p class="note">{t.approximate}</p>}
             {i.tags.length > 0 && <ul class="tags">{i.tags.map((tag) => <li>{t.tags[tag as keyof typeof t.tags]}</li>)}</ul>}
             {i.nearby.length > 0 && (
@@ -92,7 +98,7 @@ const kinds = ['neighbourhood', 'library', 'serviceontario'] as const;
             )}
             <p class="links">
               <a href={directions(i)} target="_blank" rel="noopener">{t.directions}</a>
-              {i.url && <a href={i.url} target="_blank" rel="noopener">{t.officialPage}</a>}
+              {i.url && <a href={i.url} target="_blank" rel="noopener">{i.kind === 'cafe' ? t.website : t.officialPage}</a>}
             </p>
           </article>
         ))}
@@ -102,7 +108,7 @@ const kinds = ['neighbourhood', 'library', 'serviceontario'] as const;
         {ITEMS.map((i) => (
           <li data-id={i.id} data-kind={i.kind} data-search={searchText(i)}>
             <button type="button" data-goto={i.id}>
-              <span class={`badge badge--${i.kind}`} aria-hidden="true">{i.n ?? (i.kind === 'library' ? 'L' : 'S')}</span>
+              {i.n ? <span class="badge badge--neighbourhood" aria-hidden="true">{i.n}</span> : <Fragment set:html={kindIcon(i.kind, 'badge')} />}
               <span>{i.name[lang]}{i.address && <small dir="ltr">{i.address}</small>}</span>
             </button>
           </li>
@@ -132,7 +138,7 @@ const kinds = ['neighbourhood', 'library', 'serviceontario'] as const;
     <div class="fine-wrap">
       <footer class="fine">
         <p>{t.disclaimer}</p>
-        <p>{t.checked}: {CHECKED} · <a href={SOURCES.library}>London Public Library</a> · <a href={SOURCES.serviceontario}>ServiceOntario</a></p>
+        <p>{t.checked}: {CHECKED} · <a href={SOURCES.library}>London Public Library</a> · <a href={SOURCES.serviceontario}>ServiceOntario</a> · {t.cafesSource}: {CAFES_CHECKED}</p>
         {lang !== 'en' && <p>{t.translationNote}</p>}
         <p>{t.privacy}</p>
         <p>{t.mapData} (ODbL).</p>

@@ -1,0 +1,126 @@
+{
+  "checked": "2026-10-30",
+  "source": "Locations from OpenStreetMap; descriptions written for this guide",
+  "parks": [
+    {
+      "id": "park-springbank", "name": "Springbank Park", "lat": 42.96261, "lon": -81.31268,
+      "text": {
+        "en": "London’s largest park, stretching along the Thames. Paved paths for walking and cycling, picnic areas, and Storybook Gardens for young children (admission charged).",
+        "es": "El parque más grande de London, a lo largo del río Thames. Senderos pavimentados para caminar y andar en bicicleta, áreas de pícnic y Storybook Gardens para niños pequeños (con entrada pagada).",
+        "ar": "أكبر حديقة في London، تمتد على طول نهر Thames. مسارات معبّدة للمشي وركوب الدراجات، وأماكن للنزهة، وحديقة Storybook Gardens للأطفال الصغار (برسوم دخول)."
+      }
+    },
+    {
+      "id": "park-victoria", "name": "Victoria Park", "lat": 42.98894, "lon": -81.24851,
+      "text": {
+        "en": "Downtown’s main park. Summer festivals and events, and an outdoor skating rink in winter.",
+        "es": "El parque principal del centro. Festivales y eventos en verano, y una pista de patinaje al aire libre en invierno.",
+        "ar": "الحديقة الرئيسية في وسط المدينة. مهرجانات وفعاليات في الصيف، وحلبة تزلّج في الهواء الطلق في الشتاء."
+      }
+    },
+    {
+      "id": "park-harris", "name": "Harris Park", "lat": 42.98585, "lon": -81.25652,
+      "text": {
+        "en": "A big open park beside the river at the edge of downtown, used for outdoor concerts and festivals. A good place to join the riverside paths.",
+        "es": "Un parque grande y abierto junto al río, al borde del centro, donde se hacen conciertos y festivales al aire libre. Buen lugar para tomar los senderos del río.",
+        "ar": "حديقة كبيرة مفتوحة بجانب النهر عند طرف وسط المدينة، تُقام فيها حفلات ومهرجانات في الهواء الطلق. مكان جيد للوصول إلى مسارات النهر."
+      }
+    },
+    {
+      "id": "park-forks", "name": "Ivey Park (the Forks of the Thames)", "lat": 42.98078, "lon": -81.25591,
+      "text": {
+        "en": "Where the two branches of the Thames meet, next to downtown. The Thames Valley Parkway, a long paved path along the river, passes through here.",
+        "es": "Donde se unen los dos brazos del río Thames, junto al centro. Por aquí pasa el Thames Valley Parkway, un largo sendero pavimentado a lo largo del río.",
+        "ar": "هنا يلتقي فرعا نهر Thames بجانب وسط المدينة. يمرّ من هنا Thames Valley Parkway، وهو مسار معبّد طويل على طول النهر."
+      }
+    },
+    {
+      "id": "park-gibbons", "name": "Gibbons Park", "lat": 43.00111, "lon": -81.26531,
+      "text": {
+        "en": "A river park north of downtown with a playground, open lawns and paths along the water. Popular with families.",
+        "es": "Un parque junto al río, al norte del centro, con juegos infantiles, áreas de césped y senderos junto al agua. Popular entre las familias.",
+        "ar": "حديقة على النهر شمال وسط المدينة، فيها ملعب للأطفال ومساحات عشبية ومسارات بجانب الماء. محبوبة لدى العائلات."
+      }
+    },
+    {
+      "id": "park-thames", "name": "Thames Park", "lat": 42.97787, "lon": -81.25624,
+      "text": {
+        "en": "A riverside park near SoHo with sports fields and paths along the Thames.",
+        "es": "Un parque junto al río, cerca de SoHo, con canchas deportivas y senderos a lo largo del Thames.",
+        "ar": "حديقة على ضفة النهر قرب SoHo، فيها ملاعب رياضية ومسارات على طول نهر Thames."
+      }
+    },
+    {
+      "id": "park-greenway", "name": "Greenway Park", "lat": 42.97386, "lon": -81.28009,
+      "text": {
+        "en": "Sports fields and river paths west of downtown. Follow the river west to reach Springbank Park.",
+        "es": "Canchas deportivas y senderos junto al río, al oeste del centro. Siga el río hacia el oeste para llegar a Springbank Park.",
+        "ar": "ملاعب رياضية ومسارات على النهر غرب وسط المدينة. اتبع النهر غربًا لتصل إلى Springbank Park."
+      }
+    },
+    {
+      "id": "park-kiwanis", "name": "Kiwanis Park", "lat": 42.98773, "lon": -81.18028,
+      "text": {
+        "en": "A long east-end park along the river, with sports fields and walking and cycling paths.",
+        "es": "Un parque largo en el este, a lo largo del río, con canchas deportivas y senderos para caminar y andar en bicicleta.",
+        "ar": "حديقة طويلة في شرق المدينة على طول النهر، فيها ملاعب رياضية ومسارات للمشي وركوب الدراجات."
+      }
+    },
+    {
+      "id": "park-white-oaks", "name": "White Oaks Park", "lat": 42.92947, "lon": -81.2319,
+      "text": {
+        "en": "A south-end community park with sports fields and open space, close to White Oaks Mall.",
+        "es": "Un parque comunitario del sur con canchas deportivas y espacios abiertos, cerca de White Oaks Mall.",
+        "ar": "حديقة مجتمعية في جنوب المدينة فيها ملاعب رياضية ومساحات مفتوحة، قريبة من White Oaks Mall."
+      }
+    },
+    {
+      "id": "park-fanshawe-ca", "name": "Fanshawe Conservation Area", "lat": 43.06555, "lon": -81.18126,
+      "text": {
+        "en": "A large conservation area around Fanshawe Lake in the northeast: walking and cycling trails, picnics and camping. An entry fee applies.",
+        "es": "Una gran área de conservación alrededor del lago Fanshawe, en el noreste: senderos para caminar y andar en bicicleta, pícnics y campamento. Se cobra entrada.",
+        "ar": "محمية طبيعية كبيرة حول بحيرة Fanshawe في الشمال الشرقي: مسارات للمشي وركوب الدراجات، ونزهات وتخييم. يوجد رسم دخول."
+      }
+    },
+    {
+      "id": "park-westminster-ponds", "name": "Westminster Ponds", "lat": 42.95153, "lon": -81.20359,
+      "text": {
+        "en": "A natural area of ponds and woods with trails and boardwalks. Look for birds and turtles; stay on marked trails.",
+        "es": "Un área natural con lagunas y bosque, senderos y pasarelas de madera. Busque aves y tortugas; quédese en los senderos señalizados.",
+        "ar": "منطقة طبيعية فيها بِرَك وغابات ومسارات وممرات خشبية. ابحث عن الطيور والسلاحف، والتزم بالمسارات المعلَّمة."
+      }
+    },
+    {
+      "id": "park-sifton-bog", "name": "Sifton Bog", "lat": 42.97398, "lon": -81.32366,
+      "text": {
+        "en": "A boardwalk leads into a rare bog, unusual for a city. A short, quiet nature walk in the west end.",
+        "es": "Una pasarela de madera entra a un pantano poco común, algo raro dentro de una ciudad. Una caminata corta y tranquila en el oeste.",
+        "ar": "ممرّ خشبي يقود إلى مستنقع نادر، وهو أمر غير مألوف داخل مدينة. نزهة قصيرة وهادئة في الطبيعة غرب المدينة."
+      }
+    },
+    {
+      "id": "park-medway", "name": "Medway Valley Heritage Forest", "lat": 43.02683, "lon": -81.30384,
+      "text": {
+        "en": "Wooded valley trails along Medway Creek, near Western University. Trails can be steep and muddy; wear good shoes.",
+        "es": "Senderos en un valle boscoso junto a Medway Creek, cerca de Western University. Pueden ser empinados y con lodo; use buen calzado.",
+        "ar": "مسارات في وادٍ مشجّر على طول Medway Creek قرب جامعة Western. قد تكون المسارات منحدرة وموحلة؛ ارتدِ حذاءً مناسبًا."
+      }
+    },
+    {
+      "id": "park-meadowlily", "name": "Meadowlily Woods", "lat": 42.9705, "lon": -81.1845,
+      "text": {
+        "en": "Woods and meadows along the Thames in the east end, reached by the historic Meadowlily Bridge.",
+        "es": "Bosques y praderas a lo largo del Thames en el este, a los que se llega por el histórico puente Meadowlily.",
+        "ar": "غابات ومروج على طول نهر Thames في شرق المدينة، يُوصَل إليها عبر جسر Meadowlily التاريخي."
+      }
+    },
+    {
+      "id": "park-warbler-woods", "name": "Warbler Woods", "lat": 42.95844, "lon": -81.35095,
+      "text": {
+        "en": "Quiet forest trails in Byron, in the west end. Best in daylight; stay on marked trails.",
+        "es": "Senderos tranquilos en el bosque de Byron, en el oeste. Mejor de día; quédese en los senderos señalizados.",
+        "ar": "مسارات هادئة في الغابة في Byron غرب المدينة. الأفضل في النهار، والتزم بالمسارات المعلَّمة."
+      }
+    }
+  ]
+}

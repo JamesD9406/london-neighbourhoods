@@ -1,17 +1,21 @@
 import neighbourhoods from '../data/neighbourhoods.json';
 import placesFile from '../data/places.json';
+import parksFile from '../data/parks.json';
+import cafesFile from '../data/cafes.json';
 import { project } from './geo.js';
-import type { Lang } from '../i18n/strings';
+import { LANGS, STRINGS, type Lang } from '../i18n/strings';
 
-export type Kind = 'neighbourhood' | 'library' | 'serviceontario';
+/** Every kind of thing on the map, in drawing order (later kinds are drawn on top). */
+export const KINDS = ['cafe', 'park', 'library', 'serviceontario', 'neighbourhood'] as const;
+export type Kind = (typeof KINDS)[number];
 type Localized = Record<Lang, string>;
 
 export interface Item {
   id: string;
   kind: Kind;
-  /** Map number for neighbourhoods (1–20); undefined for places. */
+  /** Map number for neighbourhoods (1–20). */
   n?: number;
-  /** Print-map code for places (A–P, S1–S4). */
+  /** Print-map code: libraries L1–L16, ServiceOntario S1–S4, parks P1–P15. */
   code?: string;
   name: Localized;
   text?: Localized;
@@ -24,26 +28,46 @@ export interface Item {
   lon: number;
   x: number;
   y: number;
-  /** Ids of the closest libraries and ServiceOntario offices (neighbourhoods only). */
+  /** Ids of the closest place of each kind (neighbourhoods only). */
   nearby: string[];
 }
 
 const same = (s: string): Localized => ({ en: s, es: s, ar: s });
+const fromStrings = (pick: (s: (typeof STRINGS)['en']) => string): Localized =>
+  Object.fromEntries(LANGS.map((l) => [l, pick(STRINGS[l])])) as Localized;
+const at = (lat: number, lon: number) => { const [x, y] = project(lat, lon); return { lat, lon, x, y }; };
 
-const places: Item[] = placesFile.places.map((p) => {
-  const [x, y] = project(p.lat, p.lon);
-  return {
-    id: p.id,
-    kind: p.type as Kind,
-    name: same(p.name),
-    note: 'note' in p ? (p.note as Localized) : undefined,
-    tags: [],
-    address: p.address,
-    url: 'url' in p ? (p.url as string) : placesFile.sources.library,
-    approximate: 'approximate' in p ? Boolean(p.approximate) : undefined,
-    lat: p.lat, lon: p.lon, x, y, nearby: [],
-  };
-});
+const services: Item[] = placesFile.places.map((p) => ({
+  id: p.id,
+  kind: p.type as Kind,
+  name: same(p.name),
+  note: 'note' in p ? (p.note as Localized) : undefined,
+  tags: [],
+  address: p.address,
+  url: 'url' in p ? (p.url as string) : placesFile.sources.library,
+  approximate: 'approximate' in p ? Boolean(p.approximate) : undefined,
+  ...at(p.lat, p.lon),
+  nearby: [],
+}));
+
+const parks: Item[] = parksFile.parks.map((p) => ({
+  id: p.id, kind: 'park', name: same(p.name), text: p.text, tags: ['parks', 'walks'], ...at(p.lat, p.lon), nearby: [],
+}));
+
+const cafes: Item[] = cafesFile.cafes.map((c) => ({
+  id: c.id,
+  kind: 'cafe',
+  name: same(c.name),
+  // Newcomers will hear about Tim Hortons constantly, so it gets a short explainer.
+  note: c.brand === 'Tim Hortons' || c.name === 'Tim Hortons' ? fromStrings((s) => s.timsNote) : undefined,
+  tags: ['coffee'],
+  address: c.address,
+  url: c.url,
+  ...at(c.lat, c.lon),
+  nearby: [],
+}));
+
+const places = [...services, ...parks, ...cafes];
 
 // Straight-line km; plenty for "what's close to this neighbourhood".
 function km(a: { lat: number; lon: number }, b: { lat: number; lon: number }) {
@@ -51,24 +75,29 @@ function km(a: { lat: number; lon: number }, b: { lat: number; lon: number }) {
   const dy = (a.lat - b.lat) * 110.57;
   return Math.hypot(dx, dy);
 }
+const RADIUS: Partial<Record<Kind, number>> = { library: 2.5, serviceontario: 2.5, park: 2.5, cafe: 1.5 };
 
 const hoods: Item[] = neighbourhoods.map((h, i) => {
-  const [x, y] = project(h.lat, h.lon);
-  const nearby = places
-    .map((p) => ({ p, d: km(h, p) }))
-    .filter(({ d }) => d < 2.5)
-    .sort((a, b) => a.d - b.d)
-    .slice(0, 3)
-    .map(({ p }) => p.id);
-  return { id: h.id, kind: 'neighbourhood', n: i + 1, name: h.name, text: h.text, tags: h.tags, lat: h.lat, lon: h.lon, x, y, nearby };
+  // The closest place of each kind, so cafés (there are many) can't crowd out the library.
+  const nearby = (Object.keys(RADIUS) as Kind[]).flatMap((kind) => {
+    const best = places
+      .filter((p) => p.kind === kind)
+      .map((p) => ({ p, d: km(h, p) }))
+      .filter(({ d }) => d < RADIUS[kind]!)
+      .sort((a, b) => a.d - b.d)[0];
+    return best ? [best.p.id] : [];
+  });
+  return { id: h.id, kind: 'neighbourhood', n: i + 1, name: h.name, text: h.text, tags: h.tags, ...at(h.lat, h.lon), nearby };
 });
 
-// Neighbourhood points are approximate; library and ServiceOntario points are exact.
+// Neighbourhood points are approximate; library, ServiceOntario and park points are exact.
 // Nudge neighbourhood pins (never places) apart so nothing hides under a number on the map.
+// Cafés are small, drawn underneath, and too numerous to push against.
 const GAP = 20; // SVG units, about 600 m
+const solid = places.filter((p) => p.kind !== 'cafe');
 for (let pass = 0; pass < 30; pass++) {
   for (const h of hoods) {
-    for (const o of [...places, ...hoods]) {
+    for (const o of [...solid, ...hoods]) {
       if (o === h) continue;
       const dx = h.x - o.x, dy = h.y - o.y, d = Math.hypot(dx, dy) || 0.01;
       if (d >= GAP) continue;
@@ -80,10 +109,12 @@ for (let pass = 0; pass < 30; pass++) {
   }
 }
 
-// Short codes for the printed map, where pins can't be tapped: libraries A–P, ServiceOntario S1–S4.
-let lib = 0, so = 0;
-for (const p of places) p.code = p.kind === 'library' ? String.fromCharCode(65 + lib++) : `S${++so}`;
+// Short codes for the printed map, where pins can't be tapped.
+const PREFIX: Partial<Record<Kind, string>> = { library: 'L', serviceontario: 'S', park: 'P' };
+const counts: Record<string, number> = {};
+for (const p of solid) p.code = `${PREFIX[p.kind]}${(counts[p.kind] = (counts[p.kind] ?? 0) + 1)}`;
 
-export const ITEMS: Item[] = [...hoods, ...places];
+export const ITEMS: Item[] = [...hoods, ...services, ...parks, ...cafes];
 export const CHECKED = placesFile.checked;
+export const CAFES_CHECKED = cafesFile.checked;
 export const SOURCES = placesFile.sources;

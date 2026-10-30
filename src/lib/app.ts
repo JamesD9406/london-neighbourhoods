@@ -1,6 +1,8 @@
 // Client behaviour for the main page: pan/zoom, selection, search, layers, offline status.
 // Everything is already rendered in the HTML; this only shows, hides and moves things.
 
+import { cullLabels } from './labels';
+
 type Box = [number, number, number, number];
 const $ = <T extends Element = HTMLElement>(s: string, root: ParentNode = document) => root.querySelector(s) as T;
 const $$ = <T extends Element = HTMLElement>(s: string, root: ParentNode = document) => [...root.querySelectorAll(s)] as T[];
@@ -37,7 +39,13 @@ export function initApp() {
     svg.setAttribute('viewBox', box.join(' '));
     const u = box[2] / Math.max(1, svg.clientWidth);
     svg.style.setProperty('--u', u.toFixed(4));
-    svg.classList.toggle('far', u > 1.4);
+    scheduleCull(u);
+  }
+  // Re-pick visible street labels once zooming/panning settles (measuring every frame is wasteful).
+  let cullTimer = 0;
+  function scheduleCull(u: number) {
+    clearTimeout(cullTimer);
+    cullTimer = window.setTimeout(() => cullLabels(svg, u), 120);
   }
   function zoomAt(factor: number, px = svg.clientWidth / 2, py = svg.clientHeight / 2) {
     const [x, y, w, h] = box;
@@ -162,7 +170,7 @@ export function initApp() {
   $$('button[role="tab"]').forEach((b) => b.addEventListener('click', () => showTab(b.dataset.tab as 'map' | 'list')));
 
   // ---- search + layers --------------------------------------------------
-  const layers = new Set(['neighbourhood', 'library', 'serviceontario']);
+  const layers = new Set($$('.chip').filter((c) => c.getAttribute('aria-pressed') === 'true').map((c) => c.dataset.layer!));
   const q = $<HTMLInputElement>('#q');
   function filter() {
     const words = fold(q.value).split(/\s+/).filter(Boolean);
@@ -174,6 +182,10 @@ export function initApp() {
       if (hit) shown++;
     });
     $('#empty').hidden = shown > 0;
+    // Don't leave a details sheet open for a place that was just filtered away.
+    if (selected && $(`#results li[data-id="${selected}"]`).hidden) select(null);
+    // Hidden pins free up room for street labels.
+    if (svg.clientWidth) scheduleCull(box[2] / svg.clientWidth);
   }
   q.addEventListener('input', filter);
   q.addEventListener('keydown', (e) => {

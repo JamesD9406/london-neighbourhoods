@@ -43,3 +43,10 @@ th { width: 3em; color: var(--library); }
 /* Arabic needs taller lines; keep the 20 descriptions on one page. */
 :lang(ar) .cols p { font-size: 11.5px; line-height: 1.45; }
 :lang(ar) .cols article { margin-block-end: 5px; }
+
+/* Codes and icons that tie the map to the tables. */
+.legend .key .chip-icon { width: 18px; height: 18px; padding: 3px; }
+.code-tag { display: inline-block; min-width: 2.2em; padding: 0 4px; border-radius: 4px; background: var(--park); color: #fff; font-size: 11px; text-align: center; }
+.cols--parks p { font-size: 11.5px; }
+.coffee-note { display: flex; align-items: center; gap: 8px; margin-block-start: 10px !important; color: var(--muted); }
+.coffee-note .chip-icon { width: 20px; height: 20px; padding: 3px; }

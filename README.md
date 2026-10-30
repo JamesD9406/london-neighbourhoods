@@ -9,7 +9,7 @@
 ![Playwright](https://img.shields.io/badge/Playwright-1.64-2EAD33?logo=playwright&logoColor=white)
 ![Languages](https://img.shields.io/badge/languages-EN%20%7C%20ES%20%7C%20AR-125f67)
 
-An interactive, **offline-first** guide to London, Ontario for people who are new to the city. It covers **20 neighbourhoods**, all **16 London Public Library branches** and the **4 ServiceOntario offices** in **English, Spanish and Arabic**. It's built with **Astro**, **TypeScript** and a **custom SVG map built from OpenStreetMap data**, uses a **build-time service worker** for offline use, and generates **printable PDFs** with **Playwright**.
+An interactive, **offline-first** guide to London, Ontario for people who are new to the city. It covers **20 neighbourhoods**, all **16 London Public Library branches**, the **4 ServiceOntario offices**, **15 notable parks** and **121 coffee shops** in **English, Spanish and Arabic**. It's built with **Astro**, **TypeScript** and a **custom SVG map built from OpenStreetMap data**, uses a **build-time service worker** for offline use, and generates **printable PDFs** with **Playwright**.
 
 The project came out of volunteering with **Canada Connects** and the **South London Neighbourhood Resource Centre**, where I meet weekly with newcomers so they can practise their English. One couple from Colombia said that one of the hardest parts of arriving was learning the city: what the neighbourhoods are called, where things are, and why you would go there.
 
@@ -22,17 +22,21 @@ This project demonstrates mobile-first UI design, offline-first architecture, in
 ## 🚀 Features
 
 ### 🗺️ Interactive Map
-- Custom vector basemap (river, highways and arterial roads) generated from OpenStreetMap
+- Custom vector basemap (river, parks, highways and main streets) generated from OpenStreetMap
+- Street names appear as you zoom in: highways first, then main roads, then smaller streets, and labels never overlap each other or a marker
+- [Lucide](https://lucide.dev) icon markers: a book for libraries, an ID card for ServiceOntario, trees for parks, a cup for coffee
 - Pan, pinch-to-zoom, mouse-wheel zoom and keyboard-accessible pins
 - Pins stay the same size on screen at every zoom level
-- Three layers: neighbourhoods, libraries and ServiceOntario offices, each with its own toggle
+- Five layers: neighbourhoods, libraries, ServiceOntario, parks and coffee, each with its own toggle
 - Selecting a place zooms to it and updates the URL (`/en/#byron`), so links can be shared
 
 ### 📍 Neighbourhoods & Essential Services
 - 20 neighbourhoods described in everyday language: why you'd go, not a safety rating
 - All 16 London Public Library branches with verified addresses
 - All 4 current ServiceOntario offices (health cards, driver's licences, photo cards)
-- "Nearby" links from each neighbourhood to the closest libraries and ServiceOntario offices, worked out from coordinates
+- 15 notable parks and nature areas with descriptions, plus every park drawn as a green area
+- 121 coffee shops from OpenStreetMap, each with a short "practise ordering in English" blurb (and an explanation of the Tim Hortons "double-double")
+- "Nearby" links from each neighbourhood to the closest library, ServiceOntario office, park and café, worked out from coordinates
 - Suggested first outings and practical advice for exploring with confidence
 
 ### 🌐 Multilingual (EN / ES / AR)
@@ -56,7 +60,7 @@ This project demonstrates mobile-first UI design, offline-first architecture, in
 
 ### 🖨️ Printable PDF Guide
 - A 4-page, letter-size landscape handout for each language
-- Map with lettered library pins (A–P) and ServiceOntario pins (S1–S4), matching the address tables
+- Map with coded pins for libraries (L1–L16), ServiceOntario (S1–S4) and parks (P1–P15), matching the tables
 - Generated from the same data and print page as the website, so the paper version never drifts
 
 ### 🔒 Privacy by Design
@@ -106,6 +110,7 @@ This project demonstrates mobile-first UI design, offline-first architecture, in
 | **TypeScript** | Type safety for data, strings and client logic |
 | **Vanilla TS** | Pan/zoom, search and selection (~5 KB, no UI framework) |
 | **SVG** | Basemap and pins, sharp at any zoom and in print |
+| **Lucide** | Marker and button icons, inlined at build time (no icon font, works offline) |
 | **CSS logical properties** | One stylesheet that mirrors for right-to-left languages |
 
 ### Offline & Print
@@ -120,7 +125,7 @@ This project demonstrates mobile-first UI design, offline-first architecture, in
 | Technology | Purpose |
 |------------|---------|
 | **OpenStreetMap / Overpass API** | River and road geometry, plus location coordinates |
-| **Douglas–Peucker simplification** | Shrinks the basemap to ~78 KB |
+| **Douglas–Peucker simplification** | Keeps the basemap (roads, parks, river and labels) to ~190 KB before compression |
 | **JSON data files** | Neighbourhoods and places, the single source of truth |
 
 ### Deployment
@@ -150,11 +155,19 @@ This project demonstrates mobile-first UI design, offline-first architecture, in
 - `approximate` (boolean, optional): flags a pin that couldn't be placed exactly
 - File-level `checked` date and `sources`, shown in the UI and on the PDF
 
+### **Park** (`src/data/parks.json`)
+- `id`, `name`, `lat`, `lon`: a curated list of notable parks and nature areas
+- `text` (`{ en, es, ar }`): a short description
+
+### **Café** (`src/data/cafes.json`, generated by `npm run cafes`)
+- `id`, `name`, `brand`, `lat`, `lon`: every named `amenity=cafe` in OpenStreetMap
+- `address`, `url` (optional): when OpenStreetMap has them
+
 ### **Derived at build time** (`src/lib/data.ts`)
 - `x`, `y`: projected SVG coordinates
 - `n`: map number (1–20) for neighbourhoods
-- `code`: print label for places (A–P, S1–S4)
-- `nearby`: up to 3 places within 2.5 km of each neighbourhood
+- `code`: print label for places (L1–L16, S1–S4, P1–P15)
+- `nearby`: the closest library, ServiceOntario office and park within 2.5 km, and café within 1.5 km
 
 ---
 
@@ -180,6 +193,8 @@ london-neighbourhoods/
 │   ├── data/
 │   │   ├── neighbourhoods.json   # 20 neighbourhoods, EN/ES/AR
 │   │   ├── places.json           # Libraries + ServiceOntario
+│   │   ├── parks.json            # Notable parks, EN/ES/AR
+│   │   ├── cafes.json            # Generated from OpenStreetMap
 │   │   └── basemap.json          # Generated from OpenStreetMap
 │   ├── i18n/
 │   │   └── strings.ts            # UI text for all languages
@@ -188,7 +203,9 @@ london-neighbourhoods/
 │   ├── lib/
 │   │   ├── app.ts                # Pan/zoom, search, selection, offline status
 │   │   ├── data.ts               # Projection, nearby places, pin nudging, codes
-│   │   └── geo.js                # Shared lat/lon → SVG projection
+│   │   ├── geo.js                # Shared lat/lon → SVG projection
+│   │   ├── icons.ts              # Lucide icons, inlined
+│   │   └── labels.ts             # Zoom-aware, collision-free street labels
 │   ├── pages/
 │   │   ├── index.astro           # Language picker
 │   │   └── [lang]/
@@ -199,7 +216,8 @@ london-neighbourhoods/
 │   │   └── print.css             # Letter landscape pages
 │   └── sw-template.js            # Service worker template
 ├── scripts/
-│   ├── build-basemap.mjs         # Overpass → simplified SVG paths
+│   ├── build-basemap.mjs         # Overpass → roads, parks, river, labels
+│   ├── build-cafes.mjs           # Overpass → cafes.json
 │   └── make-assets.mjs           # PDFs + icons via Playwright
 ├── public/
 │   ├── icons/
@@ -249,9 +267,10 @@ PDFs and icons (first time only: `npx playwright install chromium`):
 npm run assets
 ```
 
-Refresh the OpenStreetMap basemap:
+Refresh the OpenStreetMap basemap and café list:
 ```bash
 npm run basemap
+npm run cafes
 ```
 
 ### **Updating Places**
@@ -286,6 +305,9 @@ PDFs are committed in `public/pdf/`, so the Vercel build doesn't need Chromium.
 
 ### **Map Projection**
 An equirectangular projection, scaled by `cos(latitude)`, maps latitude/longitude to SVG units. At city scale the distortion isn't noticeable, and it keeps the build script and the browser using the same simple maths (`src/lib/geo.js`).
+
+### **Street Labels**
+The basemap script joins OpenStreetMap road pieces into whole streets, repeats each name about every 5 km along the street, and gives every label a rank (highway, main road, secondary, minor). After each zoom or pan settles, `labels.ts` shows only the ranks that suit the current zoom, then places labels in order of importance and hides any that would overlap a marker, another label, or the edge of the map. The print page runs the same function once before the PDF is generated.
 
 ### **Constant-Size Pins**
 On every zoom, the script sets `--u` to the number of SVG units per screen pixel. Pins use `scale(calc(var(--u) * 1.25))` and labels use `font-size: calc(11px * var(--u))`, so they stay readable at every zoom without redrawing.
@@ -359,5 +381,6 @@ A community and portfolio project demonstrating offline-first architecture, inte
 - **Canada Connects** and the **South London Neighbourhood Resource Centre**: for the work they do with newcomers, and the conversations that started this project
 - **OpenStreetMap contributors**: map data © OpenStreetMap contributors, available under the [ODbL](https://www.openstreetmap.org/copyright)
 - **London Public Library** and **ServiceOntario**: official location information
+- **Lucide**: open-source icons (ISC licence)
 - **Astro**: static site framework
 - **Playwright**: headless browser for PDF generation

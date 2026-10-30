@@ -10,6 +10,8 @@
   --accent: #b44120;
   --library: #6a3d9a;
   --so: #1f5fa8;
+  --park: #3f7f3a;
+  --cafe: #8a5a35;
   --radius: 12px;
   --tap: 44px;
   font: 17px/1.5 system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', 'Noto Sans Arabic', sans-serif;
@@ -45,9 +47,15 @@ button { font: inherit; color: inherit; }
 .chip { min-height: var(--tap); padding: 8px 14px; border-radius: 999px; border: 2px solid var(--line); background: var(--card); cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
 .chip[aria-pressed='true'] { border-color: var(--ink); }
 .chip[aria-pressed='false'] { opacity: .55; }
-.swatch { width: 14px; height: 14px; border-radius: 50%; background: var(--teal); }
-.swatch--library { background: var(--library); border-radius: 3px; }
-.swatch--serviceontario { background: var(--so); transform: rotate(45deg); border-radius: 2px; }
+/* Kind icons in chips and list badges: white Lucide strokes on the kind's colour. */
+.chip-icon, .badge { flex: none; display: inline-grid; place-items: center; border-radius: 50%; background: var(--teal);
+  fill: none; stroke: #fff; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.chip-icon { width: 22px; height: 22px; padding: 4px; }
+.chip-icon--neighbourhood { width: 14px; height: 14px; padding: 0; margin-inline: 4px; }
+.chip-icon--library, .badge--library { background: var(--library); }
+.chip-icon--serviceontario, .badge--serviceontario { background: var(--so); border-radius: 6px; }
+.chip-icon--park, .badge--park { background: var(--park); }
+.chip-icon--cafe, .badge--cafe { background: var(--cafe); }
 .tabs { display: grid; grid-template-columns: 1fr 1fr; background: var(--card); border: 2px solid var(--line); border-radius: var(--radius); overflow: hidden; }
 .tabs button { min-height: var(--tap); border: 0; background: none; cursor: pointer; font-weight: 600; }
 .tabs button[aria-selected='true'] { background: var(--teal); color: #fff; }
@@ -58,22 +66,22 @@ button { font: inherit; color: inherit; }
 .map-wrap .map { width: 100%; height: 100%; display: block; cursor: grab; user-select: none; }
 .map-wrap .map.dragging { cursor: grabbing; }
 .zoom { position: absolute; inset-block-start: 10px; inset-inline-end: 10px; display: grid; gap: 6px; }
-.zoom button { width: var(--tap); height: var(--tap); border-radius: 10px; border: 1px solid var(--line); background: var(--card); font-size: 1.3rem; cursor: pointer; box-shadow: 0 1px 3px #0002; }
+.zoom button { width: var(--tap); height: var(--tap); border-radius: 10px; border: 1px solid var(--line); background: var(--card); cursor: pointer; box-shadow: 0 1px 3px #0002; display: grid; place-items: center; }
+.zoom svg, .detail__close svg { width: 20px; height: 20px; }
 .attr { position: absolute; inset-block-end: 4px; inset-inline-start: 8px; font-size: .7rem; color: var(--muted); background: #fffc; padding: 0 4px; border-radius: 4px; }
 
 .results { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; max-height: 60vh; overflow: auto; }
 .results button { width: 100%; min-height: var(--tap); text-align: start; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); cursor: pointer; display: flex; gap: 10px; align-items: center; }
 .results button:hover { border-color: var(--teal); }
-.results .badge { flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--teal); color: #fff; font-size: .85rem; font-weight: 700; display: grid; place-items: center; }
-.results .badge--library { background: var(--library); border-radius: 6px; }
-.results .badge--serviceontario { background: var(--so); border-radius: 6px; }
+.results .badge { width: 28px; height: 28px; padding: 6px; color: #fff; font-size: .85rem; font-weight: 700; }
+.results .badge--neighbourhood { padding: 0; }
 .results small { display: block; color: var(--muted); font-size: .8rem; }
 .empty { color: var(--muted); padding: 8px 0; }
 
 /* Detail: bottom sheet on phones, panel on wide screens */
 .detail { position: fixed; inset-inline: 0; inset-block-end: 0; z-index: 10; max-height: 62vh; overflow: auto; background: var(--card); border-radius: 18px 18px 0 0; box-shadow: 0 -6px 24px #0003; padding: 18px 18px calc(18px + env(safe-area-inset-bottom)); border-block-start: 6px solid var(--teal); }
 .detail[hidden] { display: none; }
-.detail__close { position: absolute; inset-block-start: 8px; inset-inline-end: 8px; width: var(--tap); height: var(--tap); border: 0; background: none; font-size: 1.6rem; cursor: pointer; }
+.detail__close { position: absolute; inset-block-start: 8px; inset-inline-end: 8px; width: var(--tap); height: var(--tap); border: 0; background: none; cursor: pointer; display: grid; place-items: center; }
 .detail article { display: grid; gap: 8px; }
 .detail article[hidden] { display: none; }
 .detail h2 { font-size: 1.3rem; padding-inline-end: 40px; }
@@ -100,23 +108,33 @@ button { font: inherit; color: inherit; }
 /* Map drawing. --u = SVG units per screen pixel, set by script so pins and labels keep a constant size. */
 .map { --u: 1; }
 .map .land { fill: #f1efe6; }
+.map .parks { fill: #d7e8c8; stroke: #c3dbb0; stroke-width: .5px; vector-effect: non-scaling-stroke; }
 .map .road { fill: none; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.map .road--tertiary { stroke: #e9e3d6; stroke-width: 1.2px; }
 .map .road--secondary { stroke: #e4dccb; stroke-width: 1.5px; }
 .map .road--primary { stroke: #e8cfa0; stroke-width: 2px; }
 .map .road--trunk { stroke: #e3b77d; stroke-width: 2.5px; }
 .map .road--motorway { stroke: #d99a5b; stroke-width: 3.5px; }
 .map .river { fill: none; stroke: #8fc1dc; stroke-width: 4px; stroke-linecap: round; vector-effect: non-scaling-stroke; }
-.map .labels text { font-size: calc(11px * var(--u)); fill: #7b6d58; text-anchor: middle; paint-order: stroke; stroke: #f1efe6; stroke-width: calc(3px * var(--u)); }
-.map.far .labels { display: none; }
+.map .labels text { font-size: calc(11px * var(--u)); fill: #6f624f; text-anchor: middle; paint-order: stroke; stroke: #f1efe6; stroke-width: calc(3px * var(--u)); stroke-linejoin: round; }
+.map .labels text[data-r='0'] { font-weight: 600; }
+.map .labels text[data-r='3'] { font-size: calc(10px * var(--u)); fill: #85796a; }
+.map .labels text.river { fill: #3d7fa6; font-style: italic; }
+
+/* Pins: a coloured disc with a white Lucide icon. Neighbourhoods keep their numbers. */
 .pin { transform: translate(var(--x), var(--y)) scale(calc(var(--u) * 1.25)); cursor: pointer; }
-.pin circle { fill: var(--teal); stroke: #fff; stroke-width: 2; }
-.pin text { fill: #fff; font: 700 10px system-ui, sans-serif; text-anchor: middle; pointer-events: none; }
-.pin--library rect { fill: var(--library); stroke: #fff; stroke-width: 1.5; }
-.pin--library .glyph { fill: #fff; }
-.pin--serviceontario path { fill: var(--so); stroke: #fff; stroke-width: 1.5; }
-.pin--serviceontario .glyph-text { font-size: 9px; }
-.pin:hover circle, .pin:focus-visible circle, .pin.selected circle,
-.pin.selected rect, .pin.selected path:first-child { fill: var(--accent); }
+.pin .bg, .pin circle { stroke: #fff; stroke-width: 1.8; }
+.pin--neighbourhood circle { fill: var(--teal); }
+.pin--library .bg { fill: var(--library); }
+.pin--serviceontario .bg { fill: var(--so); }
+.pin--park .bg { fill: var(--park); }
+.pin--cafe .bg { fill: var(--cafe); stroke-width: 1.4; }
+.pin .icon { fill: none; stroke: #fff; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; pointer-events: none; }
+.pin .num { fill: #fff; font: 700 10px system-ui, sans-serif; text-anchor: middle; pointer-events: none; }
+.pin .code { font: 700 9px system-ui, sans-serif; fill: var(--ink); paint-order: stroke; stroke: #fff; stroke-width: 3px; }
+.pin:hover .bg, .pin:hover circle, .pin:focus-visible .bg, .pin:focus-visible circle,
+.pin.selected .bg, .pin.selected circle { fill: var(--accent); }
+.pin.selected { transform: translate(var(--x), var(--y)) scale(calc(var(--u) * 1.6)); }
 .pin:focus { outline: none; }
 .pin.hidden { display: none; }
 
