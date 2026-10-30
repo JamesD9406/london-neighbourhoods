@@ -342,7 +342,9 @@ Pointer capture makes dragging smooth, but it sends the tap to the `<svg>` inste
 
 ## 📄 License
 
-MIT
+Code is released under the [MIT License](LICENSE).
+
+Map data in `src/data/basemap.json` and the map in the PDFs is © OpenStreetMap contributors and is available under the [Open Database License (ODbL)](https://www.openstreetmap.org/copyright).
 
 ## 👤 Author
 

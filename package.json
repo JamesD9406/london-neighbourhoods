@@ -2,6 +2,7 @@
   "name": "london-neighbourhoods",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
   "type": "module",
   "description": "An offline-first, multilingual neighbourhood guide to London, Ontario for newcomers.",
   "scripts": {
