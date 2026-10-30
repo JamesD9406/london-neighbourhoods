@@ -142,11 +142,14 @@ button { font: inherit; color: inherit; }
 @media (min-width: 860px) {
   .top, .controls, .app, .info { padding-inline: 28px; }
   .tabs { display: none; }
+  /* Search and layer chips share one row: the search box doesn't need the full page width. */
+  .controls { grid-template-columns: minmax(260px, 420px) 1fr; align-items: end; column-gap: 20px; }
   .app { grid-template-columns: minmax(0, 2fr) minmax(300px, 1fr); align-items: start; }
   .map-wrap { height: 78vh; max-height: none; }
-  .side { display: grid; gap: 12px; }
-  .detail { position: relative; max-height: none; border-radius: var(--radius); box-shadow: none; border: 1px solid var(--line); border-inline-start: 6px solid var(--teal); border-block-start-width: 1px; }
-  .results { max-height: 40vh; }
+  /* The side column matches the map's height; the list fills whatever the detail card leaves. */
+  .side { height: 78vh; display: flex; flex-direction: column; gap: 12px; }
+  .detail { position: relative; flex: none; max-height: 60%; overflow: auto; border-radius: var(--radius); box-shadow: none; border: 1px solid var(--line); border-inline-start: 6px solid var(--teal); border-block-start-width: 1px; }
+  .results { flex: 1 1 auto; min-height: 0; max-height: none; align-content: start; }
   .info { grid-template-columns: repeat(3, 1fr); }
   .info .fine-wrap { grid-column: 1 / -1; }
 }
