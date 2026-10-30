@@ -1,0 +1,147 @@
+---
+import Base from '../../layouts/Base.astro';
+import MapSvg from '../../components/MapSvg.astro';
+import { LANGS, LANG_META, STRINGS, type Lang } from '../../i18n/strings';
+import { ITEMS, CHECKED, SOURCES, type Item } from '../../lib/data';
+
+export function getStaticPaths() {
+  return LANGS.map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Lang;
+const t = STRINGS[lang];
+const byId = new Map(ITEMS.map((i) => [i.id, i]));
+
+// Everything a person might type, without accents. Descriptions in this language and English;
+// short category words ("library", "biblioteca", "مكتبة") in every language, so people can
+// search in their own language on any page.
+const fold = (s: string) => s.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase();
+function searchText(i: Item) {
+  const all = LANGS.map((l) => STRINGS[l]);
+  const tagWords = i.tags.flatMap((tag) => all.map((s) => s.tags[tag as keyof typeof t.tags]));
+  const kindWords = all.flatMap((s) => [s.type[i.kind], s.layers[i.kind]]);
+  const about = i.kind === 'neighbourhood' ? [] : [t.about[i.kind], STRINGS.en.about[i.kind]];
+  return fold([
+    i.name[lang], i.name.en, i.text?.[lang], i.text?.en, i.address, i.note?.[lang],
+    ...about, ...kindWords, ...tagWords,
+  ].filter(Boolean).join(' '));
+}
+const directions = (i: Item) => `https://www.google.com/maps/dir/?api=1&destination=${i.lat},${i.lon}`;
+const kinds = ['neighbourhood', 'library', 'serviceontario'] as const;
+---
+<Base lang={lang} title={`${t.title} — ${t.layers.neighbourhood}, ${t.layers.library}, ServiceOntario`}>
+  <header class="top">
+    <div class="top__row">
+      <h1>{t.title}</h1>
+      <nav class="langs" aria-label={t.language}>
+        {LANGS.map((l) => (
+          <a href={`/${l}/`} hreflang={l} lang={l} aria-current={l === lang ? 'true' : undefined} data-lang-link>{LANG_META[l].label}</a>
+        ))}
+      </nav>
+    </div>
+    <p>{t.subtitle}</p>
+    <p class="status" id="status" role="status" data-ready={t.offlineReady} data-offline={t.offlineNow}></p>
+  </header>
+
+  <div class="controls">
+    <div class="search">
+      <label for="q">{t.searchLabel}</label>
+      <input id="q" type="search" placeholder={t.searchPlaceholder} autocomplete="off" enterkeyhint="search" />
+    </div>
+    <div class="chips" role="group" aria-label={t.show}>
+      {kinds.map((k) => (
+        <button type="button" class="chip" data-layer={k} aria-pressed="true">
+          <span class={`swatch swatch--${k}`} aria-hidden="true"></span>{t.layers[k]}
+        </button>
+      ))}
+    </div>
+    <div class="tabs" role="tablist">
+      <button type="button" role="tab" aria-selected="true" data-tab="map">{t.tabMap}</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="list">{t.tabList}</button>
+    </div>
+  </div>
+
+  <main class="app" id="app" data-tab="map">
+    <div class="map-wrap">
+      <MapSvg lang={lang} />
+      <div class="zoom">
+        <button type="button" id="zoom-in" aria-label={t.zoomIn}>+</button>
+        <button type="button" id="zoom-out" aria-label={t.zoomOut}>−</button>
+        <button type="button" id="zoom-reset" aria-label={t.resetMap}>⤢</button>
+      </div>
+      <span class="attr">{t.mapData}</span>
+    </div>
+
+    <div class="side">
+      <aside class="detail" id="detail" aria-live="polite" hidden>
+        <button type="button" class="detail__close" id="detail-close" aria-label={t.close}>×</button>
+        {ITEMS.map((i) => (
+          <article data-id={i.id} hidden>
+            <span class="kind">{t.type[i.kind]}</span>
+            <h2>{i.n ? `${i.n}. ` : ''}{i.name[lang]}</h2>
+            {i.text && <p>{i.text[lang]}</p>}
+            {i.kind !== 'neighbourhood' && <p>{t.about[i.kind]}</p>}
+            {i.address && <p><strong>{t.address}:</strong> <span dir="ltr">{i.address}</span>{i.note && <> · {i.note[lang]}</>}</p>}
+            {i.approximate && <p class="note">{t.approximate}</p>}
+            {i.tags.length > 0 && <ul class="tags">{i.tags.map((tag) => <li>{t.tags[tag as keyof typeof t.tags]}</li>)}</ul>}
+            {i.nearby.length > 0 && (
+              <div class="nearby">
+                <strong>{t.nearby}:</strong>
+                <ul>{i.nearby.map((id) => <li><button type="button" data-goto={id}>{byId.get(id)!.name[lang]}</button></li>)}</ul>
+              </div>
+            )}
+            <p class="links">
+              <a href={directions(i)} target="_blank" rel="noopener">{t.directions}</a>
+              {i.url && <a href={i.url} target="_blank" rel="noopener">{t.officialPage}</a>}
+            </p>
+          </article>
+        ))}
+      </aside>
+
+      <ul class="results" id="results">
+        {ITEMS.map((i) => (
+          <li data-id={i.id} data-kind={i.kind} data-search={searchText(i)}>
+            <button type="button" data-goto={i.id}>
+              <span class={`badge badge--${i.kind}`} aria-hidden="true">{i.n ?? (i.kind === 'library' ? 'L' : 'S')}</span>
+              <span>{i.name[lang]}{i.address && <small dir="ltr">{i.address}</small>}</span>
+            </button>
+          </li>
+        ))}
+      </ul>
+      <p class="empty" id="empty" hidden>{t.noResults}</p>
+    </div>
+  </main>
+
+  <div class="info">
+    <section>
+      <h2>{t.outingsTitle}</h2>
+      <ul>{t.outings.map((o) => <li>{o}</li>)}</ul>
+    </section>
+    <section>
+      <h2>{t.tipsTitle}</h2>
+      <ul>{t.tips.map((o) => <li>{o}</li>)}</ul>
+    </section>
+    <section>
+      <h2>{t.beforeTitle}</h2>
+      <p>{t.before}</p>
+      <div class="actions">
+        <a class="btn" href={`/pdf/london-guide-${lang}.pdf`} download>{t.downloadPdf}</a>
+        <a class="btn btn--ghost" href={`/${lang}/print/`}>{t.printNow}</a>
+      </div>
+    </section>
+    <div class="fine-wrap">
+      <footer class="fine">
+        <p>{t.disclaimer}</p>
+        <p>{t.checked}: {CHECKED} · <a href={SOURCES.library}>London Public Library</a> · <a href={SOURCES.serviceontario}>ServiceOntario</a></p>
+        {lang !== 'en' && <p>{t.translationNote}</p>}
+        <p>{t.privacy}</p>
+        <p>{t.mapData} (ODbL).</p>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    import { initApp } from '../../lib/app';
+    initApp();
+  </script>
+</Base>

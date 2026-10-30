@@ -1,0 +1,20 @@
+{
+  "name": "london-neighbourhoods",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "An offline-first, multilingual neighbourhood guide to London, Ontario for newcomers.",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "basemap": "node scripts/build-basemap.mjs",
+    "assets": "node scripts/make-assets.mjs"
+  },
+  "dependencies": {
+    "astro": "^7.4.4"
+  },
+  "devDependencies": {
+    "playwright": "^1.64.1"
+  }
+}

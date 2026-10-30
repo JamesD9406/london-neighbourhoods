@@ -1,0 +1,5 @@
+node_modules/
+dist/
+.astro/
+# Early prototypes: the HTML embeds an Esri basemap snapshot that shouldn't be redistributed.
+reference/

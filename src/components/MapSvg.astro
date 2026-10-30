@@ -1,0 +1,50 @@
+---
+// The offline vector map: OSM river and roads plus pins for every item.
+// Used interactively on the main page and statically on the print page.
+import basemap from '../data/basemap.json';
+import { ITEMS } from '../lib/data';
+import type { Lang } from '../i18n/strings';
+import { STRINGS } from '../i18n/strings';
+
+interface Props { lang: Lang; id?: string; print?: boolean }
+const { lang, id = 'map', print = false } = Astro.props;
+const t = STRINGS[lang];
+const W = basemap.width, H = basemap.height;
+// Crop the print map to where the pins are, so it fills the page.
+const viewBox = print ? '150 90 700 730' : `0 0 ${W} ${H}`;
+---
+<svg id={id} class:list={['map', { 'map--print': print }]} viewBox={viewBox} data-full={`0 0 ${W} ${H}`}
+  role="group" aria-label={t.mapLabel} style="direction: ltr">
+  <rect x={-W} y={-H} width={W * 3} height={H * 3} class="land" />
+  <g class="roads">
+    <path d={basemap.secondary} class="road road--secondary" />
+    <path d={basemap.primary} class="road road--primary" />
+    <path d={basemap.trunk} class="road road--trunk" />
+    <path d={basemap.motorway} class="road road--motorway" />
+  </g>
+  <path d={basemap.river} class="river" />
+  <g class="labels" aria-hidden="true">
+    {basemap.labels.map((l) => (
+      <text transform={`translate(${l.x} ${l.y}) rotate(${l.angle})`} dy="-3">{l.text}</text>
+    ))}
+  </g>
+  <g class="pins">
+    {ITEMS.filter((i) => i.kind !== 'neighbourhood').map((i) => (
+      <g class={`pin pin--${i.kind}`} data-id={i.id} style={`--x:${i.x.toFixed(1)}px;--y:${i.y.toFixed(1)}px`}
+        tabindex={print ? undefined : '0'} role={print ? undefined : 'button'} aria-label={`${i.name[lang]}, ${t.type[i.kind]}`}>
+        {i.kind === 'library'
+          ? <><rect x="-7" y="-7" width="14" height="14" rx="3" />{print
+              ? <text class="glyph-text" dy="3.3">{i.code}</text>
+              : <path d="M-4 -3.5h3.2c.6 0 .8.4.8.8v6.2c0-.4-.3-.8-.8-.8H-4zM4 -3.5H.8c-.6 0-.8.4-.8.8v6.2c0-.4.3-.8.8-.8H4z" class="glyph" />}</>
+          : <><path d="M0 -10L10 0L0 10L-10 0Z" /><text class="glyph-text" dy="3">{print ? i.code : 'S'}</text></>}
+      </g>
+    ))}
+    {ITEMS.filter((i) => i.kind === 'neighbourhood').map((i) => (
+      <g class="pin pin--neighbourhood" data-id={i.id} style={`--x:${i.x.toFixed(1)}px;--y:${i.y.toFixed(1)}px`}
+        tabindex={print ? undefined : '0'} role={print ? undefined : 'button'} aria-label={`${i.n}. ${i.name[lang]}`}>
+        <circle r="10" />
+        <text dy="3.6">{i.n}</text>
+      </g>
+    ))}
+  </g>
+</svg>

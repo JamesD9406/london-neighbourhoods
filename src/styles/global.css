@@ -1,0 +1,139 @@
+/* Mobile first. Logical properties (inline/block) so Arabic mirrors correctly. */
+:root {
+  --ink: #1d3436;
+  --muted: #536a6c;
+  --paper: #f6f3ec;
+  --card: #ffffff;
+  --line: #d5dcd9;
+  --teal: #125f67;
+  --teal-soft: #e3f0ef;
+  --accent: #b44120;
+  --library: #6a3d9a;
+  --so: #1f5fa8;
+  --radius: 12px;
+  --tap: 44px;
+  font: 17px/1.5 system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', 'Noto Sans Arabic', sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+}
+:lang(ar) { line-height: 1.7; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+h1, h2, h3 { line-height: 1.2; margin: 0; }
+a { color: var(--teal); }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* Header */
+.top { padding: 14px 16px 8px; display: grid; gap: 6px; }
+.top__row { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.top h1 { font-size: 1.6rem; }
+.top p { margin: 0; color: var(--muted); }
+.langs { display: flex; gap: 4px; }
+.langs a { min-height: 36px; padding: 6px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); text-decoration: none; color: var(--ink); font-size: .9rem; }
+.langs a[aria-current='true'] { background: var(--teal); border-color: var(--teal); color: #fff; }
+.status { font-size: .85rem; color: var(--teal); min-height: 1.2em; }
+.status.offline { color: var(--accent); font-weight: 600; }
+
+/* Controls */
+.controls { padding: 0 16px; display: grid; gap: 10px; }
+.search label { font-weight: 600; display: block; margin-block-end: 4px; }
+.search input { width: 100%; min-height: var(--tap); padding: 10px 14px; font: inherit; border: 2px solid var(--line); border-radius: var(--radius); background: var(--card); }
+.search input:focus { border-color: var(--teal); outline: none; }
+.chips { display: flex; gap: 8px; flex-wrap: wrap; }
+.chip { min-height: var(--tap); padding: 8px 14px; border-radius: 999px; border: 2px solid var(--line); background: var(--card); cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
+.chip[aria-pressed='true'] { border-color: var(--ink); }
+.chip[aria-pressed='false'] { opacity: .55; }
+.swatch { width: 14px; height: 14px; border-radius: 50%; background: var(--teal); }
+.swatch--library { background: var(--library); border-radius: 3px; }
+.swatch--serviceontario { background: var(--so); transform: rotate(45deg); border-radius: 2px; }
+.tabs { display: grid; grid-template-columns: 1fr 1fr; background: var(--card); border: 2px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+.tabs button { min-height: var(--tap); border: 0; background: none; cursor: pointer; font-weight: 600; }
+.tabs button[aria-selected='true'] { background: var(--teal); color: #fff; }
+
+/* Map + list */
+.app { padding: 10px 16px 16px; display: grid; gap: 12px; }
+.map-wrap { position: relative; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; height: min(68vh, 620px); touch-action: none; }
+.map-wrap .map { width: 100%; height: 100%; display: block; cursor: grab; user-select: none; }
+.map-wrap .map.dragging { cursor: grabbing; }
+.zoom { position: absolute; inset-block-start: 10px; inset-inline-end: 10px; display: grid; gap: 6px; }
+.zoom button { width: var(--tap); height: var(--tap); border-radius: 10px; border: 1px solid var(--line); background: var(--card); font-size: 1.3rem; cursor: pointer; box-shadow: 0 1px 3px #0002; }
+.attr { position: absolute; inset-block-end: 4px; inset-inline-start: 8px; font-size: .7rem; color: var(--muted); background: #fffc; padding: 0 4px; border-radius: 4px; }
+
+.results { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; max-height: 60vh; overflow: auto; }
+.results button { width: 100%; min-height: var(--tap); text-align: start; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); cursor: pointer; display: flex; gap: 10px; align-items: center; }
+.results button:hover { border-color: var(--teal); }
+.results .badge { flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--teal); color: #fff; font-size: .85rem; font-weight: 700; display: grid; place-items: center; }
+.results .badge--library { background: var(--library); border-radius: 6px; }
+.results .badge--serviceontario { background: var(--so); border-radius: 6px; }
+.results small { display: block; color: var(--muted); font-size: .8rem; }
+.empty { color: var(--muted); padding: 8px 0; }
+
+/* Detail: bottom sheet on phones, panel on wide screens */
+.detail { position: fixed; inset-inline: 0; inset-block-end: 0; z-index: 10; max-height: 62vh; overflow: auto; background: var(--card); border-radius: 18px 18px 0 0; box-shadow: 0 -6px 24px #0003; padding: 18px 18px calc(18px + env(safe-area-inset-bottom)); border-block-start: 6px solid var(--teal); }
+.detail[hidden] { display: none; }
+.detail__close { position: absolute; inset-block-start: 8px; inset-inline-end: 8px; width: var(--tap); height: var(--tap); border: 0; background: none; font-size: 1.6rem; cursor: pointer; }
+.detail article { display: grid; gap: 8px; }
+.detail article[hidden] { display: none; }
+.detail h2 { font-size: 1.3rem; padding-inline-end: 40px; }
+.detail .kind { color: var(--muted); font-size: .85rem; text-transform: uppercase; letter-spacing: .04em; }
+.detail p { margin: 0; }
+.detail .tags { display: flex; flex-wrap: wrap; gap: 6px; padding: 0; margin: 0; list-style: none; }
+.detail .tags li { background: var(--teal-soft); border-radius: 999px; padding: 2px 10px; font-size: .85rem; }
+.detail .nearby button { border: 0; background: none; padding: 4px 0; color: var(--teal); text-decoration: underline; cursor: pointer; text-align: start; min-height: 32px; }
+.detail .links { display: flex; flex-wrap: wrap; gap: 8px 16px; }
+.note { color: var(--muted); font-size: .9rem; }
+
+/* Tips + footer */
+.info { padding: 8px 16px 24px; display: grid; gap: 18px; }
+.info section { background: var(--card); border-radius: var(--radius); padding: 16px; border: 1px solid var(--line); }
+.info h2 { font-size: 1.2rem; margin-block-end: 8px; }
+.info ul { margin: 0; padding-inline-start: 1.2em; }
+.info li + li { margin-block-start: 6px; }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.btn { min-height: var(--tap); display: inline-flex; align-items: center; padding: 10px 16px; border-radius: var(--radius); background: var(--teal); color: #fff; text-decoration: none; font-weight: 600; border: 0; cursor: pointer; }
+.btn--ghost { background: var(--card); color: var(--teal); border: 2px solid var(--teal); }
+.fine { font-size: .8rem; color: var(--muted); display: grid; gap: 4px; }
+.fine p { margin: 0; }
+
+/* Map drawing. --u = SVG units per screen pixel, set by script so pins and labels keep a constant size. */
+.map { --u: 1; }
+.map .land { fill: #f1efe6; }
+.map .road { fill: none; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.map .road--secondary { stroke: #e4dccb; stroke-width: 1.5px; }
+.map .road--primary { stroke: #e8cfa0; stroke-width: 2px; }
+.map .road--trunk { stroke: #e3b77d; stroke-width: 2.5px; }
+.map .road--motorway { stroke: #d99a5b; stroke-width: 3.5px; }
+.map .river { fill: none; stroke: #8fc1dc; stroke-width: 4px; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.map .labels text { font-size: calc(11px * var(--u)); fill: #7b6d58; text-anchor: middle; paint-order: stroke; stroke: #f1efe6; stroke-width: calc(3px * var(--u)); }
+.map.far .labels { display: none; }
+.pin { transform: translate(var(--x), var(--y)) scale(calc(var(--u) * 1.25)); cursor: pointer; }
+.pin circle { fill: var(--teal); stroke: #fff; stroke-width: 2; }
+.pin text { fill: #fff; font: 700 10px system-ui, sans-serif; text-anchor: middle; pointer-events: none; }
+.pin--library rect { fill: var(--library); stroke: #fff; stroke-width: 1.5; }
+.pin--library .glyph { fill: #fff; }
+.pin--serviceontario path { fill: var(--so); stroke: #fff; stroke-width: 1.5; }
+.pin--serviceontario .glyph-text { font-size: 9px; }
+.pin:hover circle, .pin:focus-visible circle, .pin.selected circle,
+.pin.selected rect, .pin.selected path:first-child { fill: var(--accent); }
+.pin:focus { outline: none; }
+.pin.hidden { display: none; }
+
+/* Larger screens: side-by-side, detail lives in the side column */
+@media (min-width: 860px) {
+  .top, .controls, .app, .info { padding-inline: 28px; }
+  .tabs { display: none; }
+  .app { grid-template-columns: minmax(0, 2fr) minmax(300px, 1fr); align-items: start; }
+  .map-wrap { height: 78vh; max-height: none; }
+  .side { display: grid; gap: 12px; }
+  .detail { position: relative; max-height: none; border-radius: var(--radius); box-shadow: none; border: 1px solid var(--line); border-inline-start: 6px solid var(--teal); border-block-start-width: 1px; }
+  .results { max-height: 40vh; }
+  .info { grid-template-columns: repeat(3, 1fr); }
+  .info .fine-wrap { grid-column: 1 / -1; }
+}
+@media (max-width: 859px) {
+  .app[data-tab='map'] .side > :not(.detail) { display: none; }
+  .app[data-tab='list'] .map-wrap { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }

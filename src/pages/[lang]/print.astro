@@ -1,0 +1,82 @@
+---
+// Print layout, also used to generate /pdf/london-guide-{lang}.pdf (see scripts/make-assets.mjs).
+import Base from '../../layouts/Base.astro';
+import MapSvg from '../../components/MapSvg.astro';
+import { LANGS, STRINGS, type Lang } from '../../i18n/strings';
+import { ITEMS, CHECKED } from '../../lib/data';
+import '../../styles/print.css';
+
+export function getStaticPaths() {
+  return LANGS.map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Lang;
+const t = STRINGS[lang];
+const site = Astro.site ? new URL(`/${lang}/`, Astro.site).href.replace(/^https?:\/\//, '') : '';
+const hoods = ITEMS.filter((i) => i.kind === 'neighbourhood');
+const libs = ITEMS.filter((i) => i.kind === 'library');
+const offices = ITEMS.filter((i) => i.kind === 'serviceontario');
+const footer = `${t.title} · ${t.checked}: ${CHECKED}`;
+---
+<Base lang={lang} title={t.printTitle} print>
+  <div class="screen-bar">
+    <a href={`/${lang}/`}>← {t.title}</a>
+    <button type="button" onclick="print()">{t.printNow}</button>
+  </div>
+
+  <section class="sheet sheet--map">
+    <header>
+      <h1>{t.printTitle}</h1>
+      <p>{t.printSubtitle}</p>
+    </header>
+    <div class="map-grid">
+      <MapSvg lang={lang} id="print-map" print />
+      <div class="legend">
+        <ol>{hoods.map((h) => <li value={h.n}>{h.name[lang]}</li>)}</ol>
+        <p class="key"><span class="swatch swatch--library"></span> <bdi dir="ltr">A–P</bdi> {t.libraries}</p>
+        <p class="key"><span class="swatch swatch--serviceontario"></span> <bdi dir="ltr">S1–S4</bdi> {t.offices}</p>
+      </div>
+    </div>
+    <p class="fineprint">{t.disclaimer} {t.mapData} (ODbL).</p>
+    <footer>{footer}{site && <> · <bdi dir="ltr">{site}</bdi></>}</footer>
+  </section>
+
+  <section class="sheet">
+    <h2>{t.layers.neighbourhood}</h2>
+    <div class="cols">
+      {hoods.map((h) => (
+        <article>
+          <h3>{h.n}. {h.name[lang]}</h3>
+          <p>{h.text![lang]}</p>
+        </article>
+      ))}
+    </div>
+    <footer>{footer}{site && <> · <bdi dir="ltr">{site}</bdi></>}</footer>
+  </section>
+
+  <section class="sheet">
+    <h2>{t.libraries}</h2>
+    <p class="intro">{t.about.library}</p>
+    <table>
+      <tbody>{libs.map((p) => <tr><th>{p.code}</th><td>{p.name.en}</td><td dir="ltr">{p.address}</td></tr>)}</tbody>
+    </table>
+    <h2>{t.offices}</h2>
+    <p class="intro">{t.about.serviceontario}</p>
+    <table>
+      <tbody>{offices.map((p) => <tr><th>{p.code}</th><td>{p.name.en.replace('ServiceOntario – ', '')}</td><td><span dir="ltr">{p.address}</span>{p.note && <> · {p.note[lang]}</>}</td></tr>)}</tbody>
+    </table>
+    <footer>{footer}{site && <> · <bdi dir="ltr">{site}</bdi></>}</footer>
+  </section>
+
+  <section class="sheet">
+    <h2>{t.tipsTitle}</h2>
+    <ul>{t.tips.map((x) => <li>{x}</li>)}</ul>
+    <h3>{t.outingsTitle}</h3>
+    <ul>{t.outings.map((x) => <li>{x}</li>)}</ul>
+    <h3>{t.beforeTitle}</h3>
+    <p>{t.before}</p>
+    {site && <p class="app-link">{t.scanForApp} <strong><bdi dir="ltr">{site}</bdi></strong></p>}
+    <p class="fineprint">{t.privacy} {lang !== 'en' && t.translationNote}</p>
+    <footer>{footer}{site && <> · <bdi dir="ltr">{site}</bdi></>}</footer>
+  </section>
+</Base>

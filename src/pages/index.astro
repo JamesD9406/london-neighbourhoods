@@ -1,0 +1,34 @@
+---
+// Language picker. Sends people straight to their browser language when we have it,
+// and still works (as plain links) with scripts off or offline.
+import Base from '../layouts/Base.astro';
+import { LANGS, LANG_META, STRINGS } from '../i18n/strings';
+---
+<Base lang="en" title="London, Ontario — newcomer neighbourhood guide">
+  <main class="picker">
+    <h1>London, Ontario</h1>
+    <ul>
+      {LANGS.map((l) => (
+        <li lang={l} dir={LANG_META[l].dir}>
+          <a class="btn" href={`/${l}/`}>{LANG_META[l].label}</a>
+          <p>{STRINGS[l].subtitle}</p>
+        </li>
+      ))}
+    </ul>
+  </main>
+  <script is:inline>
+    (function () {
+      var supported = ['en', 'es', 'ar'];
+      var langs = navigator.languages || [navigator.language || 'en'];
+      for (var i = 0; i < langs.length; i++) {
+        var l = String(langs[i]).slice(0, 2).toLowerCase();
+        if (supported.indexOf(l) > -1) { location.replace('/' + l + '/' + location.hash); return; }
+      }
+    })();
+  </script>
+  <style>
+    .picker { max-width: 520px; margin: 0 auto; padding: 32px 16px; }
+    .picker ul { list-style: none; padding: 0; display: grid; gap: 18px; margin-block-start: 20px; }
+    .picker p { color: var(--muted); margin: 6px 0 0; }
+  </style>
+</Base>

@@ -1,0 +1,30 @@
+{
+  "checked": "2026-10-30",
+  "sources": {
+    "library": "https://www.lpl.ca/locations",
+    "serviceontario": "https://www.ontario.ca/locations/serviceontario/all-locations"
+  },
+  "places": [
+    { "id": "lpl-central", "type": "library", "name": "Central Library", "address": "251 Dundas St, N6A 6H9", "lat": 42.98426, "lon": -81.24607 },
+    { "id": "lpl-beacock", "type": "library", "name": "Beacock Library", "address": "1280 Huron St, N5Y 4M2", "lat": 43.01951, "lon": -81.21879 },
+    { "id": "lpl-bostwick", "type": "library", "name": "Bostwick Library", "address": "501 Southdale Rd W, N6K 3X4", "note": { "en": "Inside the StarTech.com Community Centre", "es": "Dentro del StarTech.com Community Centre", "ar": "داخل مركز StarTech.com المجتمعي" }, "lat": 42.93757, "lon": -81.28823 },
+    { "id": "lpl-byron", "type": "library", "name": "Byron Library", "address": "1295 Commissioners Rd W, N6K 1C9", "lat": 42.96061, "lon": -81.3345 },
+    { "id": "lpl-carson", "type": "library", "name": "Carson Library", "address": "465 Quebec St, N5W 3Y4", "lat": 42.99441, "lon": -81.22019 },
+    { "id": "lpl-cherryhill", "type": "library", "name": "Cherryhill Library", "address": "301 Oxford St W, N6H 1S6", "lat": 42.99062, "lon": -81.27438 },
+    { "id": "lpl-crouch", "type": "library", "name": "Crouch Library", "address": "550 Hamilton Rd, N5Z 1S4", "lat": 42.98074, "lon": -81.21515 },
+    { "id": "lpl-east-london", "type": "library", "name": "East London Library", "address": "2016 Dundas St, N5V 1R1", "lat": 43.00763, "lon": -81.16845 },
+    { "id": "lpl-glanworth", "type": "library", "name": "Glanworth Library", "address": "2950 Glanworth Dr, N6N 1N6", "lat": 42.86684, "lon": -81.19529 },
+    { "id": "lpl-jalna", "type": "library", "name": "Jalna Library", "address": "1119 Jalna Blvd, N6E 3B3", "lat": 42.93143, "lon": -81.2284 },
+    { "id": "lpl-lambeth", "type": "library", "name": "Lambeth Library", "address": "7112 Beattie St, N6P 1A2", "lat": 42.91057, "lon": -81.30538 },
+    { "id": "lpl-landon", "type": "library", "name": "Landon Library", "address": "167 Wortley Rd, N6C 3P6", "lat": 42.97212, "lon": -81.25318 },
+    { "id": "lpl-masonville", "type": "library", "name": "Masonville Library", "address": "30 North Centre Rd, N5X 3W1", "lat": 43.02525, "lon": -81.27535 },
+    { "id": "lpl-pond-mills", "type": "library", "name": "Pond Mills Library", "address": "1166 Commissioners Rd E, N5Z 4W8", "lat": 42.96259, "lon": -81.19658 },
+    { "id": "lpl-sherwood", "type": "library", "name": "Sherwood Library", "address": "32-1225 Wonderland Rd N, N6G 2V9", "lat": 43.0045, "lon": -81.30569 },
+    { "id": "lpl-stoney-creek", "type": "library", "name": "Stoney Creek Library", "address": "920 Sunningdale Rd E, N5X 0H5", "lat": 43.04805, "lon": -81.25774 },
+
+    { "id": "so-dundas-talbot", "type": "serviceontario", "name": "ServiceOntario – Dundas and Talbot", "address": "100 Dundas St", "note": { "en": "Bell Building, main entrance on Talbot St", "es": "Edificio Bell, entrada principal por Talbot St", "ar": "مبنى Bell، المدخل الرئيسي من شارع Talbot" }, "lat": 42.98335, "lon": -81.25227, "url": "https://www.ontario.ca/locations/serviceontario/dundas-and-talbot-london" },
+    { "id": "so-dundas-beatrice", "type": "serviceontario", "name": "ServiceOntario – Dundas and Beatrice", "address": "1790 Dundas St E, Unit 18", "lat": 43.0036, "lon": -81.1812, "approximate": true, "url": "https://www.ontario.ca/locations/serviceontario/dundas-and-beatrice-london" },
+    { "id": "so-fanshawe-hyde-park", "type": "serviceontario", "name": "ServiceOntario – Fanshawe Park and Hyde Park", "address": "1280 Fanshawe Park Rd W", "note": { "en": "Inside Walmart", "es": "Dentro de Walmart", "ar": "داخل متجر Walmart" }, "lat": 43.00885, "lon": -81.33045, "url": "https://www.ontario.ca/locations/serviceontario/fanshawe-park-and-hyde-park-london" },
+    { "id": "so-wharncliffe-campbell", "type": "serviceontario", "name": "ServiceOntario – Wharncliffe and Campbell", "address": "2295 Wharncliffe Rd S", "note": { "en": "In East Lambeth Plaza", "es": "En East Lambeth Plaza", "ar": "في مجمّع East Lambeth Plaza" }, "lat": 42.91233, "lon": -81.2918, "url": "https://www.ontario.ca/locations/serviceontario/wharncliffe-and-campbell-london" }
+  ]
+}

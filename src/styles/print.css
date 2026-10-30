@@ -1,0 +1,45 @@
+/* Letter landscape handout. On screen it previews as stacked pages. */
+@page { size: letter landscape; margin: 0; }
+
+.is-print { background: #ddd; font-size: 13px; }
+.screen-bar { display: flex; justify-content: space-between; align-items: center; padding: 10px 16px; background: var(--card); }
+.screen-bar button { min-height: var(--tap); padding: 8px 16px; border-radius: var(--radius); border: 0; background: var(--teal); color: #fff; font-weight: 600; cursor: pointer; }
+
+.sheet { width: 11in; height: 8.5in; margin: 16px auto; padding: .45in .5in .55in; background: #fff; position: relative; overflow: hidden; break-after: page; }
+.sheet:last-child { break-after: auto; }
+.sheet h1 { font-size: 26px; color: var(--teal); }
+.sheet h2 { font-size: 20px; color: var(--teal); margin-block: 0 10px; }
+.sheet h3 { font-size: 14px; margin-block: 14px 4px; }
+.sheet p, .sheet li { margin: 0; }
+.sheet ul { padding-inline-start: 1.2em; display: grid; gap: 6px; }
+.sheet > header p { color: var(--muted); margin-block: 2px 8px; }
+.sheet footer { position: absolute; inset-block-end: .25in; inset-inline: .5in; font-size: 10px; color: var(--muted); border-block-start: 1px solid var(--line); padding-block-start: 4px; }
+
+.map-grid { display: grid; grid-template-columns: 6.6in 1fr; gap: .25in; height: 6.4in; }
+.map--print { width: 100%; height: 100%; border: 1px solid var(--line); --u: .9; }
+.legend ol { margin: 0; padding-inline-start: 1.8em; display: grid; gap: 1px; font-size: 12px; }
+.legend li::marker { font-weight: 700; color: var(--teal); }
+.legend .key { display: flex; align-items: center; gap: 8px; margin-block-start: 10px; font-size: 12px; }
+.legend .swatch { width: 12px; height: 12px; flex: none; }
+.fineprint { font-size: 10px; color: var(--muted); margin-block-start: 6px !important; }
+
+.cols { columns: 2; column-gap: .4in; }
+.cols article { break-inside: avoid; margin-block-end: 8px; }
+.cols h3 { margin-block-start: 0; color: var(--ink); }
+.cols p { font-size: 12px; line-height: 1.4; }
+
+.intro { color: var(--muted); margin-block-end: 6px !important; max-width: 8.5in; }
+table { border-collapse: collapse; width: 100%; margin-block-end: 14px; font-size: 12px; }
+th, td { text-align: start; padding: 2px 8px; border-block-end: 1px solid #eee; }
+th { width: 3em; color: var(--library); }
+.app-link { margin-block-start: 16px !important; font-size: 14px; }
+
+@media print {
+  .is-print { background: #fff; }
+  .screen-bar { display: none; }
+  .sheet { margin: 0; }
+}
+
+/* Arabic needs taller lines; keep the 20 descriptions on one page. */
+:lang(ar) .cols p { font-size: 11.5px; line-height: 1.45; }
+:lang(ar) .cols article { margin-block-end: 5px; }
