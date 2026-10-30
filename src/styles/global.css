@@ -158,3 +158,27 @@ button { font: inherit; color: inherit; }
   .app[data-tab='list'] .map-wrap { display: none; }
 }
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+
+/* Search mode tabs: Places | Address or intersection */
+.search-tabs { display: flex; gap: 4px; margin-block-end: 6px; }
+.search-tabs button { min-height: 36px; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); cursor: pointer; font-size: .9rem; }
+.search-tabs button[aria-selected='true'] { background: var(--ink); border-color: var(--ink); color: #fff; }
+
+/* Address results */
+.addr { display: flex; flex-direction: column; gap: 10px; min-height: 0; }
+.addr[hidden] { display: none; }
+.addr__status { margin: 0; color: var(--muted); }
+.addr__status[hidden] { display: none; }
+.addr__online { display: grid; gap: 4px; }
+.addr__online[hidden] { display: none; }
+.addr__online .btn { justify-self: start; }
+.addr .results { flex: 1 1 auto; min-height: 0; }
+.results[hidden] { display: none; }
+.detail .dist { color: var(--muted); font-size: .9rem; }
+
+/* The address-search pin: a red map pin whose point sits on the location. */
+.pin--search { pointer-events: none; }
+.pin--search path, .pin--search circle { fill: var(--accent); stroke: #fff; stroke-width: 1.6; }
+.pin--search circle { fill: #fff; stroke: none; }
+.pin--search.selected { transform: translate(var(--x), var(--y)) scale(calc(var(--u) * 1.6)); }
+.pin--search.selected path { fill: var(--accent); }

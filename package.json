@@ -11,6 +11,7 @@
     "preview": "astro preview",
     "basemap": "node scripts/build-basemap.mjs",
     "cafes": "node scripts/build-cafes.mjs",
+    "streets": "node scripts/build-streets.mjs",
     "assets": "node scripts/make-assets.mjs"
   },
   "dependencies": {

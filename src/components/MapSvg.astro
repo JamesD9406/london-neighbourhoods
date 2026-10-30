@@ -3,7 +3,7 @@
 // Used interactively on the main page and statically on the print page.
 import basemap from '../data/basemap.json';
 import { ITEMS, KINDS } from '../lib/data';
-import { KIND_ICON } from '../lib/icons';
+import { KIND_ICON, SEARCH_PIN } from '../lib/icons';
 import type { Lang } from '../i18n/strings';
 import { STRINGS } from '../i18n/strings';
 
@@ -47,5 +47,10 @@ const pins = KINDS.flatMap((k) => ITEMS.filter((i) => i.kind === k && !(print &&
             </>}
       </g>
     ))}
+    {!print && (
+      <g class="pin pin--search hidden" data-id="__addr" aria-hidden="true">
+        <g transform="translate(-12 -22)" set:html={SEARCH_PIN} />
+      </g>
+    )}
   </g>
 </svg>

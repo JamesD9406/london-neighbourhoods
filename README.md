@@ -46,11 +46,20 @@ This project demonstrates mobile-first UI design, offline-first architecture, in
 - Switching language keeps the selected place
 - Picks the visitor's browser language automatically on first visit
 
-### 🔎 Cross-Language Search
+### 🔎 Search: Places or Addresses
+Two search tabs:
+
+**Places**
 - Search names, descriptions, activities and addresses
 - Ignores accents: `cafe` finds `café`
 - Category words work in every language on every page: `library`, `biblioteca` and `مكتبة` all find libraries
 - Service keywords: `ohip` or `licence` finds ServiceOntario
+
+**Address or intersection**
+- Every named street in London (~3,100) and every intersection (~5,600), searchable **offline**
+- Type it any way: `Dundas & Richmond`, `dundas and richmond`, `Wonderland at Oxford`, `Dundas y Wellington`
+- Picking a result drops a pin and lists the **nearest library, ServiceOntario office, park and café**, with distances
+- House numbers (`251 Dundas St`) can be looked up through OpenStreetMap's geocoder, **only when the user taps "Look up online"**, and only when online
 
 ### 📶 Works Offline
 - A service worker saves the entire site after the first visit: every page, the map, the icons and the PDFs
@@ -66,6 +75,7 @@ This project demonstrates mobile-first UI design, offline-first architecture, in
 ### 🔒 Privacy by Design
 - No tracking, no analytics and no cookies
 - Never asks for the user's location
+- The only outside request is an optional house-number lookup, which the user has to start, and the page says where it goes
 - No backend: nothing to log, nothing to breach
 
 ---
@@ -180,6 +190,7 @@ This project demonstrates mobile-first UI design, offline-first architecture, in
 | `/{lang}/#{id}` | Same page with a place pre-selected |
 | `/{lang}/print/` | Print layout, also used to generate the PDFs |
 | `/pdf/london-guide-{lang}.pdf` | Downloadable PDF guide |
+| `/streets.json` | Street and intersection index for address search (loaded on demand, cached offline) |
 | `/sw.js` | Service worker, generated at build time |
 
 ---
@@ -204,6 +215,7 @@ london-neighbourhoods/
 │   │   ├── app.ts                # Pan/zoom, search, selection, offline status
 │   │   ├── data.ts               # Projection, nearby places, pin nudging, codes
 │   │   ├── geo.js                # Shared lat/lon → SVG projection
+│   │   ├── address.ts            # Street/intersection search + optional online lookup
 │   │   ├── icons.ts              # Lucide icons, inlined
 │   │   └── labels.ts             # Zoom-aware, collision-free street labels
 │   ├── pages/
@@ -218,6 +230,7 @@ london-neighbourhoods/
 ├── scripts/
 │   ├── build-basemap.mjs         # Overpass → roads, parks, river, labels
 │   ├── build-cafes.mjs           # Overpass → cafes.json
+│   ├── build-streets.mjs         # Overpass → streets.json (streets + intersections)
 │   └── make-assets.mjs           # PDFs + icons via Playwright
 ├── public/
 │   ├── icons/
@@ -267,10 +280,11 @@ PDFs and icons (first time only: `npx playwright install chromium`):
 npm run assets
 ```
 
-Refresh the OpenStreetMap basemap and café list:
+Refresh the OpenStreetMap basemap, café list and street index:
 ```bash
 npm run basemap
 npm run cafes
+npm run streets
 ```
 
 ### **Updating Places**
@@ -308,6 +322,9 @@ An equirectangular projection, scaled by `cos(latitude)`, maps latitude/longitud
 
 ### **Street Labels**
 The basemap script joins OpenStreetMap road pieces into whole streets, repeats each name about every 5 km along the street, and gives every label a rank (highway, main road, secondary, minor). After each zoom or pan settles, `labels.ts` shows only the ranks that suit the current zoom, then places labels in order of importance and hides any that would overlap a marker, another label, or the edge of the map. The print page runs the same function once before the PDF is generated.
+
+### **Offline Intersection Search**
+`build-streets.mjs` downloads every named street with its node IDs. Any node shared by two differently named streets is an intersection; repeat meetings of the same pair (crescents, divided roads) are kept only when they're more than 300 m apart. In the browser, street names and the query are reduced to the same short forms (`Road`→`rd`, `North`→`n`), so every word typed only has to be the start of a word in the street name. The query is split on `&`, `and`, `at`, `/`, Spanish `y` or Arabic `و`.
 
 ### **Constant-Size Pins**
 On every zoom, the script sets `--u` to the number of SVG units per screen pixel. Pins use `scale(calc(var(--u) * 1.25))` and labels use `font-size: calc(11px * var(--u))`, so they stay readable at every zoom without redrawing.

@@ -1,5 +1,5 @@
 // Lucide icons (ISC licence), inlined at build time so they work offline with no icon font.
-import { BookOpen, Coffee, IdCard, Maximize2, Minus, Plus, Trees, X } from 'lucide-static';
+import { BookOpen, Coffee, IdCard, MapPin, Maximize2, Minus, Plus, Trees, X } from 'lucide-static';
 import type { Kind } from './data';
 
 /** The inside of a Lucide <svg>: its paths, ready to drop into another SVG. */
@@ -11,6 +11,9 @@ export const KIND_ICON: Partial<Record<Kind, string>> = {
   park: inner(Trees),
   cafe: inner(Coffee),
 };
+
+/** The address-search pin: Lucide's map pin, point at (0, 0) after translate(-12 -22). */
+export const SEARCH_PIN = inner(MapPin);
 
 /** A full Lucide <svg> for buttons, sized by CSS. */
 const ui = (svg: string) => svg.replace(/\s(width|height)="24"/g, '').replace('<svg', '<svg aria-hidden="true" focusable="false"');

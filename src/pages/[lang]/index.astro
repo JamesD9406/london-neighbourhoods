@@ -30,6 +30,9 @@ function searchText(i: Item) {
 const directions = (i: Item) => `https://www.google.com/maps/dir/?api=1&destination=${i.lat},${i.lon}`;
 // Chip order: what newcomers need most first.
 const kinds: Kind[] = ['neighbourhood', 'library', 'serviceontario', 'park', 'cafe'];
+// Places for "Nearest" on address results: computed in the browser from these coordinates.
+const placeIndex = ITEMS.filter((i) => i.kind !== 'neighbourhood')
+  .map((i) => ({ id: i.id, kind: i.kind, name: i.name[lang], lat: i.lat, lon: i.lon }));
 const kindIcon = (k: Kind, cls: string) => k === 'neighbourhood'
   ? `<span class="${cls} ${cls}--neighbourhood"></span>`
   : `<svg class="${cls} ${cls}--${k}" viewBox="0 0 24 24" aria-hidden="true">${KIND_ICON[k]}</svg>`;
@@ -49,9 +52,14 @@ const kindIcon = (k: Kind, cls: string) => k === 'neighbourhood'
   </header>
 
   <div class="controls">
-    <div class="search">
-      <label for="q">{t.searchLabel}</label>
-      <input id="q" type="search" placeholder={t.searchPlaceholder} autocomplete="off" enterkeyhint="search" />
+    <div class="search" data-mode="places">
+      <div class="search-tabs" role="tablist" aria-label={t.searchLabel}>
+        <button type="button" role="tab" aria-selected="true" aria-controls="q" data-mode="places">{t.tabPlaces}</button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="q" data-mode="address">{t.tabAddress}</button>
+      </div>
+      <label for="q" class="visually-hidden" id="q-label" data-places={t.searchLabel} data-address={t.addrLabel}>{t.searchLabel}</label>
+      <input id="q" type="search" placeholder={t.searchPlaceholder} autocomplete="off" enterkeyhint="search"
+        data-places={t.searchPlaceholder} data-address={t.addrPlaceholder} />
     </div>
     <div class="chips" role="group" aria-label={t.show}>
       {kinds.map((k) => (
@@ -80,6 +88,16 @@ const kindIcon = (k: Kind, cls: string) => k === 'neighbourhood'
     <div class="side">
       <aside class="detail" id="detail" aria-live="polite" hidden>
         <button type="button" class="detail__close" id="detail-close" aria-label={t.close} set:html={UI_ICON.close} />
+        <article data-id="__addr" hidden>
+          <span class="kind" data-f="kind">{t.addrKind}</span>
+          <h2 data-f="title"></h2>
+          <div class="nearby">
+            <strong>{t.nearest}:</strong>
+            <ul data-f="nearest"></ul>
+          </div>
+          <p class="links"><a data-f="directions" target="_blank" rel="noopener">{t.directions}</a></p>
+          <p class="note">{t.fromOsm}</p>
+        </article>
         {ITEMS.map((i) => (
           <article data-id={i.id} hidden>
             <span class="kind">{t.type[i.kind]}</span>
@@ -103,6 +121,18 @@ const kindIcon = (k: Kind, cls: string) => k === 'neighbourhood'
           </article>
         ))}
       </aside>
+
+      <div class="addr" id="addr" hidden
+        data-hint={t.addrHint} data-loading={t.addrLoading} data-none={t.addrNone} data-offline={t.addrOffline}
+        data-failed={t.addrFailed} data-noaddress={t.addrNoAddress}
+        data-street={t.addrStreet} data-intersection={t.addrIntersection}>
+        <p class="addr__status" id="addr-status" role="status">{t.addrHint}</p>
+        <div class="addr__online" id="addr-online" hidden>
+          <button type="button" class="btn" id="addr-lookup">{t.addrOnline}</button>
+          <p class="note">{t.addrOnlineNote}</p>
+        </div>
+        <ul class="results" id="addr-results"></ul>
+      </div>
 
       <ul class="results" id="results">
         {ITEMS.map((i) => (
@@ -146,6 +176,7 @@ const kindIcon = (k: Kind, cls: string) => k === 'neighbourhood'
     </div>
   </div>
 
+  <script type="application/json" id="place-index" set:html={JSON.stringify(placeIndex)} />
   <script>
     import { initApp } from '../../lib/app';
     initApp();
