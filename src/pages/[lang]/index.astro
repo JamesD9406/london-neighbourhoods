@@ -52,6 +52,7 @@ const kindIcon = (k: Kind, cls: string) => k === 'neighbourhood'
       </div>
     </div>
     <p>{t.subtitle}</p>
+    {lang !== 'en' && <p class="translation-note">{t.translationNote}</p>}
     <p class="status" id="status" role="status" data-ready={t.offlineReady} data-offline={t.offlineNow}></p>
   </header>
 

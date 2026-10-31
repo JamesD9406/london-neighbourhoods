@@ -135,6 +135,7 @@ button { font: inherit; color: inherit; }
 .theme-toggle svg { width: 18px; height: 18px; }
 /* Show the icon for the mode you'd switch to. */
 :root:not([data-theme='dark']) .theme-toggle .sun, :root[data-theme='dark'] .theme-toggle .moon { display: none; }
+.top .translation-note { font-size: .85rem; padding: 6px 10px; border-radius: 8px; background: var(--teal-soft); color: var(--ink); justify-self: start; }
 .status { font-size: .85rem; color: var(--teal); min-height: 1.2em; }
 .status:empty { display: none; }
 .status.offline { color: var(--accent); font-weight: 600; }
