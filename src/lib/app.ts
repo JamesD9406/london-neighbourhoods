@@ -348,6 +348,22 @@ export function initApp() {
     if (selected && !selected.startsWith('__')) a.hash = selected;
   }));
 
+  // ---- light / dark toggle (the theme itself is applied in Base.astro) ----
+  const toggle = $('#theme-toggle');
+  const html = document.documentElement;
+  function labelToggle() {
+    const label = html.dataset.theme === 'dark' ? toggle.dataset.toLight! : toggle.dataset.toDark!;
+    toggle.setAttribute('aria-label', label);
+    toggle.title = label;
+  }
+  toggle.addEventListener('click', () => {
+    (window as unknown as { setTheme: (t: string) => void }).setTheme(html.dataset.theme === 'dark' ? 'light' : 'dark');
+    labelToggle();
+  });
+  // Follow system changes too (when the visitor hasn't picked a theme themselves).
+  new MutationObserver(labelToggle).observe(html, { attributes: true, attributeFilter: ['data-theme'] });
+  labelToggle();
+
   // ---- offline status ---------------------------------------------------
   const status = $('#status');
   function online() {

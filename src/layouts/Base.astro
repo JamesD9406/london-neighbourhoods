@@ -13,7 +13,31 @@ const t = STRINGS[lang];
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{title}</title>
     <meta name="description" content={t.subtitle} />
-    <meta name="theme-color" content="#125f67" />
+    <meta name="theme-color" content="#fafafa" />
+    {!print && (
+      // Set the theme before first paint (no flash): the visitor's saved choice, else their system setting.
+      // The print page skips this and always stays light.
+      <script is:inline>
+        (function () {
+          var saved = null;
+          try { saved = localStorage.getItem('theme'); } catch (e) {}
+          var media = matchMedia('(prefers-color-scheme: dark)');
+          function apply() {
+            var theme = saved || (media.matches ? 'dark' : 'light');
+            document.documentElement.dataset.theme = theme;
+            var meta = document.querySelector('meta[name="theme-color"]');
+            if (meta) meta.content = theme === 'dark' ? '#09090b' : '#fafafa';
+          }
+          apply();
+          if (media.addEventListener) media.addEventListener('change', function () { if (!saved) apply(); });
+          window.setTheme = function (theme) {
+            saved = theme;
+            try { localStorage.setItem('theme', theme); } catch (e) {}
+            apply();
+          };
+        })();
+      </script>
+    )}
     <link rel="manifest" href="/manifest.webmanifest" />
     <link rel="icon" href="/icons/icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/icons/icon-192.png" />
@@ -21,7 +45,8 @@ const t = STRINGS[lang];
   </head>
   <body class:list={{ 'is-print': print }}>
     <slot />
-    {!print && (
+    {/* sw.js only exists in production builds (astro.config.mjs writes it), so don't register it in dev. */}
+    {!print && import.meta.env.PROD && (
       <script is:inline>
         if ('serviceWorker' in navigator) {
           addEventListener('load', () => navigator.serviceWorker.register('/sw.js'));

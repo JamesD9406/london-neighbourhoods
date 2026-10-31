@@ -72,6 +72,12 @@ Two search tabs:
 - Map with coded pins for libraries (L1–L16), ServiceOntario (S1–S4) and parks (P1–P15), matching the tables
 - Generated from the same data and print page as the website, so the paper version never drifts
 
+### 🌗 Light & Dark
+- A clean light theme by default, using the same zinc + teal palette and Geist font as [jamesdunford.com](https://jamesdunford.com)
+- Switches to a dark theme automatically when the device is in dark mode
+- A sun/moon toggle in the header overrides it; the choice is remembered on that device (`localStorage`, never sent anywhere)
+- The map, pins and labels change theme too; the printable PDF always stays light
+
 ### 🔒 Privacy by Design
 - No tracking, no analytics and no cookies
 - Never asks for the user's location
@@ -122,6 +128,8 @@ Two search tabs:
 | **SVG** | Basemap and pins, sharp at any zoom and in print |
 | **Lucide** | Marker and button icons, inlined at build time (no icon font, works offline) |
 | **CSS logical properties** | One stylesheet that mirrors for right-to-left languages |
+| **CSS custom properties** | Light and dark themes, including the map colours |
+| **Geist** | Self-hosted variable font (Latin subsets only, ~46 KB; Arabic uses the system font) |
 
 ### Offline & Print
 | Technology | Purpose |
@@ -399,5 +407,6 @@ A community and portfolio project demonstrating offline-first architecture, inte
 - **OpenStreetMap contributors**: map data © OpenStreetMap contributors, available under the [ODbL](https://www.openstreetmap.org/copyright)
 - **London Public Library** and **ServiceOntario**: official location information
 - **Lucide**: open-source icons (ISC licence)
+- **Geist**: typeface by Vercel, under the SIL Open Font License (`public/fonts/OFL.txt`)
 - **Astro**: static site framework
 - **Playwright**: headless browser for PDF generation

@@ -41,11 +41,15 @@ const kindIcon = (k: Kind, cls: string) => k === 'neighbourhood'
   <header class="top">
     <div class="top__row">
       <h1>{t.title}</h1>
-      <nav class="langs" aria-label={t.language}>
-        {LANGS.map((l) => (
-          <a href={`/${l}/`} hreflang={l} lang={l} aria-current={l === lang ? 'true' : undefined} data-lang-link>{LANG_META[l].label}</a>
-        ))}
-      </nav>
+      <div class="top__tools">
+        <nav class="langs" aria-label={t.language}>
+          {LANGS.map((l) => (
+            <a href={`/${l}/`} hreflang={l} lang={l} aria-current={l === lang ? 'true' : undefined} data-lang-link>{LANG_META[l].label}</a>
+          ))}
+        </nav>
+        <button type="button" class="theme-toggle" id="theme-toggle" data-to-dark={t.themeToDark} data-to-light={t.themeToLight}
+          aria-label={t.themeToDark} title={t.themeToDark} set:html={UI_ICON.moon + UI_ICON.sun} />
+      </div>
     </div>
     <p>{t.subtitle}</p>
     <p class="status" id="status" role="status" data-ready={t.offlineReady} data-offline={t.offlineNow}></p>
