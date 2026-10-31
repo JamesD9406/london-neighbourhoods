@@ -175,6 +175,10 @@ button { font: inherit; color: inherit; }
 .zoom { position: absolute; inset-block-start: 10px; inset-inline-end: 10px; display: grid; gap: 6px; }
 .zoom button { width: var(--tap); height: var(--tap); border-radius: 12px; border: 1px solid var(--line); background: var(--card); cursor: pointer; box-shadow: 0 1px 3px rgb(0 0 0 / .12); display: grid; place-items: center; }
 .zoom svg, .detail__close svg { width: 20px; height: 20px; }
+/* Shown when someone scrolls over the map without Ctrl/⌘: plain scrolling moves the page. */
+.zoom-hint { position: absolute; inset: 0; display: grid; place-items: center; padding: 24px; background: rgb(0 0 0 / .45); pointer-events: none; opacity: 0; transition: opacity .2s; }
+.zoom-hint.show { opacity: 1; }
+.zoom-hint span { color: #fff; font-size: 1.15rem; font-weight: 600; text-align: center; }
 .attr { position: absolute; inset-block-end: 4px; inset-inline-start: 8px; font-size: .7rem; color: var(--muted); background: var(--overlay); padding: 0 4px; border-radius: 4px; }
 
 .results { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; max-height: 60vh; overflow: auto; }

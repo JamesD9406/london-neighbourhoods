@@ -121,8 +121,20 @@ export function initApp() {
     release(e);
   });
   svg.addEventListener('pointercancel', release);
+  // Plain scrolling moves the page, so the map doesn't trap people on the way to the footer.
+  // Ctrl/⌘ + scroll zooms; trackpad pinches arrive as wheel events with ctrlKey set.
+  const hint = $('#zoom-hint');
+  if (/Mac|iPhone|iPad/.test(navigator.platform)) hint.firstElementChild!.textContent = hint.dataset.mac!;
+  let hintTimer = 0;
   svg.addEventListener('wheel', (e) => {
+    if (!e.ctrlKey && !e.metaKey) {
+      hint.classList.add('show');
+      clearTimeout(hintTimer);
+      hintTimer = window.setTimeout(() => hint.classList.remove('show'), 1200);
+      return;
+    }
     e.preventDefault();
+    hint.classList.remove('show');
     const rect = svg.getBoundingClientRect();
     zoomAt(e.deltaY < 0 ? 1.2 : 1 / 1.2, e.clientX - rect.left, e.clientY - rect.top);
   }, { passive: false });

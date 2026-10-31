@@ -88,6 +88,7 @@ const kindIcon = (k: Kind, cls: string) => k === 'neighbourhood'
         <button type="button" id="zoom-reset" aria-label={t.resetMap} set:html={UI_ICON.reset} />
       </div>
       <span class="attr">{t.mapData}</span>
+      <div class="zoom-hint" id="zoom-hint" data-mac={t.zoomHintMac} aria-hidden="true"><span>{t.zoomHint}</span></div>
     </div>
 
     <div class="side">
