@@ -4,9 +4,9 @@
     "tags": ["food", "events", "market", "transit"],
     "name": { "en": "Downtown", "es": "Downtown (centro)", "ar": "Downtown (وسط المدينة)" },
     "text": {
-      "en": "Start here for Covent Garden Market, restaurants, the library and events. This is London’s busy centre; plan your trip home if you stay for an evening out.",
-      "es": "Empiece aquí: Covent Garden Market, restaurantes, la biblioteca central y eventos. Es el centro activo de London; si sale de noche, planee cómo regresar a casa.",
-      "ar": "ابدأ من هنا: سوق Covent Garden Market والمطاعم والمكتبة المركزية والفعاليات. هذا هو مركز London المزدحم؛ خطّط لطريق العودة إلى البيت إذا بقيت في المساء."
+      "en": "Start here for Covent Garden Market, restaurants, the library and events. This is London’s busy centre. If you stay out in the evening, check when the last bus home leaves before you go.",
+      "es": "Empiece aquí: Covent Garden Market, restaurantes, la biblioteca central y eventos. Es el centro activo de London. Si se queda hasta la noche, revise a qué hora sale el último autobús a casa antes de ir.",
+      "ar": "ابدأ من هنا: سوق Covent Garden Market والمطاعم والمكتبة المركزية والفعاليات. هذا هو مركز London المزدحم. إذا بقيت حتى المساء، فتحقّق قبل أن تذهب من موعد آخر حافلة تعيدك إلى البيت."
     }
   },
   {

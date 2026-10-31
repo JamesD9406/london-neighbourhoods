@@ -50,3 +50,6 @@ th { width: 3em; color: var(--library); }
 .cols--parks p { font-size: 11.5px; }
 .coffee-note { display: flex; align-items: center; gap: 8px; margin-block-start: 10px !important; color: var(--muted); }
 .coffee-note .chip-icon { width: 20px; height: 20px; padding: 3px; }
+/* Spanish runs about 15% longer than English; same treatment so the 20 descriptions fit one page. */
+:lang(es) .cols p { font-size: 11.5px; line-height: 1.38; }
+:lang(es) .cols article { margin-block-end: 6px; }
