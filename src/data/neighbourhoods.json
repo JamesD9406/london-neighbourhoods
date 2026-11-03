@@ -1,202 +1,22 @@
 [
-  {
-    "id": "downtown", "lat": 42.984, "lon": -81.25,
-    "tags": ["food", "events", "market", "transit"],
-    "name": { "en": "Downtown", "es": "Downtown (centro)", "ar": "Downtown (وسط المدينة)" },
-    "text": {
-      "en": "Start here for Covent Garden Market, restaurants, the library and events. This is London’s busy centre. If you stay out in the evening, check when the last bus home leaves before you go.",
-      "es": "Empiece aquí: Covent Garden Market, restaurantes, la biblioteca central y eventos. Es el centro activo de London. Si se queda hasta la noche, revise a qué hora sale el último autobús a casa antes de ir.",
-      "ar": "ابدأ من هنا: سوق Covent Garden Market والمطاعم والمكتبة المركزية والفعاليات. هذا هو مركز London المزدحم. إذا بقيت حتى المساء، فتحقّق قبل أن تذهب من موعد آخر حافلة تعيدك إلى البيت."
-    }
-  },
-  {
-    "id": "richmond-row", "lat": 42.993, "lon": -81.251,
-    "tags": ["food", "shopping", "nightlife"],
-    "name": { "en": "Richmond Row", "es": "Richmond Row", "ar": "Richmond Row" },
-    "text": {
-      "en": "The stretch of Richmond north of downtown is a go-to for restaurants, shops and an evening out. It can feel lively and noisy late at night.",
-      "es": "El tramo de la calle Richmond al norte del centro es un lugar popular para restaurantes, tiendas y salir de noche. Puede ser animado y ruidoso tarde en la noche.",
-      "ar": "الجزء من شارع Richmond شمال وسط المدينة مكان مفضّل للمطاعم والمحلات والخروج في المساء. قد يكون حيويًا وصاخبًا في وقت متأخر من الليل."
-    }
-  },
-  {
-    "id": "woodfield", "lat": 42.99, "lon": -81.237,
-    "tags": ["walks", "history", "parks"],
-    "name": { "en": "Woodfield", "es": "Woodfield", "ar": "Woodfield" },
-    "text": {
-      "en": "Just east of the core: older houses, leafy streets and an easy walk toward Victoria Park. Come for a relaxed look at London’s heritage streets.",
-      "es": "Justo al este del centro: casas antiguas, calles con muchos árboles y una caminata fácil hasta Victoria Park. Ideal para conocer con calma las calles históricas de London.",
-      "ar": "شرق وسط المدينة مباشرة: بيوت قديمة وشوارع مليئة بالأشجار ومشي سهل نحو حديقة Victoria Park. مكان هادئ للتعرّف على شوارع London التاريخية."
-    }
-  },
-  {
-    "id": "old-north", "lat": 43.006, "lon": -81.251,
-    "tags": ["walks", "history"],
-    "name": { "en": "Old North", "es": "Old North", "ar": "Old North" },
-    "text": {
-      "en": "Tree-lined streets and older homes between downtown and the university area. A pleasant place for a daytime walk and a look at established London.",
-      "es": "Calles con árboles y casas antiguas entre el centro y la zona de la universidad. Un lugar agradable para caminar de día y conocer el London tradicional.",
-      "ar": "شوارع تصطفّ فيها الأشجار وبيوت قديمة بين وسط المدينة ومنطقة الجامعة. مكان لطيف للمشي في النهار والتعرّف على أحياء London العريقة."
-    }
-  },
-  {
-    "id": "wortley-village", "lat": 42.97, "lon": -81.254,
-    "tags": ["coffee", "shopping", "walks", "first-outing"],
-    "name": { "en": "Old South / Wortley Village", "es": "Old South / Wortley Village", "ar": "Old South / Wortley Village" },
-    "text": {
-      "en": "This is where you go for a village feeling inside the city: coffee, independent shops and a stroll along Wortley Road. An easy first neighbourhood outing.",
-      "es": "Aquí se siente como un pueblo dentro de la ciudad: café, tiendas locales y un paseo por Wortley Road. Una primera salida fácil.",
-      "ar": "هنا تشعر وكأنك في قرية داخل المدينة: قهوة ومحلات مستقلة ونزهة على طول Wortley Road. نزهة أولى سهلة للتعرّف على الأحياء."
-    }
-  },
-  {
-    "id": "old-east-village", "lat": 42.991, "lon": -81.222,
-    "tags": ["arts", "food", "market", "events"],
-    "name": { "en": "Old East Village", "es": "Old East Village", "ar": "Old East Village" },
-    "text": {
-      "en": "Come for independent businesses, arts and performance spaces, and the Western Fair District nearby. Explore with a destination in mind; the feel changes from street to street.",
-      "es": "Venga por los negocios locales, los espacios de arte y espectáculos, y el Western Fair District cercano. Vaya con un destino en mente; el ambiente cambia de una calle a otra.",
-      "ar": "تعال من أجل المحلات المستقلة وأماكن الفنون والعروض، ومنطقة Western Fair District القريبة. اذهب وفي ذهنك مكان محدد؛ فالأجواء تختلف من شارع إلى آخر."
-    }
-  },
-  {
-    "id": "soho", "lat": 42.974, "lon": -81.24,
-    "tags": ["history"],
-    "name": { "en": "SoHo", "es": "SoHo", "ar": "SoHo" },
-    "text": {
-      "en": "The name means “south of Horton”. A neighbourhood close to downtown and the river, with older homes and redevelopment. Useful to recognize when people describe central London.",
-      "es": "El nombre significa “al sur de Horton” (south of Horton). Un barrio cerca del centro y del río, con casas antiguas y obras nuevas. Es útil reconocerlo cuando la gente describe el centro de London.",
-      "ar": "الاسم يعني «جنوب شارع Horton» (south of Horton). حيّ قريب من وسط المدينة والنهر، فيه بيوت قديمة ومشاريع تجديد. من المفيد معرفته عندما يصف الناس وسط London."
-    }
-  },
-  {
-    "id": "blackfriars", "lat": 42.991, "lon": -81.264,
-    "tags": ["walks", "history", "parks"],
-    "name": { "en": "Blackfriars / Petersville", "es": "Blackfriars / Petersville", "ar": "Blackfriars / Petersville" },
-    "text": {
-      "en": "A small historic area across the river from downtown. Blackfriars Bridge and nearby river paths make a good starting point for a walk.",
-      "es": "Una pequeña zona histórica al otro lado del río, frente al centro. El puente Blackfriars y los senderos junto al río son un buen punto de partida para caminar.",
-      "ar": "منطقة تاريخية صغيرة على الضفة المقابلة لوسط المدينة. جسر Blackfriars ومسارات النهر القريبة نقطة بداية جيدة للمشي."
-    }
-  },
-  {
-    "id": "western", "lat": 43.01, "lon": -81.276,
-    "tags": ["students", "events"],
-    "name": { "en": "Western / Broughdale", "es": "Western / Broughdale", "ar": "Western / Broughdale" },
-    "text": {
-      "en": "University buildings, students and busy term-time streets. Visit for the campus and events; check parking and visitor access before going.",
-      "es": "Edificios de la universidad, estudiantes y calles muy activas durante el semestre. Visítelo por el campus y los eventos; revise el estacionamiento y el acceso para visitantes antes de ir.",
-      "ar": "مباني الجامعة والطلاب وشوارع مزدحمة خلال الفصل الدراسي. زُرها من أجل الحرم الجامعي والفعاليات؛ تحقّق من مواقف السيارات ودخول الزوار قبل الذهاب."
-    }
-  },
-  {
-    "id": "masonville", "lat": 43.027, "lon": -81.279,
-    "tags": ["shopping", "food", "errands"],
-    "name": { "en": "Masonville", "es": "Masonville", "ar": "Masonville" },
-    "text": {
-      "en": "When someone says Masonville, they often mean the north-end mall and surrounding shops and restaurants. Handy for a shopping trip; roads are busy.",
-      "es": "Cuando alguien dice Masonville, normalmente se refiere al centro comercial del norte y las tiendas y restaurantes de alrededor. Práctico para ir de compras; las calles tienen mucho tráfico.",
-      "ar": "عندما يقول أحدهم Masonville فغالبًا يقصد المول في شمال المدينة والمحلات والمطاعم حوله. مناسب للتسوّق؛ والطرق مزدحمة."
-    }
-  },
-  {
-    "id": "hyde-park", "lat": 43.011, "lon": -81.333,
-    "tags": ["shopping", "food", "errands"],
-    "name": { "en": "Hyde Park", "es": "Hyde Park", "ar": "Hyde Park" },
-    "text": {
-      "en": "The northwest shopping-and-neighbourhood area around Hyde Park Road. Good for errands and restaurants; distances between stops can be longer than they look.",
-      "es": "La zona comercial y residencial del noroeste, alrededor de Hyde Park Road. Buena para hacer diligencias y comer; las distancias entre tiendas pueden ser más largas de lo que parecen.",
-      "ar": "منطقة تسوّق وسكن في الشمال الغربي حول Hyde Park Road. جيدة لقضاء الحاجات والمطاعم؛ المسافات بين الأماكن قد تكون أطول مما تبدو."
-    }
-  },
-  {
-    "id": "oakridge", "lat": 42.983, "lon": -81.322,
-    "tags": ["errands", "shopping", "parks"],
-    "name": { "en": "Oakridge", "es": "Oakridge", "ar": "Oakridge" },
-    "text": {
-      "en": "Established west-end streets, shopping along Oxford and access toward the river. Think everyday errands mixed with quiet residential pockets.",
-      "es": "Calles tradicionales del oeste, tiendas a lo largo de Oxford y acceso hacia el río. Diligencias del día a día y zonas residenciales tranquilas.",
-      "ar": "شوارع قديمة في غرب المدينة، ومحلات على طول شارع Oxford، وطريق نحو النهر. حاجات يومية مع أحياء سكنية هادئة."
-    }
-  },
-  {
-    "id": "byron", "lat": 42.958, "lon": -81.331,
-    "tags": ["parks", "walks", "first-outing"],
-    "name": { "en": "Byron", "es": "Byron", "ar": "Byron" },
-    "text": {
-      "en": "A west-end village feel, with Springbank Park nearby and Boler Mountain to the south. A favourite direction for a park outing or outdoor activity.",
-      "es": "Ambiente de pueblo en el oeste, con Springbank Park cerca y Boler Mountain al sur. Un destino favorito para ir al parque o hacer actividades al aire libre.",
-      "ar": "أجواء قرية في غرب المدينة، وبالقرب منها حديقة Springbank Park، وفي الجنوب Boler Mountain. وجهة مفضّلة للنزهة في الحديقة أو الأنشطة في الهواء الطلق."
-    }
-  },
-  {
-    "id": "river-bend", "lat": 42.974, "lon": -81.371,
-    "tags": ["walks", "parks", "food"],
-    "name": { "en": "River Bend / West 5", "es": "River Bend / West 5", "ar": "River Bend / West 5" },
-    "text": {
-      "en": "Farther west: newer neighbourhoods, the West 5 area and nearby woodland walks. Choose an official trail entrance and check trail conditions.",
-      "es": "Más al oeste: barrios nuevos, la zona de West 5 y senderos en el bosque cercano. Use una entrada oficial al sendero y revise el estado del camino.",
-      "ar": "أبعد نحو الغرب: أحياء جديدة ومنطقة West 5 ومسارات مشي في الغابات القريبة. استخدم مدخلًا رسميًا للمسار وتحقّق من حالته."
-    }
-  },
-  {
-    "id": "westmount", "lat": 42.947, "lon": -81.293,
-    "tags": ["shopping", "errands"],
-    "name": { "en": "Westmount", "es": "Westmount", "ar": "Westmount" },
-    "text": {
-      "en": "A southwest area Londoners associate with shopping and established residential streets. Handy for everyday services around Wonderland and Commissioners.",
-      "es": "Una zona del suroeste que la gente asocia con compras y calles residenciales tradicionales. Práctica para servicios diarios cerca de Wonderland y Commissioners.",
-      "ar": "منطقة في الجنوب الغربي يربطها سكان London بالتسوّق والشوارع السكنية القديمة. مناسبة للخدمات اليومية قرب Wonderland وCommissioners."
-    }
-  },
-  {
-    "id": "lambeth", "lat": 42.911, "lon": -81.299,
-    "tags": ["shopping"],
-    "name": { "en": "Lambeth", "es": "Lambeth", "ar": "Lambeth" },
-    "text": {
-      "en": "The southwest village that became part of London. Come for local shops and community places; allow more travel time from the city centre.",
-      "es": "El pueblo del suroeste que pasó a ser parte de London. Venga por las tiendas locales y los espacios comunitarios; calcule más tiempo de viaje desde el centro.",
-      "ar": "القرية الواقعة في الجنوب الغربي التي أصبحت جزءًا من London. تعال من أجل المحلات المحلية والأماكن المجتمعية؛ واحسب وقتًا أطول للوصول من وسط المدينة."
-    }
-  },
-  {
-    "id": "white-oaks", "lat": 42.931, "lon": -81.223,
-    "tags": ["shopping", "food", "errands"],
-    "name": { "en": "White Oaks", "es": "White Oaks", "ar": "White Oaks" },
-    "text": {
-      "en": "South-end shopping around White Oaks Mall and Wellington Road, with residential streets nearby. Useful for errands and meeting up over food.",
-      "es": "Zona comercial del sur, alrededor de White Oaks Mall y Wellington Road, con calles residenciales cerca. Útil para diligencias y para reunirse a comer.",
-      "ar": "منطقة تسوّق في جنوب المدينة حول White Oaks Mall وWellington Road، وبالقرب منها شوارع سكنية. مفيدة لقضاء الحاجات واللقاء على الطعام."
-    }
-  },
-  {
-    "id": "pond-mills", "lat": 42.953, "lon": -81.199,
-    "tags": ["parks", "walks", "errands"],
-    "name": { "en": "Pond Mills / Westminster", "es": "Pond Mills / Westminster", "ar": "Pond Mills / Westminster" },
-    "text": {
-      "en": "Southeast neighbourhoods near ponds, natural areas and everyday services. Use marked public trails; wooded routes are better explored in daylight.",
-      "es": "Barrios del sureste cerca de lagunas, áreas naturales y servicios diarios. Use los senderos públicos señalizados; es mejor recorrer las zonas boscosas de día.",
-      "ar": "أحياء في الجنوب الشرقي قرب البِرَك والمناطق الطبيعية والخدمات اليومية. استخدم المسارات العامة المعلَّمة؛ ومن الأفضل استكشاف الطرق بين الأشجار في النهار."
-    }
-  },
-  {
-    "id": "argyle", "lat": 43.001, "lon": -81.177,
-    "tags": ["shopping", "errands"],
-    "name": { "en": "Argyle", "es": "Argyle", "ar": "Argyle" },
-    "text": {
-      "en": "A broad east-end area with shopping along Dundas and many residential streets. A practical place for errands; “Argyle” covers more than one small pocket.",
-      "es": "Una zona amplia del este, con tiendas a lo largo de Dundas y muchas calles residenciales. Práctica para diligencias; “Argyle” abarca más de un sector pequeño.",
-      "ar": "منطقة واسعة في شرق المدينة، فيها محلات على طول شارع Dundas وشوارع سكنية كثيرة. مكان عملي لقضاء الحاجات؛ واسم «Argyle» يشمل أكثر من حيّ صغير."
-    }
-  },
-  {
-    "id": "fanshawe", "lat": 43.03, "lon": -81.202,
-    "tags": ["students", "parks", "errands"],
-    "name": { "en": "Huron Heights / Fanshawe", "es": "Huron Heights / Fanshawe", "ar": "Huron Heights / Fanshawe" },
-    "text": {
-      "en": "Northeast London around Fanshawe College and surrounding neighbourhoods. Think campus activities, local services and parks; the conservation area is farther northeast.",
-      "es": "El noreste de London, alrededor de Fanshawe College y los barrios cercanos. Actividades del campus, servicios locales y parques; el área de conservación está más al noreste.",
-      "ar": "شمال شرق London حول كلية Fanshawe College والأحياء المحيطة بها. أنشطة الحرم الجامعي والخدمات المحلية والحدائق؛ أمّا المحمية الطبيعية فهي أبعد نحو الشمال الشرقي."
-    }
-  }
+  { "id": "downtown", "lat": 42.984, "lon": -81.25, "tags": ["food", "events", "market", "transit"] },
+  { "id": "richmond-row", "lat": 42.993, "lon": -81.251, "tags": ["food", "shopping", "nightlife"] },
+  { "id": "woodfield", "lat": 42.99, "lon": -81.237, "tags": ["walks", "history", "parks"] },
+  { "id": "old-north", "lat": 43.006, "lon": -81.251, "tags": ["walks", "history"] },
+  { "id": "wortley-village", "lat": 42.97, "lon": -81.254, "tags": ["coffee", "shopping", "walks", "first-outing"] },
+  { "id": "old-east-village", "lat": 42.991, "lon": -81.222, "tags": ["arts", "food", "market", "events"] },
+  { "id": "soho", "lat": 42.974, "lon": -81.24, "tags": ["history"] },
+  { "id": "blackfriars", "lat": 42.991, "lon": -81.264, "tags": ["walks", "history", "parks"] },
+  { "id": "western", "lat": 43.01, "lon": -81.276, "tags": ["students", "events"] },
+  { "id": "masonville", "lat": 43.027, "lon": -81.279, "tags": ["shopping", "food", "errands"] },
+  { "id": "hyde-park", "lat": 43.011, "lon": -81.333, "tags": ["shopping", "food", "errands"] },
+  { "id": "oakridge", "lat": 42.983, "lon": -81.322, "tags": ["errands", "shopping", "parks"] },
+  { "id": "byron", "lat": 42.958, "lon": -81.331, "tags": ["parks", "walks", "first-outing"] },
+  { "id": "river-bend", "lat": 42.974, "lon": -81.371, "tags": ["walks", "parks", "food"] },
+  { "id": "westmount", "lat": 42.947, "lon": -81.293, "tags": ["shopping", "errands"] },
+  { "id": "lambeth", "lat": 42.911, "lon": -81.299, "tags": ["shopping"] },
+  { "id": "white-oaks", "lat": 42.931, "lon": -81.223, "tags": ["shopping", "food", "errands"] },
+  { "id": "pond-mills", "lat": 42.953, "lon": -81.199, "tags": ["parks", "walks", "errands"] },
+  { "id": "argyle", "lat": 43.001, "lon": -81.177, "tags": ["shopping", "errands"] },
+  { "id": "fanshawe", "lat": 43.03, "lon": -81.202, "tags": ["students", "parks", "errands"] }
 ]

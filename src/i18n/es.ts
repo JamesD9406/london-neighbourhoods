@@ -1,0 +1,198 @@
+// Spanish: neutral Latin American.
+import type { Strings } from './en';
+
+export const es: Strings = {
+  // ── Interface: buttons, labels, messages and page text ──
+  title: 'London, Ontario',
+  subtitle: 'Conozca su nueva ciudad: barrios, bibliotecas, ServiceOntario, parques y cafeterías.',
+  language: 'Idioma',
+  searchLabel: 'Busque lugares, actividades o direcciones',
+  searchPlaceholder: 'Pruebe: café, Byron, biblioteca…',
+  themeToDark: 'Cambiar a modo oscuro',
+  themeToLight: 'Cambiar a modo claro',
+  tabPlaces: 'Lugares',
+  tabAddress: 'Dirección o intersección',
+  addrLabel: 'Busque una calle, intersección o dirección',
+  addrPlaceholder: 'Pruebe: Dundas & Richmond, o 251 Dundas St',
+  addrHint: 'Escriba el nombre de una calle, o dos calles con “&” entre ellas.',
+  addrLoading: 'Cargando calles…',
+  addrNone: 'Ninguna calle o intersección coincide. Revise la ortografía o escriba menos letras.',
+  addrOnline: 'Buscar esta dirección en línea',
+  addrOnlineNote: 'Los números de casa requieren internet. Su búsqueda se envía al servicio de búsqueda de OpenStreetMap.',
+  addrOffline: 'Está sin conexión. Las calles e intersecciones funcionan; los números de casa requieren internet.',
+  addrFailed: 'La búsqueda en línea no funcionó. Inténtelo de nuevo o busque la intersección más cercana.',
+  addrNoAddress: 'No se encontró la dirección. Revise el número y la calle, o busque la intersección más cercana.',
+  addrKind: 'Resultado de búsqueda',
+  addrStreet: 'Calle',
+  addrIntersection: 'Intersección',
+  nearest: 'Lo más cercano',
+  fromOsm: 'Ubicación según OpenStreetMap.',
+  noResults: 'No hay resultados. Pruebe otra palabra.',
+  show: 'Mostrar en el mapa',
+  layers: { neighbourhood: 'Barrios', library: 'Bibliotecas', serviceontario: 'ServiceOntario', park: 'Parques', cafe: 'Café' },
+  type: { neighbourhood: 'Barrio', library: 'Biblioteca pública', serviceontario: 'Oficina de ServiceOntario', park: 'Parque', cafe: 'Cafetería' },
+  about: {
+    library: 'Tarjeta de biblioteca gratis con comprobante de domicilio. Wi-Fi y computadoras gratis, grupos de conversación en inglés, programas para niños y ayuda para recién llegados.',
+    serviceontario: 'Tarjeta de salud (OHIP), licencia de conducir, tarjeta con foto de Ontario y actas de nacimiento. Lleve sus documentos y revise el horario antes de ir.',
+    cafe: 'Café, té y algo para comer. Un lugar tranquilo para reunirse con alguien o practicar cómo pedir en inglés. Revise el horario antes de ir.',
+  },
+  timsNote: 'Tim Hortons (“Timmies”) es la cadena de café más conocida de Canadá. Un “double-double” es un café con dos cremas y dos azúcares.',
+  parksTitle: 'Parques y naturaleza',
+  coffeePrint: 'La versión interactiva también muestra {n} cafeterías.',
+  cafesSource: 'Cafeterías según OpenStreetMap',
+  tags: {
+    food: 'Comida', coffee: 'Café', shopping: 'Compras', parks: 'Parques', walks: 'Caminatas', arts: 'Arte',
+    nightlife: 'Salir de noche', students: 'Estudiantes', errands: 'Diligencias', history: 'Historia', events: 'Eventos',
+    market: 'Mercado', transit: 'Conexiones de autobús', 'first-outing': 'Buena primera salida',
+  },
+  nearby: 'Cerca',
+  address: 'Dirección',
+  approximate: 'La ubicación en el mapa es aproximada.',
+  directions: 'Cómo llegar (requiere internet)',
+  officialPage: 'Página oficial (requiere internet)',
+  website: 'Sitio web (requiere internet)',
+  zoomIn: 'Acercar', zoomOut: 'Alejar', resetMap: 'Ver todo London',
+  zoomHint: 'Mantén presionada Ctrl y desplázate para hacer zoom en el mapa', zoomHintMac: 'Mantén presionada ⌘ y desplázate para hacer zoom en el mapa',
+  mapLabel: 'Mapa de London, Ontario',
+  tabMap: 'Mapa', tabList: 'Lista',
+  close: 'Cerrar',
+  offlineReady: 'Guardado para usar sin conexión',
+  offlineNow: 'Está sin conexión. Todo aquí sigue funcionando.',
+  downloadPdf: 'Descargar PDF para imprimir',
+  printNow: 'Imprimir esta guía',
+  tipsTitle: 'Explorar con confianza',
+  tips: [
+    'Conozca un lugar primero de día. De noche, elija calles bien iluminadas y con gente, revise a qué hora sale su autobús de regreso y considere ir acompañado.',
+    'Es mejor recorrer los senderos tranquilos junto al río y en el bosque durante el día. Si se siente incómodo, entre a un negocio abierto o cambie de ruta.',
+    'La pobreza, la falta de vivienda o la apariencia de alguien no indican si es peligroso. Ninguna guía puede garantizar la seguridad en cada calle.',
+  ],
+  outingsTitle: 'Tres primeras salidas fáciles',
+  outings: [
+    'Wortley Village: café y un paseo por Wortley Road.',
+    'Downtown: Covent Garden Market y la biblioteca central.',
+    'Byron: una caminata de día en Springbank Park.',
+  ],
+  beforeTitle: 'Antes de salir',
+  before: 'Revise los horarios de apertura, el clima y su autobús (LTC) de ida y vuelta. Los autobuses pasan con menos frecuencia por la noche. Los nombres de los barrios se superponen y la gente los usa de formas distintas.',
+  disclaimer: 'Barrios seleccionados, no una lista completa. Los números son puntos de referencia aproximados, no límites oficiales. Sirve para orientarse, no para navegar. Sin calificaciones de seguridad.',
+  checked: 'Ubicaciones verificadas',
+  translationNote: 'Estas traducciones se hicieron con ayuda de inteligencia artificial y todavía no las ha revisado un hablante nativo. Si algo no está claro, consulte la versión en inglés.',
+  privacy: 'Sin rastreo, sin cookies y nunca se pide su ubicación. Las búsquedas de números de casa, solo cuando usted las pide, se envían al servicio de búsqueda de OpenStreetMap.',
+  mapData: 'Datos del mapa © colaboradores de OpenStreetMap',
+  printTitle: 'London, Ontario: para ubicarse',
+  printSubtitle: 'Los números del mapa corresponden a las descripciones. El norte está arriba.',
+  libraries: 'Bibliotecas públicas',
+  offices: 'Oficinas de ServiceOntario',
+  scanForApp: 'Versión interactiva, funciona sin conexión:',
+
+  // ── Neighbourhoods: name and description, keyed by id in src/data/neighbourhoods.json ──
+  neighbourhoods: {
+    downtown: {
+      name: 'Downtown (centro)',
+      text: 'Empiece aquí: Covent Garden Market, restaurantes, la biblioteca central y eventos. Es el centro activo de London. Si se queda hasta la noche, revise a qué hora sale el último autobús a casa antes de ir.',
+    },
+    'richmond-row': {
+      name: 'Richmond Row',
+      text: 'El tramo de la calle Richmond al norte del centro es un lugar popular para restaurantes, tiendas y salir de noche. Puede ser animado y ruidoso tarde en la noche.',
+    },
+    woodfield: {
+      name: 'Woodfield',
+      text: 'Justo al este del centro: casas antiguas, calles con muchos árboles y una caminata fácil hasta Victoria Park. Ideal para conocer con calma las calles históricas de London.',
+    },
+    'old-north': {
+      name: 'Old North',
+      text: 'Calles con árboles y casas antiguas entre el centro y la zona de la universidad. Un lugar agradable para caminar de día y conocer el London tradicional.',
+    },
+    'wortley-village': {
+      name: 'Old South / Wortley Village',
+      text: 'Aquí se siente como un pueblo dentro de la ciudad: café, tiendas locales y un paseo por Wortley Road. Una primera salida fácil.',
+    },
+    'old-east-village': {
+      name: 'Old East Village',
+      text: 'Venga por los negocios locales, los espacios de arte y espectáculos, y el Western Fair District cercano. Vaya con un destino en mente; el ambiente cambia de una calle a otra.',
+    },
+    soho: {
+      name: 'SoHo',
+      text: 'El nombre significa “al sur de Horton” (south of Horton). Un barrio cerca del centro y del río, con casas antiguas y obras nuevas. Es útil reconocerlo cuando la gente describe el centro de London.',
+    },
+    blackfriars: {
+      name: 'Blackfriars / Petersville',
+      text: 'Una pequeña zona histórica al otro lado del río, frente al centro. El puente Blackfriars y los senderos junto al río son un buen punto de partida para caminar.',
+    },
+    western: {
+      name: 'Western / Broughdale',
+      text: 'Edificios de la universidad, estudiantes y calles muy activas durante el semestre. Visítelo por el campus y los eventos; revise el estacionamiento y el acceso para visitantes antes de ir.',
+    },
+    masonville: {
+      name: 'Masonville',
+      text: 'Cuando alguien dice Masonville, normalmente se refiere al centro comercial del norte y las tiendas y restaurantes de alrededor. Práctico para ir de compras; las calles tienen mucho tráfico.',
+    },
+    'hyde-park': {
+      name: 'Hyde Park',
+      text: 'La zona comercial y residencial del noroeste, alrededor de Hyde Park Road. Buena para hacer diligencias y comer; las distancias entre tiendas pueden ser más largas de lo que parecen.',
+    },
+    oakridge: {
+      name: 'Oakridge',
+      text: 'Calles tradicionales del oeste, tiendas a lo largo de Oxford y acceso hacia el río. Diligencias del día a día y zonas residenciales tranquilas.',
+    },
+    byron: {
+      name: 'Byron',
+      text: 'Ambiente de pueblo en el oeste, con Springbank Park cerca y Boler Mountain al sur. Un destino favorito para ir al parque o hacer actividades al aire libre.',
+    },
+    'river-bend': {
+      name: 'River Bend / West 5',
+      text: 'Más al oeste: barrios nuevos, la zona de West 5 y senderos en el bosque cercano. Use una entrada oficial al sendero y revise el estado del camino.',
+    },
+    westmount: {
+      name: 'Westmount',
+      text: 'Una zona del suroeste que la gente asocia con compras y calles residenciales tradicionales. Práctica para servicios diarios cerca de Wonderland y Commissioners.',
+    },
+    lambeth: {
+      name: 'Lambeth',
+      text: 'El pueblo del suroeste que pasó a ser parte de London. Venga por las tiendas locales y los espacios comunitarios; calcule más tiempo de viaje desde el centro.',
+    },
+    'white-oaks': {
+      name: 'White Oaks',
+      text: 'Zona comercial del sur, alrededor de White Oaks Mall y Wellington Road, con calles residenciales cerca. Útil para diligencias y para reunirse a comer.',
+    },
+    'pond-mills': {
+      name: 'Pond Mills / Westminster',
+      text: 'Barrios del sureste cerca de lagunas, áreas naturales y servicios diarios. Use los senderos públicos señalizados; es mejor recorrer las zonas boscosas de día.',
+    },
+    argyle: {
+      name: 'Argyle',
+      text: 'Una zona amplia del este, con tiendas a lo largo de Dundas y muchas calles residenciales. Práctica para diligencias; “Argyle” abarca más de un sector pequeño.',
+    },
+    fanshawe: {
+      name: 'Huron Heights / Fanshawe',
+      text: 'El noreste de London, alrededor de Fanshawe College y los barrios cercanos. Actividades del campus, servicios locales y parques; el área de conservación está más al noreste.',
+    },
+  },
+
+  // ── Parks: description, keyed by id in src/data/parks.json (park names stay in English) ──
+  parks: {
+    'park-springbank': 'El parque más grande de London, a lo largo del río Thames. Senderos pavimentados para caminar y andar en bicicleta, áreas de pícnic y Storybook Gardens para niños pequeños (con entrada pagada).',
+    'park-victoria': 'El parque principal del centro. Festivales y eventos en verano, y una pista de patinaje al aire libre en invierno.',
+    'park-harris': 'Un parque grande y abierto junto al río, al borde del centro, donde se hacen conciertos y festivales al aire libre. Buen lugar para tomar los senderos del río.',
+    'park-forks': 'Donde se unen los dos brazos del río Thames, junto al centro. Por aquí pasa el Thames Valley Parkway, un largo sendero pavimentado a lo largo del río.',
+    'park-gibbons': 'Un parque junto al río, al norte del centro, con juegos infantiles, áreas de césped y senderos junto al agua. Popular entre las familias.',
+    'park-thames': 'Un parque junto al río, cerca de SoHo, con canchas deportivas y senderos a lo largo del Thames.',
+    'park-greenway': 'Canchas deportivas y senderos junto al río, al oeste del centro. Siga el río hacia el oeste para llegar a Springbank Park.',
+    'park-kiwanis': 'Un parque largo en el este, a lo largo del río, con canchas deportivas y senderos para caminar y andar en bicicleta.',
+    'park-white-oaks': 'Un parque comunitario del sur con canchas deportivas y espacios abiertos, cerca de White Oaks Mall.',
+    'park-fanshawe-ca': 'Una gran área de conservación alrededor del lago Fanshawe, en el noreste: senderos para caminar y andar en bicicleta, pícnics y campamento. Se cobra entrada.',
+    'park-westminster-ponds': 'Un área natural con lagunas y bosque, senderos y pasarelas de madera. Busque aves y tortugas; quédese en los senderos señalizados.',
+    'park-sifton-bog': 'Una pasarela de madera entra a un pantano poco común, algo raro dentro de una ciudad. Una caminata corta y tranquila en el oeste.',
+    'park-medway': 'Senderos en un valle boscoso junto a Medway Creek, cerca de Western University. Pueden ser empinados y con lodo; use buen calzado.',
+    'park-meadowlily': 'Bosques y praderas a lo largo del Thames en el este, a los que se llega por el histórico puente Meadowlily.',
+    'park-warbler-woods': 'Senderos tranquilos en el bosque de Byron, en el oeste. Mejor de día; quédese en los senderos señalizados.',
+  },
+
+  // ── Notes: extra location details for libraries and ServiceOntario, keyed by id in src/data/places.json ──
+  notes: {
+    'lpl-bostwick': 'Dentro del StarTech.com Community Centre',
+    'so-dundas-talbot': 'Edificio Bell, entrada principal por Talbot St',
+    'so-fanshawe-hyde-park': 'Dentro de Walmart',
+    'so-wharncliffe-campbell': 'En East Lambeth Plaza',
+  },
+};

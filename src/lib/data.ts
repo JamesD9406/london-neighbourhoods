@@ -3,7 +3,7 @@ import placesFile from '../data/places.json';
 import parksFile from '../data/parks.json';
 import cafesFile from '../data/cafes.json';
 import { project } from './geo.js';
-import { LANGS, STRINGS, type Lang } from '../i18n/strings';
+import { LANGS, STRINGS, type Lang, type Strings } from '../i18n/strings';
 
 /** Every kind of thing on the map, in drawing order (later kinds are drawn on top). */
 export const KINDS = ['cafe', 'park', 'library', 'serviceontario', 'neighbourhood'] as const;
@@ -33,15 +33,24 @@ export interface Item {
 }
 
 const same = (s: string): Localized => ({ en: s, es: s, ar: s });
-const fromStrings = (pick: (s: (typeof STRINGS)['en']) => string): Localized =>
-  Object.fromEntries(LANGS.map((l) => [l, pick(STRINGS[l])])) as Localized;
+/** One string in every language; a gap fails the build rather than showing "undefined". */
+const fromStrings = (pick: (s: Strings) => string | undefined, what = 'text'): Localized =>
+  Object.fromEntries(LANGS.map((l) => {
+    const s = pick(STRINGS[l]);
+    if (s === undefined) throw new Error(`Missing ${l} ${what} (src/i18n/${l}.ts)`);
+    return [l, s];
+  })) as Localized;
+// Language files key content by data id. Index loosely so a missing id is caught above, not by a crash.
+const hoodText = (s: Strings) => s.neighbourhoods as Record<string, { name: string; text: string } | undefined>;
+const parkText = (s: Strings) => s.parks as Record<string, string | undefined>;
+const noteText = (s: Strings) => s.notes as Record<string, string | undefined>;
 const at = (lat: number, lon: number) => { const [x, y] = project(lat, lon); return { lat, lon, x, y }; };
 
 const services: Item[] = placesFile.places.map((p) => ({
   id: p.id,
   kind: p.type as Kind,
   name: same(p.name),
-  note: 'note' in p ? (p.note as Localized) : undefined,
+  note: p.id in STRINGS.en.notes ? fromStrings((s) => noteText(s)[p.id], `note for ${p.id}`) : undefined,
   tags: [],
   address: p.address,
   url: 'url' in p ? (p.url as string) : placesFile.sources.library,
@@ -51,7 +60,7 @@ const services: Item[] = placesFile.places.map((p) => ({
 }));
 
 const parks: Item[] = parksFile.parks.map((p) => ({
-  id: p.id, kind: 'park', name: same(p.name), text: p.text, tags: ['parks', 'walks'], ...at(p.lat, p.lon), nearby: [],
+  id: p.id, kind: 'park', name: same(p.name), text: fromStrings((s) => parkText(s)[p.id], `text for ${p.id}`), tags: ['parks', 'walks'], ...at(p.lat, p.lon), nearby: [],
 }));
 
 const cafes: Item[] = cafesFile.cafes.map((c) => ({
@@ -87,8 +96,16 @@ const hoods: Item[] = neighbourhoods.map((h, i) => {
       .sort((a, b) => a.d - b.d)[0];
     return best ? [best.p.id] : [];
   });
-  return { id: h.id, kind: 'neighbourhood', n: i + 1, name: h.name, text: h.text, tags: h.tags, ...at(h.lat, h.lon), nearby };
+  const name = fromStrings((s) => hoodText(s)[h.id]?.name, `name for ${h.id}`);
+  const text = fromStrings((s) => hoodText(s)[h.id]?.text, `text for ${h.id}`);
+  return { id: h.id, kind: 'neighbourhood', n: i + 1, name, text, tags: h.tags, ...at(h.lat, h.lon), nearby };
 });
+
+// The other direction: text for an id that isn't in the data (a typo, or a removed place) is an error too.
+const ids = new Set([...hoods, ...places].map((p) => p.id));
+for (const id of [...Object.keys(STRINGS.en.neighbourhoods), ...Object.keys(STRINGS.en.parks), ...Object.keys(STRINGS.en.notes)]) {
+  if (!ids.has(id)) throw new Error(`src/i18n/en.ts has text for "${id}", which isn't in src/data`);
+}
 
 // Neighbourhood points are approximate; library, ServiceOntario and park points are exact.
 // Nudge neighbourhood pins (never places) apart so nothing hides under a number on the map.
