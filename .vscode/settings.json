@@ -1,0 +1,6 @@
+{
+  // The translation files use typographic punctuation and Arabic/Spanish text on purpose;
+  // don't flag them as lookalikes of ASCII characters.
+  "editor.unicodeHighlight.allowedCharacters": { "’": true },
+  "editor.unicodeHighlight.allowedLocales": { "ar": true, "es": true }
+}

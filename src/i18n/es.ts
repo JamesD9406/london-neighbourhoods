@@ -38,7 +38,10 @@ export const es: Strings = {
   },
   timsNote: 'Tim Hortons (“Timmies”) es la cadena de café más conocida de Canadá. Un “double-double” es un café con dos cremas y dos azúcares.',
   parksTitle: 'Parques y naturaleza',
-  coffeePrint: 'La versión interactiva también muestra {n} cafeterías.',
+  coffeePrint: {
+    one: 'La versión interactiva también muestra {n} cafetería.',
+    other: 'La versión interactiva también muestra {n} cafeterías.',
+  },
   cafesSource: 'Cafeterías según OpenStreetMap',
   tags: {
     food: 'Comida', coffee: 'Café', shopping: 'Compras', parks: 'Parques', walks: 'Caminatas', arts: 'Arte',

@@ -1,6 +1,8 @@
 // English is the source language: other language files must have exactly the same keys.
 // Place and street names stay in English on purpose in every language: they match the signs people will see.
 // Content (neighbourhoods, parks, notes) is keyed by the id used in src/data.
+import type { Plural } from './plural';
+
 export const en = {
   // ── Interface: buttons, labels, messages and page text ──
   title: 'London, Ontario',
@@ -38,7 +40,10 @@ export const en = {
   },
   timsNote: 'Tim Hortons (“Timmies”) is Canada’s best-known coffee chain. A “double-double” is a coffee with two creams and two sugars.',
   parksTitle: 'Parks and nature',
-  coffeePrint: 'The interactive version also shows {n} coffee shops.',
+  coffeePrint: {
+    one: 'The interactive version also shows {n} coffee shop.',
+    other: 'The interactive version also shows {n} coffee shops.',
+  } as Plural,
   cafesSource: 'Coffee shops from OpenStreetMap',
   tags: {
     food: 'Food', coffee: 'Coffee', shopping: 'Shopping', parks: 'Parks', walks: 'Walks', arts: 'Arts',

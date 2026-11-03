@@ -3,6 +3,7 @@
 import Base from '../../layouts/Base.astro';
 import MapSvg from '../../components/MapSvg.astro';
 import { LANGS, STRINGS, type Lang } from '../../i18n/strings';
+import { plural } from '../../i18n/plural';
 import { ITEMS, CHECKED, type Kind } from '../../lib/data';
 import { KIND_ICON } from '../../lib/icons';
 import '../../styles/print.css';
@@ -84,7 +85,7 @@ const footer = `${t.title} · ${t.checked}: ${CHECKED}`;
         </article>
       ))}
     </div>
-    <p class="coffee-note"><Fragment set:html={icon('cafe')} /> {t.coffeePrint.replace('{n}', String(cafeCount))}</p>
+    <p class="coffee-note"><Fragment set:html={icon('cafe')} /> {plural(lang, t.coffeePrint, cafeCount)}</p>
     <footer>{footer}{site && <> · <bdi dir="ltr">{site}</bdi></>}</footer>
   </section>
 
