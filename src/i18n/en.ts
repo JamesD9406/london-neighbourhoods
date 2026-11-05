@@ -34,9 +34,18 @@ export const en = {
   layers: { neighbourhood: 'Neighbourhoods', library: 'Libraries', serviceontario: 'ServiceOntario', park: 'Parks', cafe: 'Coffee' },
   type: { neighbourhood: 'Neighbourhood', library: 'Public library', serviceontario: 'ServiceOntario office', park: 'Park', cafe: 'Coffee shop' },
   about: {
-    library: 'Free library card with proof of address. Free Wi-Fi, computers, English conversation groups, children’s programs and newcomer help.',
+    library: 'Free library card with proof of address. Every branch has free Wi-Fi and computers, plus printing and photocopying.',
     serviceontario: 'Health cards (OHIP), driver’s licences, Ontario photo cards and birth certificates. Bring your documents and check hours before you go.',
     cafe: 'Coffee, tea and snacks. A relaxed place to meet someone or to practise ordering in English. Check opening hours before you go.',
+  },
+  servicesHere: 'Also at this branch',
+  // Keyed by service in src/data/libraries.json; only list what the library's own pages confirm.
+  libraryServices: {
+    settlement: 'Settlement workers to help newcomers (drop in, no appointment needed)',
+    labs: 'The Labs: 3D printers, sewing machines, a recording studio and more',
+    'accessible-computers': 'Computers with screen reader and magnifier software',
+    'braille-printer': 'Braille printer',
+    'digital-piano': 'Digital piano with headphones',
   },
   timsNote: 'Tim Hortons (“Timmies”) is Canada’s best-known coffee chain. A “double-double” is a coffee with two creams and two sugars.',
   parksTitle: 'Parks and nature',
@@ -193,9 +202,10 @@ export const en = {
     'park-warbler-woods': 'Quiet forest trails in Byron, in the west end. Best in daylight; stay on marked trails.',
   },
 
-  // ── Notes: extra location details for libraries and ServiceOntario, keyed by id in src/data/places.json ──
+  // ── Notes: extra location details, keyed by id in src/data/libraries.json and src/data/places.json ──
   notes: {
     'lpl-bostwick': 'Inside the StarTech.com Community Centre',
+    'lpl-glanworth': 'Open only a few hours a week. Check hours before you go.',
     'so-dundas-talbot': 'Bell Building, main entrance on Talbot St',
     'so-fanshawe-hyde-park': 'Inside Walmart',
     'so-wharncliffe-campbell': 'In East Lambeth Plaza',

@@ -1,4 +1,5 @@
 import neighbourhoods from '../data/neighbourhoods.json';
+import librariesFile from '../data/libraries.json';
 import placesFile from '../data/places.json';
 import parksFile from '../data/parks.json';
 import cafesFile from '../data/cafes.json';
@@ -20,6 +21,8 @@ export interface Item {
   name: Localized;
   text?: Localized;
   note?: Localized;
+  /** What this library branch offers beyond the basics every branch has (libraries only). */
+  services?: Localized[];
   tags: string[];
   address?: string;
   url?: string;
@@ -44,16 +47,35 @@ const fromStrings = (pick: (s: Strings) => string | undefined, what = 'text'): L
 const hoodText = (s: Strings) => s.neighbourhoods as Record<string, { name: string; text: string } | undefined>;
 const parkText = (s: Strings) => s.parks as Record<string, string | undefined>;
 const noteText = (s: Strings) => s.notes as Record<string, string | undefined>;
+const serviceText = (s: Strings) => s.libraryServices as Record<string, string | undefined>;
 const at = (lat: number, lon: number) => { const [x, y] = project(lat, lon); return { lat, lon, x, y }; };
+const noteFor = (id: string) => id in STRINGS.en.notes ? fromStrings((s) => noteText(s)[id], `note for ${id}`) : undefined;
 
-const services: Item[] = placesFile.places.map((p) => ({
+// Every service must have a source page in libraries.json, so each claim can be re-checked.
+const libraries: Item[] = librariesFile.libraries.map((l) => ({
+  id: l.id,
+  kind: 'library',
+  name: same(l.name),
+  note: noteFor(l.id),
+  services: l.services.map((key) => {
+    if (!(key in librariesFile.services)) throw new Error(`${l.id} lists "${key}", which has no source in src/data/libraries.json`);
+    return fromStrings((s) => serviceText(s)[key], `library service "${key}"`);
+  }),
+  tags: [],
+  address: l.address,
+  url: librariesFile.source,
+  ...at(l.lat, l.lon),
+  nearby: [],
+}));
+
+const offices: Item[] = placesFile.places.map((p) => ({
   id: p.id,
   kind: p.type as Kind,
   name: same(p.name),
-  note: p.id in STRINGS.en.notes ? fromStrings((s) => noteText(s)[p.id], `note for ${p.id}`) : undefined,
+  note: noteFor(p.id),
   tags: [],
   address: p.address,
-  url: 'url' in p ? (p.url as string) : placesFile.sources.library,
+  url: p.url,
   approximate: 'approximate' in p ? Boolean(p.approximate) : undefined,
   ...at(p.lat, p.lon),
   nearby: [],
@@ -76,7 +98,7 @@ const cafes: Item[] = cafesFile.cafes.map((c) => ({
   nearby: [],
 }));
 
-const places = [...services, ...parks, ...cafes];
+const places = [...libraries, ...offices, ...parks, ...cafes];
 
 // Straight-line km; plenty for "what's close to this neighbourhood".
 function km(a: { lat: number; lon: number }, b: { lat: number; lon: number }) {
@@ -131,7 +153,8 @@ const PREFIX: Partial<Record<Kind, string>> = { library: 'L', serviceontario: 'S
 const counts: Record<string, number> = {};
 for (const p of solid) p.code = `${PREFIX[p.kind]}${(counts[p.kind] = (counts[p.kind] ?? 0) + 1)}`;
 
-export const ITEMS: Item[] = [...hoods, ...services, ...parks, ...cafes];
-export const CHECKED = placesFile.checked;
+export const ITEMS: Item[] = [...hoods, ...libraries, ...offices, ...parks, ...cafes];
+// One "checked" date on the page, so show the older one: it's the honest claim for both files.
+export const CHECKED = [librariesFile.checked, placesFile.checked].sort()[0];
 export const CAFES_CHECKED = cafesFile.checked;
-export const SOURCES = placesFile.sources;
+export const SOURCES = { library: librariesFile.source, serviceontario: placesFile.sources.serviceontario };

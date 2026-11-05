@@ -163,9 +163,15 @@ Two search tabs:
 - `name` (`{ en, es, ar }`): display name; proper nouns stay in English
 - `text` (`{ en, es, ar }`): plain-language description of why you'd go
 
+### **Library** (`src/data/libraries.json`)
+- `id`, `name`, `address`, `lat`, `lon`: as for places below
+- `services` (string[]): what this branch offers beyond the basics every branch has, e.g. `settlement`, `labs`
+- File-level `services`: each service key mapped to the London Public Library page that confirms it. A branch can't list a service without a source, and every service needs a label in `libraryServices` in each language file
+- File-level `checked` date and `source` (the locations page)
+
 ### **Place** (`src/data/places.json`)
-- `id` (string): e.g. `lpl-central`, `so-dundas-talbot`
-- `type` (`library` | `serviceontario`)
+- `id` (string): e.g. `so-dundas-talbot`
+- `type` (`serviceontario`)
 - `name`, `address` (string): official name and street address
 - `note` (`{ en, es, ar }`, optional): e.g. "Inside Walmart"
 - `lat`, `lon` (number): exact location
@@ -211,7 +217,8 @@ london-neighbourhoods/
 │   │   └── MapSvg.astro          # Basemap + pins (interactive and print)
 │   ├── data/
 │   │   ├── neighbourhoods.json   # 20 neighbourhoods, EN/ES/AR
-│   │   ├── places.json           # Libraries + ServiceOntario
+│   │   ├── libraries.json        # Library branches and their services
+│   │   ├── places.json           # ServiceOntario offices
 │   │   ├── parks.json            # Notable parks, EN/ES/AR
 │   │   ├── cafes.json            # Generated from OpenStreetMap
 │   │   └── basemap.json          # Generated from OpenStreetMap
@@ -296,9 +303,10 @@ npm run streets
 ```
 
 ### **Updating Places**
-1. Edit `src/data/places.json` and set `"checked"` to today's date
-2. Run `npm run assets` so the PDFs pick up the change
-3. Commit the data and the regenerated PDFs
+1. Edit `src/data/libraries.json` or `src/data/places.json` and set its `"checked"` to today's date
+2. For library services, open each page under `"services"` in `libraries.json` and update which branches list that service
+3. Run `npm run assets` so the PDFs pick up the change
+4. Commit the data and the regenerated PDFs
 
 Sources: [London Public Library locations](https://www.lpl.ca/locations) · [ServiceOntario locations](https://www.ontario.ca/locations/serviceontario/all-locations)
 

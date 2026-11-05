@@ -24,6 +24,7 @@ function searchText(i: Item) {
   const about = i.kind in t.about ? [t.about[i.kind as keyof typeof t.about], STRINGS.en.about[i.kind as keyof typeof t.about]] : [];
   return fold([
     i.name[lang], i.name.en, i.text?.[lang], i.text?.en, i.address, i.note?.[lang],
+    ...(i.services ?? []).flatMap((s) => [s[lang], s.en]),
     ...about, ...kindWords, ...tagWords,
   ].filter(Boolean).join(' '));
 }
@@ -110,6 +111,12 @@ const kindIcon = (k: Kind, cls: string) => k === 'neighbourhood'
             <h2>{i.n ? `${i.n}. ` : ''}{i.name[lang]}</h2>
             {i.text && <p>{i.text[lang]}</p>}
             {i.kind in t.about && <p>{t.about[i.kind as keyof typeof t.about]}</p>}
+            {i.services && i.services.length > 0 && (
+              <div class="nearby">
+                <strong>{t.servicesHere}:</strong>
+                <ul>{i.services.map((s) => <li>{s[lang]}</li>)}</ul>
+              </div>
+            )}
             {i.address && <p><strong>{t.address}:</strong> <span dir="ltr">{i.address}</span>{i.note && i.kind !== 'cafe' && <> · {i.note[lang]}</>}</p>}
             {i.note && (i.kind === 'cafe' || !i.address) && <p class="note">{i.note[lang]}</p>}
             {i.approximate && <p class="note">{t.approximate}</p>}

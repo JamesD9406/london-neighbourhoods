@@ -1,0 +1,29 @@
+{
+  "checked": "2026-11-05",
+  "source": "https://www.lpl.ca/locations",
+  "services": {
+    "settlement": "https://www.lpl.ca/services-spaces/resources/newcomers/library-settlement-partnership",
+    "labs": "https://www.lpl.ca/services-spaces/featured-spaces/labs",
+    "accessible-computers": "https://www.lpl.ca/using-library/computers-printing-technology",
+    "braille-printer": "https://www.lpl.ca/using-library/computers-printing-technology",
+    "digital-piano": "https://www.lpl.ca/using-library/meeting-rooms"
+  },
+  "libraries": [
+    { "id": "lpl-central", "name": "Central Library", "address": "251 Dundas St, N6A 6H9", "lat": 42.98426, "lon": -81.24607, "services": ["labs", "accessible-computers", "braille-printer"] },
+    { "id": "lpl-beacock", "name": "Beacock Library", "address": "1280 Huron St, N5Y 4M2", "lat": 43.01951, "lon": -81.21879, "services": ["settlement"] },
+    { "id": "lpl-bostwick", "name": "Bostwick Library", "address": "501 Southdale Rd W, N6K 3X4", "lat": 42.93757, "lon": -81.28823, "services": ["settlement"] },
+    { "id": "lpl-byron", "name": "Byron Library", "address": "1295 Commissioners Rd W, N6K 1C9", "lat": 42.96061, "lon": -81.3345, "services": [] },
+    { "id": "lpl-carson", "name": "Carson Library", "address": "465 Quebec St, N5W 3Y4", "lat": 42.99441, "lon": -81.22019, "services": [] },
+    { "id": "lpl-cherryhill", "name": "Cherryhill Library", "address": "301 Oxford St W, N6H 1S6", "lat": 42.99062, "lon": -81.27438, "services": ["settlement", "accessible-computers"] },
+    { "id": "lpl-crouch", "name": "Crouch Library", "address": "550 Hamilton Rd, N5Z 1S4", "lat": 42.98074, "lon": -81.21515, "services": [] },
+    { "id": "lpl-east-london", "name": "East London Library", "address": "2016 Dundas St, N5V 1R1", "lat": 43.00763, "lon": -81.16845, "services": ["accessible-computers"] },
+    { "id": "lpl-glanworth", "name": "Glanworth Library", "address": "2950 Glanworth Dr, N6N 1N6", "lat": 42.86684, "lon": -81.19529, "services": [] },
+    { "id": "lpl-jalna", "name": "Jalna Library", "address": "1119 Jalna Blvd, N6E 3B3", "lat": 42.93143, "lon": -81.2284, "services": ["settlement", "accessible-computers"] },
+    { "id": "lpl-lambeth", "name": "Lambeth Library", "address": "7112 Beattie St, N6P 1A2", "lat": 42.91057, "lon": -81.30538, "services": [] },
+    { "id": "lpl-landon", "name": "Landon Library", "address": "167 Wortley Rd, N6C 3P6", "lat": 42.97212, "lon": -81.25318, "services": ["digital-piano"] },
+    { "id": "lpl-masonville", "name": "Masonville Library", "address": "30 North Centre Rd, N5X 3W1", "lat": 43.02525, "lon": -81.27535, "services": ["settlement", "digital-piano"] },
+    { "id": "lpl-pond-mills", "name": "Pond Mills Library", "address": "1166 Commissioners Rd E, N5Z 4W8", "lat": 42.96259, "lon": -81.19658, "services": [] },
+    { "id": "lpl-sherwood", "name": "Sherwood Library", "address": "32-1225 Wonderland Rd N, N6G 2V9", "lat": 43.0045, "lon": -81.30569, "services": ["settlement"] },
+    { "id": "lpl-stoney-creek", "name": "Stoney Creek Library", "address": "920 Sunningdale Rd E, N5X 0H5", "lat": 43.04805, "lon": -81.25774, "services": ["settlement", "digital-piano"] }
+  ]
+}

@@ -32,9 +32,17 @@ export const ar: Strings = {
   layers: { neighbourhood: 'الأحياء', library: 'المكتبات', serviceontario: 'ServiceOntario', park: 'الحدائق', cafe: 'القهوة' },
   type: { neighbourhood: 'حيّ', library: 'مكتبة عامة', serviceontario: 'مكتب ServiceOntario', park: 'حديقة', cafe: 'مقهى' },
   about: {
-    library: 'بطاقة مكتبة مجانية مع إثبات العنوان. إنترنت Wi-Fi وحواسيب مجانية، ومجموعات محادثة باللغة الإنجليزية، وبرامج للأطفال، ومساعدة للقادمين الجدد.',
+    library: 'بطاقة مكتبة مجانية مع إثبات العنوان. في كل فرع إنترنت Wi-Fi وحواسيب مجانية، بالإضافة إلى الطباعة والنسخ.',
     serviceontario: 'البطاقة الصحية (OHIP)، ورخصة القيادة، وبطاقة أونتاريو بالصورة، وشهادات الميلاد. أحضر وثائقك وتحقّق من ساعات العمل قبل الذهاب.',
     cafe: 'قهوة وشاي ووجبات خفيفة. مكان مريح للقاء أحدهم أو للتدرّب على الطلب باللغة الإنجليزية. تحقّق من ساعات العمل قبل الذهاب.',
+  },
+  servicesHere: 'أيضًا في هذا الفرع',
+  libraryServices: {
+    settlement: 'موظفو توطين لمساعدة القادمين الجدد (دون موعد مسبق)',
+    labs: 'The Labs: طابعات ثلاثية الأبعاد وآلات خياطة واستوديو تسجيل والمزيد',
+    'accessible-computers': 'حواسيب مزوّدة ببرامج قراءة الشاشة والتكبير',
+    'braille-printer': 'طابعة برايل',
+    'digital-piano': 'بيانو رقمي مع سماعات رأس',
   },
   timsNote: 'Tim Hortons («Timmies») هي أشهر سلسلة مقاهٍ في كندا. وعبارة «double-double» تعني قهوة مع حصّتين من الكريمة وملعقتين من السكر.',
   parksTitle: 'الحدائق والطبيعة',
@@ -194,9 +202,10 @@ export const ar: Strings = {
     'park-warbler-woods': 'مسارات هادئة في الغابة في Byron غرب المدينة. الأفضل في النهار، والتزم بالمسارات المعلَّمة.',
   },
 
-  // ── Notes: extra location details for libraries and ServiceOntario, keyed by id in src/data/places.json ──
+  // ── Notes: extra location details, keyed by id in src/data/libraries.json and src/data/places.json ──
   notes: {
     'lpl-bostwick': 'داخل مركز StarTech.com المجتمعي',
+    'lpl-glanworth': 'تفتح بضع ساعات فقط في الأسبوع. تحقّق من المواعيد قبل الذهاب.',
     'so-dundas-talbot': 'مبنى Bell، المدخل الرئيسي من شارع Talbot',
     'so-fanshawe-hyde-park': 'داخل متجر Walmart',
     'so-wharncliffe-campbell': 'في مجمّع East Lambeth Plaza',

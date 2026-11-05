@@ -32,9 +32,17 @@ export const es: Strings = {
   layers: { neighbourhood: 'Barrios', library: 'Bibliotecas', serviceontario: 'ServiceOntario', park: 'Parques', cafe: 'Café' },
   type: { neighbourhood: 'Barrio', library: 'Biblioteca pública', serviceontario: 'Oficina de ServiceOntario', park: 'Parque', cafe: 'Cafetería' },
   about: {
-    library: 'Tarjeta de biblioteca gratis con comprobante de domicilio. Wi-Fi y computadoras gratis, grupos de conversación en inglés, programas para niños y ayuda para recién llegados.',
+    library: 'Tarjeta de biblioteca gratis con comprobante de domicilio. Todas las sucursales tienen Wi-Fi y computadoras gratis, además de impresión y fotocopias.',
     serviceontario: 'Tarjeta de salud (OHIP), licencia de conducir, tarjeta con foto de Ontario y actas de nacimiento. Lleve sus documentos y revise el horario antes de ir.',
     cafe: 'Café, té y algo para comer. Un lugar tranquilo para reunirse con alguien o practicar cómo pedir en inglés. Revise el horario antes de ir.',
+  },
+  servicesHere: 'También en esta sucursal',
+  libraryServices: {
+    settlement: 'Personal de apoyo para recién llegados (sin cita previa)',
+    labs: 'The Labs: impresoras 3D, máquinas de coser, un estudio de grabación y más',
+    'accessible-computers': 'Computadoras con lector de pantalla y programa de ampliación',
+    'braille-printer': 'Impresora braille',
+    'digital-piano': 'Piano digital con audífonos',
   },
   timsNote: 'Tim Hortons (“Timmies”) es la cadena de café más conocida de Canadá. Un “double-double” es un café con dos cremas y dos azúcares.',
   parksTitle: 'Parques y naturaleza',
@@ -191,9 +199,10 @@ export const es: Strings = {
     'park-warbler-woods': 'Senderos tranquilos en el bosque de Byron, en el oeste. Mejor de día; quédese en los senderos señalizados.',
   },
 
-  // ── Notes: extra location details for libraries and ServiceOntario, keyed by id in src/data/places.json ──
+  // ── Notes: extra location details, keyed by id in src/data/libraries.json and src/data/places.json ──
   notes: {
     'lpl-bostwick': 'Dentro del StarTech.com Community Centre',
+    'lpl-glanworth': 'Abre solo unas pocas horas a la semana. Revise el horario antes de ir.',
     'so-dundas-talbot': 'Edificio Bell, entrada principal por Talbot St',
     'so-fanshawe-hyde-park': 'Dentro de Walmart',
     'so-wharncliffe-campbell': 'En East Lambeth Plaza',
