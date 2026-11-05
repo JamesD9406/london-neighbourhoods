@@ -74,9 +74,11 @@ const kindIcon = (k: Kind, cls: string) => k === 'neighbourhood'
         </button>
       ))}
     </div>
+    <!-- Phones: Map | List | Events. Wide screens show the map and list together: Places | Events. -->
     <div class="tabs" role="tablist">
-      <button type="button" role="tab" aria-selected="true" data-tab="map">{t.tabMap}</button>
+      <button type="button" role="tab" aria-selected="true" data-tab="map"><span class="narrow">{t.tabMap}</span><span class="wide">{t.tabPlaces}</span></button>
       <button type="button" role="tab" aria-selected="false" data-tab="list">{t.tabList}</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="events">{t.tabEvents}</button>
     </div>
   </div>
 
@@ -159,6 +161,27 @@ const kindIcon = (k: Kind, cls: string) => k === 'neighbourhood'
       </ul>
       <p class="empty" id="empty" hidden>{t.noResults}</p>
     </div>
+
+    <section class="events" id="events" aria-labelledby="events-title"
+      data-ages={JSON.stringify(t.eventAges)} data-loading={t.eventsLoading} data-failed={t.eventsFailed}
+      data-offline={t.eventsOffline} data-updated={t.eventsUpdated} data-none={t.eventsNone}
+      data-register={t.eventsRegister} data-changed={t.eventsChanged} data-moved={t.eventsMoved} data-details={t.eventsDetails}>
+      <div class="events__head">
+        <h2 id="events-title">{t.eventsTitle}</h2>
+        <p>{t.eventsIntro}</p>
+        <p class="note">{t.eventsNote}</p>
+      </div>
+      <div class="events__filters">
+        <label class="check"><input type="checkbox" id="ev-newcomer" checked /> {t.eventsNewcomer}</label>
+        <label>{t.eventsBranch} <select id="ev-branch"><option value="">{t.eventsAllBranches}</option></select></label>
+        <label>{t.eventsAge} <select id="ev-age"><option value="">{t.eventsAllAges}</option>
+          {Object.entries(t.eventAges).map(([value, label]) => <option value={value}>{label}</option>)}
+        </select></label>
+      </div>
+      <p class="events__status" id="ev-status" role="status"></p>
+      <div id="ev-list"></div>
+      <p class="links"><a href="https://programs.lpl.ca/" target="_blank" rel="noopener">{t.eventsCalendar}</a></p>
+    </section>
   </main>
 
   <div class="info">

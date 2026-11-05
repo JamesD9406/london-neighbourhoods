@@ -61,6 +61,14 @@ Two search tabs:
 - Picking a result drops a pin and lists the **nearest library, ServiceOntario office, park and café**, with distances
 - House numbers (`251 Dundas St`) can be looked up through OpenStreetMap's geocoder, **only when the user taps "Look up online"**, and only when online
 
+### 📅 Library Events
+- An **Events** tab (Map | List | Events on phones, Places | Events on wide screens) lists London Public Library programs for the next 7 days
+- Newcomer and English-learning events (conversation circles, Discover Canada) are shown first, with filters for branch and age group
+- Each event links to the library's page for details and registration; the branch name opens that library on the map
+- Loaded from the feed the library's own calendar ([programs.lpl.ca](https://programs.lpl.ca/), run on Communico) uses, **only when the user opens the tab**. It isn't a published API, so it may change; the full-calendar link is the fallback
+- The last copy is kept on the device, so the tab still works offline
+- Event titles and descriptions come from the library and stay in English
+
 ### 📶 Works Offline
 - A service worker saves the entire site after the first visit: every page, the map, the icons and the PDFs
 - Opens with no connection, on a bus with no data plan or in a basement with no signal
@@ -81,7 +89,7 @@ Two search tabs:
 ### 🔒 Privacy by Design
 - No tracking, no analytics and no cookies
 - Never asks for the user's location
-- The only outside request is an optional house-number lookup, which the user has to start, and the page says where it goes
+- The only outside requests are an optional house-number lookup and the library's event calendar when the Events tab is opened. Both are started by the user, and the page says where they go
 - No backend: nothing to log, nothing to breach
 
 ---
@@ -231,6 +239,7 @@ london-neighbourhoods/
 │   ├── lib/
 │   │   ├── app.ts                # Pan/zoom, search, selection, offline status
 │   │   ├── data.ts               # Projection, nearby places, pin nudging, codes
+│   │   ├── events.ts             # Events tab: library calendar feed, filters, offline copy
 │   │   ├── geo.js                # Shared lat/lon → SVG projection
 │   │   ├── address.ts            # Street/intersection search + optional online lookup
 │   │   ├── icons.ts              # Lucide icons, inlined

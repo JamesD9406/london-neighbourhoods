@@ -4,6 +4,7 @@
 import { cullLabels } from './labels';
 import { isHouseNumber, loadStreets, lookupOnline, searchStreets, type Hit } from './address';
 import { project } from './geo.js';
+import { createEvents } from './events';
 
 type Box = [number, number, number, number];
 const $ = <T extends Element = HTMLElement>(s: string, root: ParentNode = document) => root.querySelector(s) as T;
@@ -21,6 +22,9 @@ export function initApp() {
   const home: Box = [150, 90, 700, 730];
   let box: Box = [...home];
   let selected: string | null = null;
+  // Every place except neighbourhoods, for "Nearest" on address results and branch links on events.
+  const places: { id: string; kind: string; name: string; lat: number; lon: number }[] =
+    JSON.parse($('#place-index').textContent!);
 
   // ---- viewBox handling -------------------------------------------------
   function fit(b: Box): Box {
@@ -175,14 +179,22 @@ export function initApp() {
   $('#detail-close').addEventListener('click', () => select(null));
   addEventListener('keydown', (e) => { if (e.key === 'Escape' && selected) select(null); });
 
-  // ---- tabs (phones only) ----------------------------------------------
-  function showTab(tab: 'map' | 'list') {
-    if (desktop.matches) return;
-    app.dataset.tab = tab;
-    $$('[data-tab]', document).forEach((b) => b.getAttribute('role') === 'tab' && b.setAttribute('aria-selected', String(b.dataset.tab === tab)));
+  // ---- tabs: Map | List | Events on phones, Places | Events on wide screens ----
+  // Wide screens show the map and list side by side, so "list" there means the map view.
+  const controls = $('.controls');
+  const events = createEvents($('#events'), new Map(places
+    .filter((p) => p.kind === 'library')
+    .map((p) => [p.name.replace(/ Library$/, ''), p.id])));
+  function showTab(tab: 'map' | 'list' | 'events') {
+    if (desktop.matches && tab === 'list') tab = 'map';
+    app.dataset.tab = controls.dataset.tab = tab;
+    $$('.tabs [role="tab"]').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.tab === tab)));
     if (tab === 'map') requestAnimationFrame(draw);
+    if (tab === 'events') events.show();
   }
-  $$('.tabs button[role="tab"]').forEach((b) => b.addEventListener('click', () => showTab(b.dataset.tab as 'map' | 'list')));
+  $$('.tabs button[role="tab"]').forEach((b) => b.addEventListener('click', () => showTab(b.dataset.tab as 'map' | 'list' | 'events')));
+  // Switching to a wide screen while on List: there is no List tab there, so show the map view.
+  desktop.addEventListener('change', () => { if (desktop.matches && app.dataset.tab === 'list') showTab('map'); });
 
   // ---- search + layers --------------------------------------------------
   const layers = new Set($$('.chip').filter((c) => c.getAttribute('aria-pressed') === 'true').map((c) => c.dataset.layer!));
@@ -243,8 +255,6 @@ export function initApp() {
   $$('.search-tabs [role="tab"]').forEach((b) => b.addEventListener('click', () => setMode(b.dataset.mode as 'places' | 'address')));
 
   // ---- address search ----------------------------------------------------
-  const places: { id: string; kind: string; name: string; lat: number; lon: number }[] =
-    JSON.parse($('#place-index').textContent!);
   const km = (a: { lat: number; lon: number }, b: { lat: number; lon: number }) =>
     Math.hypot((a.lon - b.lon) * 111.32 * Math.cos((a.lat * Math.PI) / 180), (a.lat - b.lat) * 110.57);
   let hits: Hit[] = [];
