@@ -55,7 +55,7 @@ export const es: Strings = {
   officialPage: 'Página oficial (requiere internet)',
   website: 'Sitio web (requiere internet)',
   zoomIn: 'Acercar', zoomOut: 'Alejar', resetMap: 'Ver todo London',
-  zoomHint: 'Mantén presionada Ctrl y desplázate para hacer zoom en el mapa', zoomHintMac: 'Mantén presionada ⌘ y desplázate para hacer zoom en el mapa',
+  zoomHint: 'Mantenga presionada Ctrl y desplácese para hacer zoom en el mapa', zoomHintMac: 'Mantenga presionada ⌘ y desplácese para hacer zoom en el mapa',
   mapLabel: 'Mapa de London, Ontario',
   tabMap: 'Mapa', tabList: 'Lista',
   close: 'Cerrar',
