@@ -128,7 +128,10 @@ const ABBR = [[/\bStreet\b/g, 'St'], [/\bRoad\b/g, 'Rd'], [/\bAvenue\b/g, 'Ave']
 const short = (name) => ABBR.reduce((s, [re, to]) => s.replace(re, to), name);
 
 const data = await load();
-const roads = { motorway: [], trunk: [], primary: [], secondary: [], tertiary: [] };
+// Overpass returns elements in no fixed order, and how pieces chain into lines (and so where labels
+// land) follows that order. Sort by OpenStreetMap id so the same data always gives the same file.
+data.elements.sort((a, b) => a.type.localeCompare(b.type) || a.id - b.id);
+const roads ={ motorway: [], trunk: [], primary: [], secondary: [], tertiary: [] };
 const river = [];
 const parks = [];
 const named = new Map(); // label text -> { rank, pieces }

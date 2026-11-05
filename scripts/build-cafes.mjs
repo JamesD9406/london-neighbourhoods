@@ -27,6 +27,9 @@ async function load() {
 
 const slug = (s) => s.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 const data = await load();
+// Same-named cafés are numbered in the order they arrive (starbucks-2, -3…), and Overpass's order
+// isn't fixed. Sort by OpenStreetMap id so each keeps its id from run to run.
+data.elements.sort((a, b) => a.type.localeCompare(b.type) || a.id - b.id);
 const seen = new Map();
 const cafes = data.elements
   .map((e) => {

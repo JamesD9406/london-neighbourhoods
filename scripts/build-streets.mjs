@@ -38,6 +38,9 @@ const round = (n) => Math.round(n * 1e5) / 1e5;
 const km = (a, b) => Math.hypot((a[1] - b[1]) * 81.4, (a[0] - b[0]) * 110.57); // [lat, lon] at London's latitude
 
 const data = await load();
+// Overpass returns elements in no fixed order, and street indexes and tie-breaks follow that order.
+// Sort by OpenStreetMap id so the same data always gives the same file.
+data.elements.sort((a, b) => a.type.localeCompare(b.type) || a.id - b.id);
 const coords = new Map(); // node id -> [lat, lon]
 for (const el of data.elements) if (el.type === 'node') coords.set(el.id, [el.lat, el.lon]);
 
