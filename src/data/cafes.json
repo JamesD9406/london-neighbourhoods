@@ -1,5 +1,5 @@
 {
- "checked": "2026-10-30",
+ "checked": "2026-11-05",
  "source": "OpenStreetMap contributors (ODbL)",
  "cafes": [
   {
@@ -9,6 +9,12 @@
    "url": "https://asmaracoffeehouse.com",
    "lat": 42.98742,
    "lon": -81.22713
+  },
+  {
+   "id": "cafe-bella-mia-matcha",
+   "name": "Bella Mia Matcha",
+   "lat": 42.99071,
+   "lon": -81.25097
   },
   {
    "id": "cafe-big-orange",
@@ -126,6 +132,12 @@
    "lon": -81.23096
   },
   {
+   "id": "cafe-egg-cloud",
+   "name": "Egg Cloud",
+   "lat": 42.9934,
+   "lon": -81.25243
+  },
+  {
    "id": "cafe-einstein-s",
    "name": "Einstein's",
    "lat": 43.01083,
@@ -139,6 +151,12 @@
    "lon": -81.25368
   },
   {
+   "id": "cafe-fruitea-boba-haus",
+   "name": "Fruitea Boba Haus",
+   "lat": 42.9871,
+   "lon": -81.25088
+  },
+  {
    "id": "cafe-hasbeans",
    "name": "Hasbeans",
    "lat": 42.9824,
@@ -149,6 +167,13 @@
    "name": "Java Time",
    "lat": 42.98483,
    "lon": -81.25005
+  },
+  {
+   "id": "cafe-kung-fu-tea",
+   "name": "Kung Fu Tea",
+   "brand": "Kung Fu Tea",
+   "lat": 42.99133,
+   "lon": -81.25061
   },
   {
    "id": "cafe-lin-s-bubble-tea",
@@ -181,12 +206,6 @@
    "name": "Mado Cafe Patio",
    "lat": 43.02477,
    "lon": -81.28
-  },
-  {
-   "id": "cafe-marky-s-crepe-cafe",
-   "name": "Marky's Crepe Cafe",
-   "lat": 42.98626,
-   "lon": -81.25048
   },
   {
    "id": "cafe-nooners",
@@ -244,13 +263,6 @@
    "url": "https://scotianisle.ca/",
    "lat": 42.97783,
    "lon": -81.19184
-  },
-  {
-   "id": "cafe-sharetea",
-   "name": "Sharetea",
-   "brand": "Sharetea",
-   "lat": 42.99294,
-   "lon": -81.25161
   },
   {
    "id": "cafe-sidetrack-a-wortley-cafe",
