@@ -318,7 +318,11 @@ Sources: [London Public Library locations](https://www.lpl.ca/locations) · [Ser
 ### **Weekly Data Check**
 A GitHub Action ([`.github/workflows/weekly-data.yml`](.github/workflows/weekly-data.yml)) runs every Monday, and can be run by hand from the Actions tab:
 - **OpenStreetMap:** re-runs `cafes`, `basemap` and `streets`, rebuilds the PDFs if the map or cafés changed, and opens a **Weekly data refresh** pull request. A run where only the date changed opens nothing.
-- **Library and ServiceOntario pages:** `scripts/check-sources.mjs` fetches every URL in `libraries.json` and `places.json` and compares the page text with `scripts/source-snapshots.json`. If a page changed or stopped loading, it opens a `source-check` issue showing the added and removed lines. It never edits the data.
+- **Library and ServiceOntario pages:** `scripts/check-sources.mjs` fetches every URL in `libraries.json` and `places.json` and compares the page text with `scripts/source-snapshots.json`. If a page changed or stopped loading, it opens a `source-check` issue showing the added and removed lines. It never changes what the data says. When every page behind a file is unchanged, it moves that file's `"checked"` date to today. Otherwise the date stays on the last day the data was known to match.
+
+If the only change is the `"checked"` dates, with every source confirmed unchanged, the Action commits straight to `main`, as there's nothing to review. Anything else goes into a pull request.
+
+Pull requests and issues are assigned to the repo owner, so GitHub sends an email. This needs email turned on for "Participating, @mentions and custom" under GitHub **Settings → Notifications** (it is by default).
 
 When an issue appears, update the data files if anything shown is affected, then merge the pull request so the next check compares against the new versions.
 

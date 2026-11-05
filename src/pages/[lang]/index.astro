@@ -2,7 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import MapSvg from '../../components/MapSvg.astro';
 import { LANGS, LANG_META, STRINGS, type Lang } from '../../i18n/strings';
-import { ITEMS, CHECKED, CAFES_CHECKED, SOURCES, type Item, type Kind } from '../../lib/data';
+import { ITEMS, LIBRARIES_CHECKED, OFFICES_CHECKED, CAFES_CHECKED, SOURCES, type Item, type Kind } from '../../lib/data';
 import { KIND_ICON, UI_ICON } from '../../lib/icons';
 
 export function getStaticPaths() {
@@ -181,7 +181,7 @@ const kindIcon = (k: Kind, cls: string) => k === 'neighbourhood'
     <div class="fine-wrap">
       <footer class="fine">
         <p>{t.disclaimer}</p>
-        <p>{t.checked}: {CHECKED} · <a href={SOURCES.library}>London Public Library</a> · <a href={SOURCES.serviceontario}>ServiceOntario</a> · {t.cafesSource}: {CAFES_CHECKED}</p>
+        <p>{t.checked}: <a href={SOURCES.library}>London Public Library</a> {LIBRARIES_CHECKED} · <a href={SOURCES.serviceontario}>ServiceOntario</a> {OFFICES_CHECKED} · {t.cafesSource}: {CAFES_CHECKED}</p>
         {lang !== 'en' && <p>{t.translationNote}</p>}
         <p>{t.privacy}</p>
         <p>{t.mapData} (ODbL).</p>

@@ -1,7 +1,8 @@
 # Once a week:
 # 1. Refreshes the OpenStreetMap data (cafés, basemap, streets) and opens a pull request if anything changed.
 # 2. Checks the library and ServiceOntario pages our data is based on, and opens an issue if any changed
-#    or stopped loading. It never edits libraries.json or places.json: a person reads the change and decides.
+#    or stopped loading. It never changes what libraries.json or places.json say: a person reads the change
+#    and decides. It only moves a file's "checked" date when every page behind it is unchanged.
 name: Weekly data check
 
 on:
@@ -42,21 +43,23 @@ jobs:
         continue-on-error: true
       - run: node scripts/drop-date-only-changes.mjs src/data/cafes.json src/data/basemap.json public/streets.json
 
-      # The PDFs show the map and the number of cafés, so rebuild them only when those changed.
+      # Before the PDFs, because it can move the "checked" date their footer shows.
+      - name: Check library and ServiceOntario pages
+        run: node scripts/check-sources.mjs --report "$RUNNER_TEMP/source-report.md"
+
+      # The PDFs show the map, the number of cafés and the "checked" date, so rebuild them only when those changed.
       - name: Regenerate PDFs
         run: |
-          if git diff --quiet -- src/data/cafes.json src/data/basemap.json; then
-            echo "Map and cafés unchanged, PDFs left as they are"
+          if git diff --quiet -- src/data/cafes.json src/data/basemap.json src/data/libraries.json src/data/places.json; then
+            echo "Map, cafés and dates unchanged, PDFs left as they are"
           else
             npx playwright install --with-deps chromium
             npm run assets
             git checkout -- public/icons # Icons don't depend on the data; ignore any re-render noise.
           fi
 
-      - name: Check library and ServiceOntario pages
-        run: node scripts/check-sources.mjs --report "$RUNNER_TEMP/source-report.md"
-
       # One open issue at a time: later weeks add a comment until it's closed.
+      # Assigned to the repo owner, so GitHub emails them.
       - name: Open or update the issue
         env:
           GH_TOKEN: ${{ github.token }}
@@ -66,21 +69,49 @@ jobs:
           gh label create source-check --color FBCA04 --description "A source page for our data changed" --force
           open=$(gh issue list --label source-check --state open --json number --jq '.[0].number // empty')
           if [ -n "$open" ]; then
-            gh issue comment "$open" --body-file "$report"
+            gh issue comment "$open" --body "@${{ github.repository_owner }} more changes this week:"$'\n\n'"$(cat "$report")"
           else
-            gh issue create --title "Library or ServiceOntario pages changed" --label source-check --body-file "$report"
+            gh issue create --title "Library or ServiceOntario pages changed" --label source-check \
+              --assignee "${{ github.repository_owner }}" --body-file "$report"
           fi
 
+      # Nothing to review when the only change is "checked" dates (and the PDFs rebuilt to show them):
+      # every source was confirmed unchanged. Commit that straight to main. Anything else gets a pull request.
+      - id: outcome
+        name: Decide between a direct commit and a pull request
+        run: |
+          if git diff --quiet; then
+            echo "result=nothing" >> "$GITHUB_OUTPUT"
+          elif git diff --quiet -- src/data/cafes.json src/data/basemap.json public/streets.json scripts/source-snapshots.json \
+               && [ ! -f "$RUNNER_TEMP/source-report.md" ]; then
+            echo "result=dates" >> "$GITHUB_OUTPUT"
+          else
+            echo "result=review" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit date-only changes to main
+        if: steps.outcome.outputs.result == 'dates'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "Weekly check: sources unchanged, checked dates moved to $(date -u +%F)"
+          git push
+
+      # Assigned and sent for review to the repo owner, so GitHub emails them.
       - uses: peter-evans/create-pull-request@v7
+        if: steps.outcome.outputs.result == 'review'
         with:
           branch: weekly-data
           delete-branch: true
           title: Weekly data refresh
           commit-message: Weekly data refresh
+          assignees: ${{ github.repository_owner }}
+          reviewers: ${{ github.repository_owner }}
           body: |
             Automatic weekly refresh. Review the diff before merging.
 
             - **OpenStreetMap data:** `cafes.json`, `basemap.json` and `streets.json`, plus the PDFs if the map or cafés changed.
+            - **`checked` dates** in `libraries.json` and `places.json`: moved to today for each file whose source pages were all unchanged.
             - **`scripts/source-snapshots.json`:** the latest text of the library and ServiceOntario pages. If an open `source-check` issue lists changes, update the data files first. Merging tells next week's check to compare against these versions.
 
       - name: Fail the run if an OpenStreetMap refresh failed

@@ -154,7 +154,9 @@ const counts: Record<string, number> = {};
 for (const p of solid) p.code = `${PREFIX[p.kind]}${(counts[p.kind] = (counts[p.kind] ?? 0) + 1)}`;
 
 export const ITEMS: Item[] = [...hoods, ...libraries, ...offices, ...parks, ...cafes];
-// One "checked" date on the page, so show the older one: it's the honest claim for both files.
-export const CHECKED = [librariesFile.checked, placesFile.checked].sort()[0];
+export const LIBRARIES_CHECKED = librariesFile.checked;
+export const OFFICES_CHECKED = placesFile.checked;
+// Where there's room for only one date (the PDF footer), the older one is the honest claim for both.
+export const CHECKED = [LIBRARIES_CHECKED, OFFICES_CHECKED].sort()[0];
 export const CAFES_CHECKED = cafesFile.checked;
 export const SOURCES = { library: librariesFile.source, serviceontario: placesFile.sources.serviceontario };
