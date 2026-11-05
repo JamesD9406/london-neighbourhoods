@@ -1,0 +1,89 @@
+# Once a week:
+# 1. Refreshes the OpenStreetMap data (cafés, basemap, streets) and opens a pull request if anything changed.
+# 2. Checks the library and ServiceOntario pages our data is based on, and opens an issue if any changed
+#    or stopped loading. It never edits libraries.json or places.json: a person reads the change and decides.
+name: Weekly data check
+
+on:
+  schedule:
+    - cron: '0 11 * * 1' # Mondays, 11:00 UTC (6 or 7 am in London, Ontario)
+  workflow_dispatch: # Also runnable by hand from the Actions tab.
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+concurrency: weekly-data
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+
+      # Each refresh can fail on its own (Overpass is sometimes busy) without stopping the rest.
+      # A failed script writes nothing, so the committed file stays as it was.
+      - id: cafes
+        run: npm run cafes
+        continue-on-error: true
+      - id: basemap
+        run: npm run basemap
+        continue-on-error: true
+      - id: streets
+        run: npm run streets
+        continue-on-error: true
+      - run: node scripts/drop-date-only-changes.mjs src/data/cafes.json src/data/basemap.json public/streets.json
+
+      # The PDFs show the map and the number of cafés, so rebuild them only when those changed.
+      - name: Regenerate PDFs
+        run: |
+          if git diff --quiet -- src/data/cafes.json src/data/basemap.json; then
+            echo "Map and cafés unchanged, PDFs left as they are"
+          else
+            npx playwright install --with-deps chromium
+            npm run assets
+            git checkout -- public/icons # Icons don't depend on the data; ignore any re-render noise.
+          fi
+
+      - name: Check library and ServiceOntario pages
+        run: node scripts/check-sources.mjs --report "$RUNNER_TEMP/source-report.md"
+
+      # One open issue at a time: later weeks add a comment until it's closed.
+      - name: Open or update the issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          report="$RUNNER_TEMP/source-report.md"
+          [ -f "$report" ] || { echo "No source pages changed"; exit 0; }
+          gh label create source-check --color FBCA04 --description "A source page for our data changed" --force
+          open=$(gh issue list --label source-check --state open --json number --jq '.[0].number // empty')
+          if [ -n "$open" ]; then
+            gh issue comment "$open" --body-file "$report"
+          else
+            gh issue create --title "Library or ServiceOntario pages changed" --label source-check --body-file "$report"
+          fi
+
+      - uses: peter-evans/create-pull-request@v7
+        with:
+          branch: weekly-data
+          delete-branch: true
+          title: Weekly data refresh
+          commit-message: Weekly data refresh
+          body: |
+            Automatic weekly refresh. Review the diff before merging.
+
+            - **OpenStreetMap data:** `cafes.json`, `basemap.json` and `streets.json`, plus the PDFs if the map or cafés changed.
+            - **`scripts/source-snapshots.json`:** the latest text of the library and ServiceOntario pages. If an open `source-check` issue lists changes, update the data files first. Merging tells next week's check to compare against these versions.
+
+      - name: Fail the run if an OpenStreetMap refresh failed
+        if: steps.cafes.outcome == 'failure' || steps.basemap.outcome == 'failure' || steps.streets.outcome == 'failure'
+        run: |
+          echo "cafes: ${{ steps.cafes.outcome }}, basemap: ${{ steps.basemap.outcome }}, streets: ${{ steps.streets.outcome }}"
+          exit 1

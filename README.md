@@ -212,6 +212,8 @@ Two search tabs:
 ## 🏗️ Project Structure
 ```
 london-neighbourhoods/
+├── .github/workflows/
+│   └── weekly-data.yml           # Weekly data refresh and source check
 ├── src/
 │   ├── components/
 │   │   └── MapSvg.astro          # Basemap + pins (interactive and print)
@@ -246,6 +248,9 @@ london-neighbourhoods/
 │   ├── build-basemap.mjs         # Overpass → roads, parks, river, labels
 │   ├── build-cafes.mjs           # Overpass → cafes.json
 │   ├── build-streets.mjs         # Overpass → streets.json (streets + intersections)
+│   ├── check-sources.mjs         # Weekly check of library and ServiceOntario pages
+│   ├── drop-date-only-changes.mjs # Ignores refreshes where only the date changed
+│   ├── source-snapshots.json     # Last-seen text of those pages
 │   └── make-assets.mjs           # PDFs + icons via Playwright
 ├── public/
 │   ├── icons/
@@ -309,6 +314,15 @@ npm run streets
 4. Commit the data and the regenerated PDFs
 
 Sources: [London Public Library locations](https://www.lpl.ca/locations) · [ServiceOntario locations](https://www.ontario.ca/locations/serviceontario/all-locations)
+
+### **Weekly Data Check**
+A GitHub Action ([`.github/workflows/weekly-data.yml`](.github/workflows/weekly-data.yml)) runs every Monday, and can be run by hand from the Actions tab:
+- **OpenStreetMap:** re-runs `cafes`, `basemap` and `streets`, rebuilds the PDFs if the map or cafés changed, and opens a **Weekly data refresh** pull request. A run where only the date changed opens nothing.
+- **Library and ServiceOntario pages:** `scripts/check-sources.mjs` fetches every URL in `libraries.json` and `places.json` and compares the page text with `scripts/source-snapshots.json`. If a page changed or stopped loading, it opens a `source-check` issue showing the added and removed lines. It never edits the data.
+
+When an issue appears, update the data files if anything shown is affected, then merge the pull request so the next check compares against the new versions.
+
+The Action needs **Settings → Actions → General → Allow GitHub Actions to create and approve pull requests** turned on.
 
 ### **Adding a Language**
 1. Add the code to `LANGS` in `src/i18n/strings.ts` and add a strings object for it
