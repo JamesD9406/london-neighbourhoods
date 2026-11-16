@@ -1,5 +1,5 @@
 {
- "checked": "2026-11-05",
+ "checked": "2026-11-16",
  "source": "OpenStreetMap contributors (ODbL)",
  "cafes": [
   {
@@ -145,10 +145,11 @@
   },
   {
    "id": "cafe-filter-cafe",
-   "name": "Filter Café",
-   "address": "206 Piccadilly Street",
-   "lat": 42.99439,
-   "lon": -81.25368
+   "name": "Filter Cafe",
+   "address": "201 King Street",
+   "url": "http://filtercafe.ca",
+   "lat": 42.98277,
+   "lon": -81.24752
   },
   {
    "id": "cafe-fruitea-boba-haus",
